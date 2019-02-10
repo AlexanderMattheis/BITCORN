@@ -1270,7 +1270,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0"});
+            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0+5d7d4cbe"});
           }
         
 //# sourceMappingURL=bitcorn.map

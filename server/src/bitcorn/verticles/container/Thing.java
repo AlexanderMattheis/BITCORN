@@ -1,4 +1,4 @@
-package bitcorn.verticles.data;
+package bitcorn.verticles.container;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

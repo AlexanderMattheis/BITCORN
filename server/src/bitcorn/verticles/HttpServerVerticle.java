@@ -4,7 +4,7 @@ import bitcorn.system.Commands;
 import bitcorn.system.Defaults;
 import bitcorn.system.Parameters;
 import bitcorn.system.Paths;
-import bitcorn.verticles.data.Thing;
+import bitcorn.verticles.container.Thing;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.http.HttpServer;
@@ -61,12 +61,12 @@ public class HttpServerVerticle extends AbstractVerticle {
     }
 
     private void additionHandler(RoutingContext context) {
-        // to deliver the ADD_ONE command over the event-bus
-        DeliveryOptions options = new DeliveryOptions().addHeader(Parameters.Delivery.COMMAND, Commands.ADD_ONE);
+        // to deliver the ADD_PAGE command over the event-bus
+        DeliveryOptions options = new DeliveryOptions().addHeader(Parameters.Delivery.COMMAND, Commands.ADD_PAGE);
 
         // input: String address, Object message, DeliveryOptions options, Handler<AsyncResult<Message<T>>> replyHandler
         // hint: the message is in this case "{name: name, origin: origin}"
-        vertx.eventBus().send(Paths.Eventbus.Addresses.DATABASE_QUEUE, context.getBodyAsString(), options, reply -> {
+        vertx.eventBus().send(Paths.Eventbus.Addresses.Verticles.DATABASE, context.getBodyAsString(), options, reply -> {
             if (reply.succeeded()) {
                 Thing thing = new Thing(
                         context.getBodyAsJson().getString("name"),
@@ -91,12 +91,12 @@ public class HttpServerVerticle extends AbstractVerticle {
         // url: '/api/stuff/' + id
         String id = context.request().getParam("id");
 
-        // to deliver the DELETE_ONE command over the event-bus
-        DeliveryOptions options = new DeliveryOptions().addHeader(Parameters.Delivery.COMMAND, Commands.DELETE_ONE);
+        // to deliver the DELETE_PAGE command over the event-bus
+        DeliveryOptions options = new DeliveryOptions().addHeader(Parameters.Delivery.COMMAND, Commands.DELETE_PAGE);
 
         // input: String address, Object message, DeliveryOptions options, Handler<AsyncResult<Message<T>>> replyHandler
         // hint: the message is in this case "{name: name, origin: origin}"
-        vertx.eventBus().send(Paths.Eventbus.Addresses.DATABASE_QUEUE, id, options, reply -> {
+        vertx.eventBus().send(Paths.Eventbus.Addresses.Verticles.DATABASE, id, options, reply -> {
             if (reply.succeeded()) {
                 context.response().setStatusCode((int) reply.result().body()).end();
             } else {
@@ -106,11 +106,11 @@ public class HttpServerVerticle extends AbstractVerticle {
     }
 
     private void fetchHandler(RoutingContext context) {
-        // to deliver the FETCH_ALL command over the event-bus
-        DeliveryOptions options = new DeliveryOptions().addHeader(Parameters.Delivery.COMMAND, Commands.FETCH_ALL);
+        // to deliver the FETCH_ALL_PAGE_NAMES command over the event-bus
+        DeliveryOptions options = new DeliveryOptions().addHeader(Parameters.Delivery.COMMAND, Commands.FETCH_ALL_PAGE_NAMES);
 
         // input: String address, Object message, DeliveryOptions options, Handler<AsyncResult<Message<T>>> replyHandler
-        vertx.eventBus().send(Paths.Eventbus.Addresses.DATABASE_QUEUE, new JsonObject(), options, reply -> {  // empty object
+        vertx.eventBus().send(Paths.Eventbus.Addresses.Verticles.DATABASE, new JsonObject(), options, reply -> {  // empty object
             if (reply.succeeded()) {
                 // result() returns the message from which it is looked at the body
                 String response = (String) reply.result().body();
