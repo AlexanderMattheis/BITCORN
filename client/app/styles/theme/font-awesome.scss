@@ -1,0 +1,18 @@
+.connections {
+  a {
+    font-size: 4em;
+    margin: 1em;
+  }
+}
+
+.fa-github {
+  color: $color-github-cat;
+}
+
+.fa-github:hover, .fa-youtube:hover {
+  color: $color-font-bg;
+}
+
+.fa-youtube {
+  color: $color-youtube-play;
+}

@@ -1,0 +1,72 @@
+.btn-outline-secondary {
+  color: $color-font;
+  border-color: $color-font-bg;
+}
+
+.btn-outline-secondary:hover {
+  color: white;
+  background-color: $color-font-bg;
+  border-color: $color-font-bg;
+}
+
+.card {
+  margin: 10px;
+  min-width: 240px;
+}
+
+.carousel {
+  outline: none;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  a {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 5em;
+    text-shadow: 1px 1px 10px black;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: 2em;
+    font-weight: 500;
+    padding-bottom: 1rem;
+    text-shadow: 1px 1px 10px black;
+  }
+}
+
+.carousel-inner {
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.d-block {
+  display: none !important;
+}
+
+.jumbotron {
+  padding: 1em;
+}
+
+.navbar-nav {
+  li {
+    padding-right: 20px;
+  }
+}
+
+.navbar-toggler:focus {
+  outline-color: $color-primary;
+}
+
+.nav-link {
+  font-size: 1.1em !important;
+}

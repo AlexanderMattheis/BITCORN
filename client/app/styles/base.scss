@@ -1,29 +1,6 @@
-/* SPECIFIC */
-// WebKit and Blink browsers
-::selection {
-  background: $yellow;
-  color: white;
-}
-
-/* Gecko browsers */
-::-moz-selection {
-  background: $yellow;
-  color: white;
-}
-
-/* UNSPECIFIC */
-.base {
-  // TAG
-
-  // ID
-
-  // CLASS
-
-  /* RESOLUTION DEPENDANT */
-  // TAG
-
-  // ID
-
-  // CLASS
-}
-
+/* Do not change the order! */
+@import "base/tags";
+@import "base/ids";
+@import "base/classes";
+@import "base/resolution";
+@import "base/browser";

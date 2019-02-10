@@ -1,14 +1,20 @@
-/* ASSETS */
-@import 'fonts';
-@import 'images';
+@import "colors";
+@import "dimensions";
+@import "fonts";
+@import "images";
+@import "system";
 
 /* LIBRARIES */
-@import 'ember-bootstrap/bootstrap';
+@import "ember-bootstrap/bootstrap";
 
 /* ROUTES */
-@import 'base';
+@import "base";
 
-@import 'routes/home';
-@import 'routes/downloads';
-@import 'routes/tutorials';
-@import 'routes/about';
+@import "routes/home";
+@import "routes/downloads";
+@import "routes/tutorials";
+@import "routes/about";
+
+/* THEME */
+@import "theme/bootstrap";
+@import "theme/font-awesome";

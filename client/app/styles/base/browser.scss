@@ -1,0 +1,11 @@
+// WebKit and Blink browsers
+::selection {
+  background: $yellow;
+  color: white;
+}
+
+// Gecko browsers
+::-moz-selection {
+  background: $yellow;
+  color: white;
+}

@@ -1,0 +1,47 @@
+#author {
+  color: $color-font-bg;
+  float: right;
+  font-weight: 600 !important;
+  margin-right: $distance-default;
+  margin-top: 15px;
+}
+
+#effects {
+  margin: 0;
+  overflow: hidden;
+  position: fixed;
+  pointer-events: none;
+  zoom: normal;
+  z-index: $max-z-index;
+}
+
+#footer {
+  background: rgb(0, 0, 0);
+  color: #404040;
+  font-weight: bold;
+  height: 50px;
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+#liabilities {
+  float: left;
+  font-weight: 400;
+  margin-left: $distance-default;
+  margin-top: 13px;
+
+  /* TAGS */
+  a {
+    color: $color-font-bg;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: white;
+  }
+}
+
+#top {
+  min-height: 100%; /* to stick footer to bottom of page */
+}

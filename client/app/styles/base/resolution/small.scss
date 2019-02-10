@@ -1,0 +1,31 @@
+@media (min-width: 576px) and (max-width: 767px) {
+  .carousel-caption {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+
+    h1 {
+      font-size: 4em;
+      text-shadow: 1px 1px 10px black;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 1em;
+      font-weight: 500;
+      padding-bottom: 1rem;
+      text-shadow: 1px 1px 10px black;
+    }
+  }
+
+  .embedded-logo {
+    float: right;
+    max-height: 140px;
+    max-width: 384px;
+  }
+
+  .nav-link {
+    margin-left: 10px !important;
+  }
+}

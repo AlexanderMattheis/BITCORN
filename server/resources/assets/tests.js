@@ -37,9 +37,21 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
     assert.expect(1);
     assert.ok(true, 'bitcorn/templates/application.hbs should pass TemplateLint.\n\n');
   });
+  QUnit.test('bitcorn/templates/contact.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'bitcorn/templates/contact.hbs should pass TemplateLint.\n\n');
+  });
   QUnit.test('bitcorn/templates/home.hbs', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'bitcorn/templates/home.hbs should pass TemplateLint.\n\n');
+    assert.ok(false, 'bitcorn/templates/home.hbs should pass TemplateLint.\n\nbitcorn/templates/home.hbs\n  39:30  error  Duplicate attribute \'type\' found in the Element.  no-duplicate-attributes\n');
+  });
+  QUnit.test('bitcorn/templates/imprint.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'bitcorn/templates/imprint.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('bitcorn/templates/privacy.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'bitcorn/templates/privacy.hbs should pass TemplateLint.\n\n');
   });
 });
 define("bitcorn/tests/lint/tests.lint-test", [], function () {
@@ -90,6 +102,17 @@ define("bitcorn/tests/unit/routes/about/page-test", ["qunit", "ember-qunit"], fu
     });
   });
 });
+define("bitcorn/tests/unit/routes/contact-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | contact', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:contact');
+      assert.ok(route);
+    });
+  });
+});
 define("bitcorn/tests/unit/routes/home-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
   "use strict";
 
@@ -97,6 +120,28 @@ define("bitcorn/tests/unit/routes/home-test", ["qunit", "ember-qunit"], function
     (0, _emberQunit.setupTest)(hooks);
     (0, _qunit.test)('it exists', function (assert) {
       let route = this.owner.lookup('route:home');
+      assert.ok(route);
+    });
+  });
+});
+define("bitcorn/tests/unit/routes/imprint-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | imprint', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:imprint');
+      assert.ok(route);
+    });
+  });
+});
+define("bitcorn/tests/unit/routes/privacy-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | privacy', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:privacy');
       assert.ok(route);
     });
   });

@@ -1,0 +1,37 @@
+body {
+  color: $color-font;
+  font-family: "OpenSans-Light", sans-serif;
+  height: 100%;  /* to stick footer to bottom of page */
+
+  >.ember-view {
+    height: 100%;  /* to stick footer to bottom of page */
+  }
+}
+
+em {
+  font-family: "NovaMono", monospace;
+  font-style: normal;
+}
+
+html {
+  height: 100%;  /* to stick footer to bottom of page */
+}
+
+hr {
+  border-top: 1px solid $color-font-bg;
+  width: 90%;
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+
+h1, h2, h4 {
+  font-weight: 600 !important;
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4 {
+  font-size: 1.2em;
+}

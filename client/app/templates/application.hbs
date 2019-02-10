@@ -1,4 +1,4 @@
-<div id="top">
+<div class="background" id="top">
   {{#bs-navbar as |navbar|}}
     <a href="/" class="navbar-brand"><div class="logo"></div></a>
 
@@ -10,32 +10,32 @@
 
         {{!-- downloads --}}
         {{#bs-dropdown as |dd|}}
-          {{#dd.button class="navbar-button"}}Downloads{{/dd.button}}
+          {{#dd.button class="menu-button"}}Downloads{{/dd.button}}
 
-          {{#dd.menu class="navbar-menu" as |menu|}}
+          {{#dd.menu class="menu" as |menu|}}
             {{#menu.item}}
-              {{#menu.link-to "downloads.programs"}}Programs{{/menu.link-to}}
+              {{#menu.link-to "downloads.programs" class="download-link"}}Programs{{/menu.link-to}}
             {{/menu.item}}
           {{/dd.menu}}
         {{/bs-dropdown}}
 
         {{!-- tutorials --}}
         {{#bs-dropdown as |dd|}}
-          {{#dd.button class="navbar-button"}}Tutorials{{/dd.button}}
+          {{#dd.button class="menu-button"}}Tutorials{{/dd.button}}
 
         {{/bs-dropdown}}
 
         {{!-- about --}}
         {{#bs-dropdown as |dd|}}
-          {{#dd.button class="navbar-button"}}About{{/dd.button}}
+          {{#dd.button class="menu-button"}}About{{/dd.button}}
 
-          {{#dd.menu class="navbar-menu" as |menu|}}
+          {{#dd.menu class="menu" as |menu|}}
             {{#menu.item}}
-              {{#menu.link-to "about.authors"}}Authors{{/menu.link-to}}
+              {{#menu.link-to "about.authors" class="about-link"}}Authors{{/menu.link-to}}
             {{/menu.item}}
 
             {{#menu.item}}
-              {{#menu.link-to "about.page"}}Page{{/menu.link-to}}
+              {{#menu.link-to "about.page" class="about-link"}}Page{{/menu.link-to}}
             {{/menu.item}}
           {{/dd.menu}}
         {{/bs-dropdown}}
@@ -45,4 +45,16 @@
   {{/bs-navbar}}
 
   {{outlet}}
+</div>
+
+<div id="footer">
+  <span id="liabilities">
+    {{#link-to "contact" class="contact"}}Contact{{/link-to}}
+    {{#link-to "imprint" class="imprint"}}Imprint{{/link-to}}
+    {{#link-to "privacy" class="privacy"}}Privacy{{/link-to}}
+  </span>
+
+  <span id="author">
+    Copyright &copy; 2019 Alexander Mattheis
+  </span>
 </div>

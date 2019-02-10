@@ -9,10 +9,14 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('home');
   this.mount('downloads');
+  this.mount('tutorials');
   this.route('about', function() {
     this.route('authors');
     this.route('page');
   });
+  this.route('contact');
+  this.route('imprint');
+  this.route('privacy');
 });
 
 export default Router;

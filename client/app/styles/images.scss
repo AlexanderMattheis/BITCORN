@@ -1,5 +1,10 @@
 $images: "../assets/images";
 
+.background {
+  background: url("#{$images}/background.svg") no-repeat;
+  background-size: cover;
+}
+
 .logo {
   background: url("#{$images}/logo.svg") no-repeat;
   display: block;

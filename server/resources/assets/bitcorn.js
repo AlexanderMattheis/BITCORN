@@ -1322,10 +1322,14 @@
   Router.map(function () {
     this.route('home');
     this.mount('downloads');
+    this.mount('tutorials');
     this.route('about', function () {
       this.route('authors');
       this.route('page');
     });
+    this.route('contact');
+    this.route('imprint');
+    this.route('privacy');
   });
   var _default = Router;
   _exports.default = _default;
@@ -1369,6 +1373,19 @@
 
   _exports.default = AboutPage;
 });
+;define("bitcorn/routes/contact", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Contact extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = Contact;
+});
 ;define("bitcorn/routes/home", ["exports"], function (_exports) {
   "use strict";
 
@@ -1381,6 +1398,19 @@
   }) {}
 
   _exports.default = Home;
+});
+;define("bitcorn/routes/imprint", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Imprint extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = Imprint;
 });
 ;define("bitcorn/routes/index", ["exports"], function (_exports) {
   "use strict";
@@ -1399,6 +1429,19 @@
   }) {}
 
   _exports.default = Index;
+});
+;define("bitcorn/routes/privacy", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Privacy extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = Privacy;
 });
 ;define("bitcorn/services/ajax", ["exports", "ember-ajax/services/ajax"], function (_exports, _ajax) {
   "use strict";
@@ -1489,8 +1532,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "NPQCanQY",
-    "block": "{\"symbols\":[\"navbar\",\"nav\",\"dd\",\"menu\",\"dd\",\"dd\",\"menu\"],\"statements\":[[7,\"div\"],[11,\"id\",\"top\"],[9],[0,\"\\n\"],[4,\"bs-navbar\",null,null,{\"statements\":[[0,\"    \"],[7,\"a\"],[11,\"href\",\"/\"],[11,\"class\",\"navbar-brand\"],[9],[7,\"div\"],[11,\"class\",\"logo\"],[9],[10],[10],[0,\"\\n\\n    \"],[1,[22,1,[\"toggle\"]],false],[0,\" \"],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"content\"]],\"expected `navbar.content` to be a contextual component but found a string. Did you mean `(component navbar.content)`? ('bitcorn/templates/application.hbs' @ L6:C7) \"],null]],null,{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"nav\"]],\"expected `navbar.nav` to be a contextual component but found a string. Did you mean `(component navbar.nav)`? ('bitcorn/templates/application.hbs' @ L7:C9) \"],null]],[[\"class\"],[\"ml-auto\"]],{\"statements\":[[0,\"        \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,2,[\"item\"]],\"expected `nav.item` to be a contextual component but found a string. Did you mean `(component nav.item)`? ('bitcorn/templates/application.hbs' @ L9:C11) \"],null]],null,{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,2,[\"link-to\"]],\"expected `nav.link-to` to be a contextual component but found a string. Did you mean `(component nav.link-to)`? ('bitcorn/templates/application.hbs' @ L9:C24) \"],null],\"home\"],null,{\"statements\":[[0,\"Home\"]],\"parameters\":[]},null]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,6,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L13:C13) \"],null]],[[\"class\"],[\"navbar-button\"]],{\"statements\":[[0,\"Downloads\"]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,6,[\"menu\"]],\"expected `dd.menu` to be a contextual component but found a string. Did you mean `(component dd.menu)`? ('bitcorn/templates/application.hbs' @ L15:C13) \"],null]],[[\"class\"],[\"navbar-menu\"]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,7,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L16:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,7,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L17:C17) \"],null],\"downloads.programs\"],null,{\"statements\":[[0,\"Programs\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[7]},null]],\"parameters\":[6]},null],[0,\"\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,5,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L24:C13) \"],null]],[[\"class\"],[\"navbar-button\"]],{\"statements\":[[0,\"Tutorials\"]],\"parameters\":[]},null],[0,\"\\n\\n\"]],\"parameters\":[5]},null],[0,\"\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,3,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L30:C13) \"],null]],[[\"class\"],[\"navbar-button\"]],{\"statements\":[[0,\"About\"]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,3,[\"menu\"]],\"expected `dd.menu` to be a contextual component but found a string. Did you mean `(component dd.menu)`? ('bitcorn/templates/application.hbs' @ L32:C13) \"],null]],[[\"class\"],[\"navbar-menu\"]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L33:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L34:C17) \"],null],\"about.authors\"],null,{\"statements\":[[0,\"Authors\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L37:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L38:C17) \"],null],\"about.page\"],null,{\"statements\":[[0,\"Page\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[4]},null]],\"parameters\":[3]},null],[0,\"\\n\"]],\"parameters\":[2]},null]],\"parameters\":[]},null]],\"parameters\":[1]},null],[0,\"\\n  \"],[1,[21,\"outlet\"],false],[0,\"\\n\"],[10]],\"hasEval\":false}",
+    "id": "lxaqMJtX",
+    "block": "{\"symbols\":[\"navbar\",\"nav\",\"dd\",\"menu\",\"dd\",\"dd\",\"menu\"],\"statements\":[[7,\"div\"],[11,\"class\",\"background\"],[11,\"id\",\"top\"],[9],[0,\"\\n\"],[4,\"bs-navbar\",null,null,{\"statements\":[[0,\"    \"],[7,\"a\"],[11,\"href\",\"/\"],[11,\"class\",\"navbar-brand\"],[9],[7,\"div\"],[11,\"class\",\"logo\"],[9],[10],[10],[0,\"\\n\\n    \"],[1,[22,1,[\"toggle\"]],false],[0,\" \"],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"content\"]],\"expected `navbar.content` to be a contextual component but found a string. Did you mean `(component navbar.content)`? ('bitcorn/templates/application.hbs' @ L6:C7) \"],null]],null,{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"nav\"]],\"expected `navbar.nav` to be a contextual component but found a string. Did you mean `(component navbar.nav)`? ('bitcorn/templates/application.hbs' @ L7:C9) \"],null]],[[\"class\"],[\"ml-auto\"]],{\"statements\":[[0,\"        \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,2,[\"item\"]],\"expected `nav.item` to be a contextual component but found a string. Did you mean `(component nav.item)`? ('bitcorn/templates/application.hbs' @ L9:C11) \"],null]],null,{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,2,[\"link-to\"]],\"expected `nav.link-to` to be a contextual component but found a string. Did you mean `(component nav.link-to)`? ('bitcorn/templates/application.hbs' @ L9:C24) \"],null],\"home\"],null,{\"statements\":[[0,\"Home\"]],\"parameters\":[]},null]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,6,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L13:C13) \"],null]],[[\"class\"],[\"menu-button\"]],{\"statements\":[[0,\"Downloads\"]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,6,[\"menu\"]],\"expected `dd.menu` to be a contextual component but found a string. Did you mean `(component dd.menu)`? ('bitcorn/templates/application.hbs' @ L15:C13) \"],null]],[[\"class\"],[\"menu\"]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,7,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L16:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,7,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L17:C17) \"],null],\"downloads.programs\"],[[\"class\"],[\"download-link\"]],{\"statements\":[[0,\"Programs\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[7]},null]],\"parameters\":[6]},null],[0,\"\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,5,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L24:C13) \"],null]],[[\"class\"],[\"menu-button\"]],{\"statements\":[[0,\"Tutorials\"]],\"parameters\":[]},null],[0,\"\\n\\n\"]],\"parameters\":[5]},null],[0,\"\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,3,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L30:C13) \"],null]],[[\"class\"],[\"menu-button\"]],{\"statements\":[[0,\"About\"]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,3,[\"menu\"]],\"expected `dd.menu` to be a contextual component but found a string. Did you mean `(component dd.menu)`? ('bitcorn/templates/application.hbs' @ L32:C13) \"],null]],[[\"class\"],[\"menu\"]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L33:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L34:C17) \"],null],\"about.authors\"],[[\"class\"],[\"about-link\"]],{\"statements\":[[0,\"Authors\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L37:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L38:C17) \"],null],\"about.page\"],[[\"class\"],[\"about-link\"]],{\"statements\":[[0,\"Page\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[4]},null]],\"parameters\":[3]},null],[0,\"\\n\"]],\"parameters\":[2]},null]],\"parameters\":[]},null]],\"parameters\":[1]},null],[0,\"\\n  \"],[1,[21,\"outlet\"],false],[0,\"\\n\"],[10],[0,\"\\n\\n\"],[7,\"div\"],[11,\"id\",\"footer\"],[9],[0,\"\\n  \"],[7,\"span\"],[11,\"id\",\"liabilities\"],[9],[0,\"\\n    \"],[4,\"link-to\",[\"contact\"],[[\"class\"],[\"contact\"]],{\"statements\":[[0,\"Contact\"]],\"parameters\":[]},null],[0,\"\\n    \"],[4,\"link-to\",[\"imprint\"],[[\"class\"],[\"imprint\"]],{\"statements\":[[0,\"Imprint\"]],\"parameters\":[]},null],[0,\"\\n    \"],[4,\"link-to\",[\"privacy\"],[[\"class\"],[\"privacy\"]],{\"statements\":[[0,\"Privacy\"]],\"parameters\":[]},null],[0,\"\\n  \"],[10],[0,\"\\n\\n  \"],[7,\"span\"],[11,\"id\",\"author\"],[9],[0,\"\\n    Copyright © 2019 Alexander Mattheis\\n  \"],[10],[0,\"\\n\"],[10]],\"hasEval\":false}",
     "meta": {
       "moduleName": "bitcorn/templates/application.hbs"
     }
@@ -1524,6 +1567,24 @@
     }
   });
 });
+;define("bitcorn/templates/contact", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "LdMMKFZF",
+    "block": "{\"symbols\":[],\"statements\":[[1,[21,\"outlet\"],false]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/contact.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
 ;define("bitcorn/templates/home", ["exports"], function (_exports) {
   "use strict";
 
@@ -1533,14 +1594,76 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "E5sKT7es",
-    "block": "{\"symbols\":[],\"statements\":[],\"hasEval\":false}",
+    "id": "tZLxHAvm",
+    "block": "{\"symbols\":[\"car\"],\"statements\":[[4,\"bs-carousel\",null,null,{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"slide\"]],\"expected `car.slide` to be a contextual component but found a string. Did you mean `(component car.slide)`? ('bitcorn/templates/home.hbs' @ L2:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[7,\"img\"],[11,\"alt\",\"Bitcorn start-screen.\"],[11,\"src\",\"assets/images/preview/popcorn.jpg\"],[9],[10],[0,\"\\n\\n    \"],[7,\"div\"],[11,\"class\",\"carousel-caption\"],[9],[0,\"\\n      \"],[7,\"h1\"],[11,\"class\",\"display-2\"],[9],[0,\"Bitcorn\"],[10],[0,\"\\n      \"],[7,\"h3\"],[9],[0,\"Interactive, Free Learning Platform\"],[10],[0,\"\\n      \"],[7,\"button\"],[11,\"class\",\"btn btn-outline-light btn-lg\"],[11,\"type\",\"button\"],[9],[0,\"\\n        VIEW DEMO\\n      \"],[10],[0,\"\\n\"],[4,\"link-to\",[\"tutorials\"],null,{\"statements\":[[0,\"        \"],[7,\"button\"],[11,\"class\",\"btn btn-primary btn-lg\"],[11,\"type\",\"button\"],[9],[0,\"\\n          Get Started\\n        \"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"    \"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"slide\"]],\"expected `car.slide` to be a contextual component but found a string. Did you mean `(component car.slide)`? ('bitcorn/templates/home.hbs' @ L19:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[7,\"img\"],[11,\"alt\",\"Preview 2\"],[11,\"src\",\"assets/images/preview/bananas.jpg\"],[9],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"slide\"]],\"expected `car.slide` to be a contextual component but found a string. Did you mean `(component car.slide)`? ('bitcorn/templates/home.hbs' @ L23:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[7,\"img\"],[11,\"alt\",\"Preview 3\"],[11,\"src\",\"assets/images/preview/barley_field.jpg\"],[9],[10],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[1]},null],[0,\"\\n\"],[7,\"div\"],[11,\"class\",\"container-fluid\"],[9],[0,\"\\n  \"],[7,\"div\"],[11,\"class\",\"row jumbotron\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"col-md-9 col-lg-9 col-xl-10\"],[9],[0,\"\\n      \"],[7,\"p\"],[11,\"class\",\"lead\"],[9],[0,\"\\n        Bitcorn is a modern learning platform\\n        whose development started between October and November 2018.\\n      \"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"div\"],[11,\"class\",\"col-md-3 col-lg-3 col-xl-2\"],[9],[0,\"\\n\"],[4,\"link-to\",[\"about.page\"],null,{\"statements\":[[0,\"        \"],[7,\"button\"],[11,\"class\",\"btn btn-outline-secondary btn-lg\"],[11,\"type\",\"button\"],[9],[0,\"\\n          More About\\n        \"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n\"],[10]],\"hasEval\":false}",
     "meta": {
       "moduleName": "bitcorn/templates/home.hbs"
     }
   });
 
   _exports.default = _default;
+});
+;define("bitcorn/templates/imprint", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "hZ+RfGdi",
+    "block": "{\"symbols\":[],\"statements\":[[1,[21,\"outlet\"],false]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/imprint.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("bitcorn/templates/privacy", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "9gZFaOsz",
+    "block": "{\"symbols\":[],\"statements\":[[1,[21,\"outlet\"],false]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/privacy.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("bitcorn/tutorials/tests/addon.lint-test", [], function () {
+  "use strict";
+
+  QUnit.module('ESLint | addon');
+  QUnit.test('addon/engine.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/engine.js should pass ESLint\n\n');
+  });
+  QUnit.test('addon/resolver.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/resolver.js should pass ESLint\n\n');
+  });
+  QUnit.test('addon/routes.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/routes.js should pass ESLint\n\n');
+  });
+});
+;define("bitcorn/tutorials/tests/templates.template.lint-test", [], function () {
+  "use strict";
+
+  QUnit.module('TemplateLint');
+  QUnit.test('addon/templates/application.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/templates/application.hbs should pass TemplateLint.\n\n');
+  });
 });
 ;
 
@@ -1565,7 +1688,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0+16265dbd"});
+            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0+7616ff83"});
           }
         
 //# sourceMappingURL=bitcorn.map

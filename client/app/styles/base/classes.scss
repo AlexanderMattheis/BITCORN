@@ -1,0 +1,61 @@
+.content {
+  text-align: justify;
+}
+
+.embedded-logo {
+  float: right;
+  max-height: 186px;
+  max-width: 512px;
+  padding: 15px;
+}
+
+.menu {
+  min-width: 90px !important;
+
+  /* CLASSES */
+  .about-link {
+    width: 90px;
+  }
+
+  .download-link {
+    width: 132px;
+  }
+
+  /* LIBRARY */
+  .dropdown-item {
+    padding: 10px 12px 10px 12px;
+  }
+
+  .dropdown-item:active {
+    background-color: $color-dropdown-active;
+  }
+}
+
+.menu-button {
+  border: none;
+  color: $color-font-inactive;
+  font-size: 17.6px;
+
+  &:hover {
+    background-color: $color-secondary;
+    color: $color-font-active;
+  }
+}
+
+.message {
+  textarea {
+    max-height: 300px;
+    min-height: 100px;
+  }
+}
+
+.overline {
+  margin-bottom: 10px;
+  margin-top: 15px;
+  width: 93%;
+}
+
+.underline {
+  margin: 0 0 15px 0;
+  width: 100%;
+}

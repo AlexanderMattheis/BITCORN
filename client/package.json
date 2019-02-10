@@ -65,7 +65,8 @@
   },
   "ember-addon": {
     "paths": [
-      "lib/downloads"
+      "lib/downloads",
+      "lib/tutorials"
     ]
   }
 }

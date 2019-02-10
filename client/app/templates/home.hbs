@@ -1,0 +1,45 @@
+{{#bs-carousel as |car|}}
+  {{#car.slide}}
+    <img alt="Bitcorn start-screen." src="assets/images/preview/popcorn.jpg">
+
+    <div class="carousel-caption">
+      <h1 class="display-2">Bitcorn</h1>
+      <h3>Interactive, Free Learning Platform</h3>
+      <button type="button" class="btn btn-outline-light btn-lg">
+        VIEW DEMO
+      </button>
+      {{#link-to "tutorials"}}
+        <button type="button" class="btn btn-primary btn-lg">
+          Get Started
+        </button>
+      {{/link-to}}
+    </div>
+  {{/car.slide}}
+
+  {{#car.slide}}
+    <img alt="Preview 2" src="assets/images/preview/bananas.jpg">
+  {{/car.slide}}
+
+  {{#car.slide}}
+    <img alt="Preview 3" src="assets/images/preview/barley_field.jpg">
+  {{/car.slide}}
+{{/bs-carousel}}
+
+<div class="container-fluid">
+  <div class="row jumbotron">
+    <div class="col-md-9 col-lg-9 col-xl-10">
+      <p class="lead">
+        Bitcorn is a modern learning platform
+        whose development started between October and November 2018.
+      </p>
+    </div>
+
+    <div class="col-md-3 col-lg-3 col-xl-2">
+      {{#link-to "about.page"}}
+        <button type="button" type="button" class="btn btn-outline-secondary btn-lg">
+          More About
+        </button>
+      {{/link-to}}
+    </div>
+  </div>
+</div>
