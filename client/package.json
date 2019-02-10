@@ -46,6 +46,7 @@
     "ember-cli-typescript": "^1.5.0",
     "ember-cli-uglify": "^2.1.0",
     "ember-data": "~3.7.0",
+    "ember-engines": "^0.5.26",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",
@@ -61,5 +62,10 @@
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
+  },
+  "ember-addon": {
+    "paths": [
+      "lib/downloads"
+    ]
   }
 }

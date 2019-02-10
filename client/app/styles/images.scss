@@ -1,0 +1,8 @@
+$images: "../assets/images";
+
+.logo {
+  background: url("#{$images}/logo.svg") no-repeat;
+  display: block;
+  height: 70px;
+  width: 200px;
+}

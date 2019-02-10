@@ -65614,6 +65614,531 @@ createDeprecatedModule('resolver');
   });
   exports.default = _isFastboot.default ? najax : Ember.$.ajax;
 });
+;define('ember-asset-loader/errors/asset-load', ['exports', 'ember-asset-loader/errors/load', 'ember-asset-loader/services/asset-loader'], function (exports, _load, _assetLoader) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+
+  /**
+   * Represents an error that occurred while trying to load an asset.
+   *
+   * @class AssetLoadError
+   * @extends LoadError
+   */
+  class AssetLoadError extends _load.default {
+    /**
+     * Constructs a new AssetLoadError from the original error and the info of the
+     * asset that was attempting to load.
+     *
+     * @param {AssetLoader} assetLoader
+     * @param {Asset} asset
+     * @param {Error} error
+     */
+    constructor(assetLoader, asset, error) {
+      super(`The ${asset.type} asset with uri "${asset.uri}" failed to load with the error: ${error}.`, assetLoader);
+      this.name = 'AssetLoadError';
+      this.asset = asset;
+      this.originalError = error;
+    }
+
+    retryLoad() {
+      return this._invokeAndCache('loadAsset', this.asset, _assetLoader.RETRY_LOAD_SECRET);
+    }
+  }
+  exports.default = AssetLoadError;
+});
+;define('ember-asset-loader/errors/bundle-load', ['exports', 'ember-asset-loader/errors/load', 'ember-asset-loader/services/asset-loader'], function (exports, _load, _assetLoader) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+
+  /**
+   * Represents an error, or errors, that occurred while trying to load a bundle
+   * of assets.
+   *
+   * @class BundleLoadError
+   * @extends LoadError
+   */
+  class BundleLoadError extends _load.default {
+    /**
+     * Constructs a new BundleLoadError from the original error, or errors, and
+     * the name of the bundle that was attempting to load.
+     *
+     * @param {AssetLoader} assetLoader
+     * @param {Asset} asset
+     * @param {Error} error
+     */
+    constructor(assetLoader, bundleName, errors) {
+      super(`The bundle "${bundleName}" failed to load.`, assetLoader);
+      this.name = 'BundleLoadError';
+      this.bundleName = bundleName;
+      this.errors = errors;
+    }
+
+    retryLoad() {
+      return this._invokeAndCache('loadBundle', this.bundleName, _assetLoader.RETRY_LOAD_SECRET);
+    }
+  }
+  exports.default = BundleLoadError;
+});
+;define('ember-asset-loader/errors/load', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  function ExtendBuiltin(klass) {
+    function ExtendableBuiltin() {
+      klass.apply(this, arguments);
+    }
+
+    ExtendableBuiltin.prototype = Object.create(klass.prototype);
+    ExtendableBuiltin.prototype.constructor = ExtendableBuiltin;
+    return ExtendableBuiltin;
+  }
+
+  /**
+   * A simple Error type to represent an error that occured while loading a
+   * resource.
+   *
+   * @class LoadError
+   * @extends Error
+   */
+  class LoadError extends ExtendBuiltin(Error) {
+    /**
+     * Constructs a new LoadError with a supplied error message and an instance
+     * of the AssetLoader service to use when retrying a load.
+     *
+     * @param {String} message
+     * @param {AssetLoader} assetLoader
+     */
+    constructor(message, assetLoader) {
+      super(...arguments);
+      this.name = 'LoadError';
+      this.message = message;
+      this.loader = assetLoader;
+    }
+
+    /**
+     * An abstract hook to define in a sub-class that specifies how to retry
+     * loading the errored resource.
+     */
+    retryLoad() {
+      throw new Error(`You must define a behavior for 'retryLoad' in a subclass.`);
+    }
+
+    /**
+     * Invokes a specified method on the AssetLoader service and caches the
+     * result. Should be used in implementations of the retryLoad hook.
+     *
+     * @protected
+     */
+    _invokeAndCache(method, ...args) {
+      return this._retry || (this._retry = this.loader[method](...args));
+    }
+  }
+  exports.default = LoadError;
+});
+;define('ember-asset-loader/loaders/css', ['exports', 'ember-asset-loader/loaders/utilities'], function (exports, _utilities) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = (0, _utilities.nodeLoader)(function css(uri) {
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      if (document.querySelector(`link[href="${uri}"]`)) {
+        return resolve();
+      }
+
+      // Try using the default onload/onerror handlers...
+      const link = (0, _utilities.createLoadElement)('link', resolve, function (error) {
+        if (this.parentNode) {
+          this.parentNode.removeChild(this);
+        }
+        reject(error);
+      });
+
+      link.rel = 'stylesheet';
+      link.href = uri;
+
+      document.head.appendChild(link);
+
+      // In case the browser doesn't fire onload/onerror events, we poll the
+      // the list of stylesheets to see when it loads...
+      function checkSheetLoad() {
+        const resolvedHref = link.href;
+        const stylesheets = document.styleSheets;
+        let i = stylesheets.length;
+
+        while (i--) {
+          const sheet = stylesheets[i];
+          if (sheet.href === resolvedHref) {
+            // Unfortunately we have no way of knowing if the load was
+            // successful or not, so we always resolve.
+            setTimeout(resolve);
+            return;
+          }
+        }
+
+        setTimeout(checkSheetLoad);
+      }
+
+      setTimeout(checkSheetLoad);
+    });
+  });
+});
+;define('ember-asset-loader/loaders/js', ['exports', 'ember-asset-loader/loaders/utilities'], function (exports, _utilities) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = (0, _utilities.nodeLoader)(function js(uri) {
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${uri}"]`)) {
+        return resolve();
+      }
+
+      const script = (0, _utilities.createLoadElement)('script', resolve, function (error) {
+        if (this.parentNode) {
+          this.parentNode.removeChild(this);
+        }
+        reject(error);
+      });
+
+      script.src = uri;
+      script.async = false;
+
+      document.head.appendChild(script);
+    });
+  });
+});
+;define('ember-asset-loader/loaders/utilities', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.createLoadElement = createLoadElement;
+  exports.nodeLoader = nodeLoader;
+
+
+  const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+  /**
+   * Creates a DOM element with the specified onload and onerror handlers.
+   *
+   * @method createLoadElement
+   * @param {String} tag
+   * @param {Function} load
+   * @param {Function} error
+   * @return {HTMLElement} el
+   */
+  function createLoadElement(tag, load, error) {
+    const el = document.createElement(tag);
+
+    el.onload = load;
+    el.onerror = error;
+
+    return el;
+  }
+
+  /**
+   * Creates a loader function that is compatible with Node environments (such as
+   * FastBoot). If we're in the browser, we'll use the passed in loader function,
+   * but when in Node, we'll just return a Promise that resolves (we assume assets
+   * will be pre-loaded).
+   *
+   * @method nodeLoader
+   * @param {Function} loader
+   * @return {Function}
+   */
+  function nodeLoader(loader) {
+    if (isBrowser) {
+      return loader;
+    } else {
+      return () => Ember.RSVP.resolve();
+    }
+  }
+});
+;define('ember-asset-loader/services/asset-loader', ['exports', 'ember-asset-loader/errors/asset-load', 'ember-asset-loader/errors/bundle-load', 'ember-asset-loader/loaders/js', 'ember-asset-loader/loaders/css'], function (exports, _assetLoad, _bundleLoad, _js, _css) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.RETRY_LOAD_SECRET = RETRY_LOAD_SECRET;
+  function RETRY_LOAD_SECRET() {}
+
+  /**
+   * Merges two manifests' bundles together and returns a new manifest.
+   *
+   * @param {AssetManifest} input
+   * @param {AssetManifest} manifest
+   * @return {AssetManifest} output
+   */
+  function reduceManifestBundles(input, manifest) {
+    // If manifest doesn't have any bundles, then no reducing to do
+    if (!manifest.bundles) {
+      return input;
+    }
+
+    // Merge the bundles together, checking for collisions
+    return Object.keys(manifest.bundles).reduce((output, bundle) => {
+      Ember.assert(`The bundle "${bundle}" already exists.`, !output.bundles[bundle]);
+      output.bundles[bundle] = manifest.bundles[bundle];
+      return output;
+    }, input);
+  }
+
+  /**
+   * A Service class to load additional assets into the Ember application.
+   *
+   * @class AssetLoader
+   */
+  exports.default = Ember.Service.extend({
+    /**
+     * Setup the caches for the service to use when loading assets.
+     *
+     * @override
+     */
+    init() {
+      this._super(...arguments);
+
+      this.__manifests = [];
+      this._setupCache();
+      this._initAssetLoaders();
+    },
+
+    /**
+     * Adds a manifest to the service by merging its bundles with any previously
+     * added manifests. Bundle collisions result in an error being thrown.
+     *
+     * @public
+     * @method pushManifest
+     * @param {AssetManifest} manifest
+     * @return {Void}
+     */
+    pushManifest(manifest) {
+      this.__manifests.push(manifest);
+      this.__manifest = this.__manifests.reduce(reduceManifestBundles, { bundles: {} });
+    },
+
+    /**
+     * Loads a bundle by fetching all of its assets and its dependencies.
+     *
+     * Returns a Promise that resolve when all assets have been loaded or rejects
+     * when one of the assets fails to load. Subsequent calls will return the same
+     * Promise.
+     *
+     * @public
+     * @method loadBundle
+     * @param {String} name
+     * @param {Boolean} retryLoad Warning: only used internally to re-initiate loads, NOT public API
+     * @return {Promise} bundlePromise
+     */
+    loadBundle(name, retryLoad) {
+      const cachedPromise = this._getFromCache('bundle', name, retryLoad === RETRY_LOAD_SECRET);
+
+      if (cachedPromise) {
+        return cachedPromise;
+      }
+
+      const bundle = this._getBundle(name);
+
+      const dependencies = bundle.dependencies || [];
+      const dependencyPromises = dependencies.map(dependency => this.loadBundle(dependency, retryLoad));
+
+      const assets = bundle.assets || [];
+      const assetPromises = assets.map(asset => this.loadAsset(asset, retryLoad));
+
+      const bundlePromise = Ember.RSVP.allSettled([...dependencyPromises, ...assetPromises]);
+
+      const bundleWithFail = bundlePromise.then(promises => {
+        const rejects = promises.filter(promise => promise.state === 'rejected');
+        const errors = rejects.map(reject => reject.reason);
+
+        if (errors.length) {
+          // Evict rejected promise.
+          this._getFromCache('bundle', name, true);
+          throw new _bundleLoad.default(this, name, errors);
+        }
+
+        return name;
+      });
+
+      return this._setInCache('bundle', name, bundleWithFail);
+    },
+
+    /**
+     * Loads a single asset into the application. Expects a given asset to specify
+     * a URI and type.
+     *
+     * @public
+     * @method loadAsset
+     * @param {Object} asset
+     * @param {String} asset.uri
+     * @param {String} asset.type
+     * @return {Promise} assetPromise
+     */
+    loadAsset({ uri, type }, retryLoad) {
+      const cacheKey = `${type}:${uri}`;
+
+      const cachedPromise = this._getFromCache('asset', cacheKey, retryLoad === RETRY_LOAD_SECRET);
+
+      if (cachedPromise) {
+        return cachedPromise;
+      }
+
+      const loader = this._getAssetLoader(type);
+      const assetPromise = loader(uri);
+
+      const assetWithFail = assetPromise.then(() => ({ uri, type }), error => {
+        // Evict rejected promise.
+        this._getFromCache('asset', cacheKey, true);
+        throw new _assetLoad.default(this, { uri, type }, error);
+      });
+
+      return this._setInCache('asset', cacheKey, assetWithFail);
+    },
+
+    /**
+     * Define a loader function for assets of a specified type. Any previously
+     * defined loaders for that type will be overriden.
+     *
+     * @public
+     * @param {String} type
+     * @param {Funciton} loader
+     * @return {Void}
+     */
+    defineLoader(type, loader) {
+      this.__assetLoaders[type] = loader;
+    },
+
+    /**
+     * Gets the current, reduced manifest.
+     *
+     * @private
+     * @method getManifest
+     * @return {AssetManifest} manifest
+     */
+    getManifest() {
+      const manifest = this.__manifest;
+
+      Ember.assert('No asset manifest found. Ensure you call pushManifest before attempting to use the AssetLoader.', manifest);
+
+      return manifest;
+    },
+
+    /**
+     * Sets up the cache used to store Promise values for asset/bundle requests.
+     *
+     * @private
+     * @return {Void}
+     */
+    _setupCache() {
+      this.__cache = {};
+      this.__cache.asset = {};
+      this.__cache.bundle = {};
+    },
+
+    /**
+     * Gets a value from the cache according to the type and key it was stored
+     * under. Optionally, evicts the cached value and returns undefined.
+     *
+     * @private
+     * @param {String} type
+     * @param {String} key
+     * @param {Boolean} evict
+     * @return {Any}
+     */
+    _getFromCache(type, key, evict) {
+      if (evict) {
+        this.__cache[type][key] = undefined;
+        return;
+      }
+
+      return this.__cache[type][key];
+    },
+
+    /**
+     * Sets a value in the cache under a type and key.
+     *
+     * @private
+     * @param {String} type
+     * @param {String} key
+     * @param {Any} value
+     * @return {Any}
+     */
+    _setInCache(type, key, value) {
+      return this.__cache[type][key] = value;
+    },
+
+    /**
+     * Gets the info for a bundle from the reduced manifest.
+     *
+     * @private
+     * @method _getBundle
+     * @param {String} name
+     * @return {Bundle} bundle
+     */
+    _getBundle(name) {
+      const manifest = this.getManifest();
+
+      const bundles = manifest.bundles;
+
+      Ember.assert('Asset manifest does not list any available bundles.', Object.keys(bundles).length);
+
+      const bundle = bundles[name];
+
+      Ember.assert(`No bundle with name "${name}" exists in the asset manifest.`, bundle);
+
+      return bundle;
+    },
+
+    /**
+     * Gets the asset loader method for a specified type.
+     *
+     * @private
+     * @method _getAssetLoader
+     * @param {String} type
+     * @return {Function} loader
+     */
+    _getAssetLoader(type) {
+      const loader = this.__assetLoaders[type];
+
+      Ember.assert(`No loader for assets of type "${type}" defined.`, loader);
+
+      return loader;
+    },
+
+    /**
+     * Initializes the __assetLoaders object and defines our default loaders.
+     */
+    _initAssetLoaders() {
+      this.__assetLoaders = {};
+      this.defineLoader('js', _js.default);
+      this.defineLoader('css', _css.default);
+    },
+
+    /**
+     * Defines loader methods for various types of assets. Each loader is stored
+     * under a key corresponding to the type of asset it loads.
+     *
+     * @private
+     * @property __assetLoaders
+     * @type {Object}
+     */
+    __assetLoaders: undefined
+  });
+});
 ;define('ember-bootstrap/components/base/bs-accordion', ['exports', 'ember-bootstrap/templates/components/bs-accordion', 'ember-bootstrap/utils/listen-to-cp'], function (exports, _bsAccordion, _listenToCp) {
   'use strict';
 
@@ -97790,6 +98315,614 @@ createDeprecatedModule('resolver');
   var _default = "3.7.0";
   _exports.default = _default;
 });
+;define('ember-engines/-private/engine-ext', ['ember-engines/components/link-to-component', 'ember-engines/components/link-to-external-component'], function (_linkToComponent, _linkToExternalComponent) {
+  'use strict';
+
+  Ember.Engine.reopen({
+    buildRegistry() {
+      let registry = this._super(...arguments);
+
+      if (!(this instanceof Ember.Application)) {
+        registry.register('component:link-to', _linkToComponent.default);
+        registry.register('component:link-to-external', _linkToExternalComponent.default);
+      }
+
+      return registry;
+    }
+  });
+});
+;define('ember-engines/-private/engine-instance-ext', [], function () {
+  'use strict';
+
+  Ember.EngineInstance.reopen({
+    /**
+      The root DOM element of the `EngineInstance` as an element or a
+      [jQuery-compatible selector
+      string](http://api.jquery.com/category/selectors/).
+       @private
+      @property {String|DOMElement} rootElement
+    */
+    rootElement: null,
+
+    /**
+      A mapping of dependency names and values, grouped by category.
+       `dependencies` should be set by the parent of this engine instance upon
+      instantiation and prior to boot.
+       During the boot process, engine instances verify that their required
+      dependencies, as defined on the parent `Engine` class, have been assigned
+      by the parent.
+       @private
+      @property {Object} dependencies
+    */
+    dependencies: null,
+
+    /**
+      A cache of dependency names and values, grouped by engine name.
+       This cache is maintained by `buildChildEngineInstance()` for every engine
+      that's a child of this parent instance.
+       Only dependencies that are singletons are currently allowed, which makes
+      this safe.
+       @private
+      @property {Object} _dependenciesForChildEngines
+    */
+    _dependenciesForChildEngines: null,
+
+    buildChildEngineInstance(name, options = {}) {
+      // Check dependencies cached by engine name
+      let dependencies = this._dependenciesForChildEngines && this._dependenciesForChildEngines[name];
+
+      // Prepare dependencies if none are cached
+      if (!dependencies) {
+        dependencies = {};
+
+        let camelizedName = Ember.String.camelize(name);
+
+        let engineConfiguration = this.base.engines && this.base.engines[camelizedName];
+
+        if (engineConfiguration) {
+          let engineDependencies = engineConfiguration.dependencies;
+
+          if (engineDependencies) {
+            ['services'].forEach(category => {
+              if (engineDependencies[category]) {
+                dependencies[category] = {};
+                let dependencyType = this._dependencyTypeFromCategory(category);
+
+                for (let i = 0; i < engineDependencies[category].length; i++) {
+                  let engineDependency = engineDependencies[category][i];
+                  let dependencyName;
+                  let dependencyNameInParent;
+
+                  if (typeof engineDependency === 'object') {
+                    dependencyName = Object.keys(engineDependency)[0];
+                    dependencyNameInParent = engineDependency[dependencyName];
+                  } else {
+                    dependencyName = dependencyNameInParent = engineDependency;
+                  }
+
+                  let dependencyKey = `${dependencyType}:${dependencyNameInParent}`;
+                  let dependency = this.lookup(dependencyKey);
+
+                  (true && !(dependency) && Ember.assert(`Engine parent failed to lookup '${dependencyKey}' dependency, as declared in 'engines.${camelizedName}.dependencies.${category}'.`, dependency));
+
+
+                  dependencies[category][dependencyName] = dependency;
+                }
+              }
+            });
+
+            if (engineDependencies.externalRoutes) {
+              dependencies.externalRoutes = engineDependencies.externalRoutes;
+            }
+          }
+        }
+
+        // Cache dependencies for child engines for faster instantiation in the future
+        this._dependenciesForChildEngines = this._dependenciesForChildEngines || {};
+        this._dependenciesForChildEngines[name] = dependencies;
+      }
+
+      options.dependencies = dependencies;
+
+      return this._super(name, options);
+    },
+
+    /*
+      Gets the application-scoped route path for an external route.
+       @private
+      @method _getExternalRoute
+      @param {String} routeName
+      @return {String} route
+    */
+    _getExternalRoute(routeName) {
+      const route = this._externalRoutes[routeName];
+
+      (true && !(route) && Ember.assert(`The external route ${routeName} does not exist`, route));
+
+
+      return route;
+    },
+
+    cloneParentDependencies() {
+      this._super();
+
+      let requiredDependencies = this.base.dependencies;
+
+      if (requiredDependencies) {
+        Object.keys(requiredDependencies).forEach(category => {
+          let dependencyType = this._dependencyTypeFromCategory(category);
+
+          if (category === 'externalRoutes') {
+            this._externalRoutes = {};
+          }
+
+          requiredDependencies[category].forEach(dependencyName => {
+            let dependency = this.dependencies[category] && this.dependencies[category][dependencyName];
+
+            (true && !(dependency) && Ember.assert(`A dependency mapping for '${category}.${dependencyName}' must be declared on this engine's parent.`, dependency));
+
+
+            if (category === 'externalRoutes') {
+              this._externalRoutes[dependencyName] = dependency;
+            } else {
+              let key = `${dependencyType}:${dependencyName}`;
+              this.register(key, dependency, { instantiate: false });
+            }
+          });
+        });
+      }
+    },
+
+    _dependencyTypeFromCategory(category) {
+      switch (category) {
+        case 'services':
+          return 'service';
+        case 'externalRoutes':
+          return 'externalRoute';
+      }
+      (true && !(false) && Ember.assert(`Dependencies of category '${category}' can not be shared with engines.`, false));
+    },
+
+    // mount(view) {
+    //   assert('EngineInstance must be booted before it can be mounted', this._booted);
+    //
+    //   view.append()
+    // },
+
+    /**
+      This hook is called by the root-most Route (a.k.a. the ApplicationRoute)
+      when it has finished creating the root View. By default, we simply take the
+      view and append it to the `rootElement` specified on the Application.
+       In cases like FastBoot and testing, we can override this hook and implement
+      custom behavior, such as serializing to a string and sending over an HTTP
+      socket rather than appending to DOM.
+       @param view {Ember.View} the root-most view
+      @private
+    */
+    didCreateRootView(view) {
+      view.appendTo(this.rootElement);
+    }
+  });
+});
+;define('ember-engines/-private/route-ext', [], function () {
+  'use strict';
+
+  /*
+    Creates an aliased form of a method that properly resolves external routes.
+  */
+  function externalAlias(methodName) {
+    return function _externalAliasMethod(routeName, ...args) {
+      let externalRoute = Ember.getOwner(this)._getExternalRoute(routeName);
+      let router = this._router || this.router;
+      return router[methodName](externalRoute, ...args);
+    };
+  }
+
+  Ember.Route.reopen({
+    transitionToExternal: externalAlias('transitionTo'),
+    replaceWithExternal: externalAlias('replaceWith')
+  });
+});
+;define('ember-engines/-private/router-ext', [], function () {
+  'use strict';
+
+  const defaultSerialize = Ember.Route.proto().serialize;
+  function hasDefaultSerialize(handler) {
+    return handler.serialize === defaultSerialize;
+  }
+
+  // NOTE:
+  // This needed because we need to infer the setup of the router.js
+  // Prior to https://github.com/emberjs/ember.js/pull/16974 we used to
+  // call `_getHandlerFunction` to get the closed over function to resolve
+  // a name to a handler. PR#16974 removed this private method.
+  let newSetup = true;
+
+  Ember.Router.reopen({
+    init() {
+      this._super(...arguments);
+      this._enginePromises = Object.create(null);
+      this._seenHandlers = Object.create(null);
+
+      // We lookup the asset loader service instead of injecting it so that we
+      // don't blow up unit tests for consumers
+      this._assetLoader = Ember.getOwner(this).lookup('service:asset-loader');
+    },
+
+    /**
+     * When going to an Engine route, we check for QP meta in the BucketCache
+     * instead of checking the Route (which may not exist yet). We populate
+     * the BucketCache after loading the Route the first time.
+     *
+     * @override
+     */
+    _getQPMeta(handlerInfo) {
+      let routeName = handlerInfo.name;
+      let isWithinEngine = this._engineInfoByRoute[routeName];
+      let hasBeenLoaded = this._seenHandlers[routeName];
+      if (isWithinEngine && !hasBeenLoaded) {
+        return undefined;
+      }
+
+      return this._super(...arguments);
+    },
+
+    /**
+     * We override this to fetch assets when crossing into a lazy Engine for the
+     * first time. For other cases we do the normal thing.
+     *
+     * @override
+     */
+    _getHandlerFunction() {
+      newSetup = false;
+      return this._handlerResolver();
+    },
+
+    setupRouter() {
+      let isSetup = this._super(...arguments);
+      if (newSetup) {
+        // This method used to be called `getHandler` and it is going to be called `getRoute`.
+        if (this._routerMicrolib.getRoute !== undefined) {
+          this._routerMicrolib.getRoute = this._handlerResolver();
+        } else if (this._routerMicrolib.getHandler !== undefined) {
+          this._routerMicrolib.getHandler = this._handlerResolver();
+        }
+      }
+      return isSetup;
+    },
+
+    _handlerResolver() {
+      let seen = this._seenHandlers;
+      let owner = Ember.getOwner(this);
+      return name => {
+        let engineInfo = this._engineInfoByRoute[name];
+        if (engineInfo) {
+          let engineInstance = this._getEngineInstance(engineInfo);
+          if (engineInstance) {
+            return this._getHandlerForEngine(seen, name, engineInfo.localFullName, engineInstance);
+          } else {
+            return this._loadEngineInstance(engineInfo).then(instance => {
+              return this._getHandlerForEngine(seen, name, engineInfo.localFullName, instance);
+            });
+          }
+        }
+
+        // If we don't cross into an Engine, then the routeName and localRouteName
+        // are the same.
+        return this._internalGetHandler(seen, name, name, owner);
+      };
+    },
+
+    /**
+     * Gets the handler for a route from an Engine instance, proxies to the
+     * _internalGetHandler method.
+     *
+     * @private
+     * @method _getHandlerForEngine
+     * @param {Object} seen
+     * @param {String} routeName
+     * @param {String} localRouteName
+     * @param {Owner} routeOwner
+     * @return {EngineInstance} engineInstance
+     */
+    _getHandlerForEngine(seen, routeName, localRouteName, engineInstance) {
+      let handler = this._internalGetHandler(seen, routeName, localRouteName, engineInstance);
+
+      if (!hasDefaultSerialize(handler)) {
+        throw new Error('Defining a custom serialize method on an Engine route is not supported.');
+      }
+
+      return handler;
+    },
+
+    /**
+     * This method is responsible for actually doing the lookup in getHandler.
+     * It is separate so that it can be used from different code paths.
+     *
+     * @private
+     * @method _internalGetHandler
+     * @param {Object} seen
+     * @param {String} routeName
+     * @param {String} localRouteName
+     * @param {Owner} routeOwner
+     * @return {Route} handler
+     */
+    _internalGetHandler(seen, routeName, localRouteName, routeOwner) {
+      const fullRouteName = 'route:' + localRouteName;
+      let handler = routeOwner.lookup(fullRouteName);
+
+      if (seen[routeName] && handler) {
+        return handler;
+      }
+
+      seen[routeName] = true;
+
+      if (!handler) {
+        const DefaultRoute = routeOwner.factoryFor ? routeOwner.factoryFor('route:basic').class : routeOwner._lookupFactory('route:basic');
+
+        routeOwner.register(fullRouteName, DefaultRoute.extend());
+        handler = routeOwner.lookup(fullRouteName);
+
+        if (Ember.get(this, 'namespace.LOG_ACTIVE_GENERATION')) {
+          // eslint-disable-next-line no-console
+          console.info(`generated -> ${fullRouteName}`, { fullName: fullRouteName });
+        }
+      }
+
+      handler._setRouteName(localRouteName);
+      if (handler._populateQPMeta) {
+        handler._populateQPMeta();
+      }
+
+      return handler;
+    },
+
+    /**
+     * Checks the owner to see if it has a registration for an Engine. This is a
+     * proxy to tell if an Engine's assets are loaded or not.
+     *
+     * @private
+     * @method _engineIsLoaded
+     * @param {String} name
+     * @return {Boolean}
+     */
+    _engineIsLoaded(name) {
+      let owner = Ember.getOwner(this);
+      return owner.hasRegistration('engine:' + name);
+    },
+
+    /**
+     * Registers an Engine that was recently loaded.
+     *
+     * @private
+     * @method _registerEngine
+     * @param {String} name
+     * @return {Void}
+     */
+    _registerEngine(name) {
+      let owner = Ember.getOwner(this);
+      if (!owner.hasRegistration('engine:' + name)) {
+        owner.register('engine:' + name, window.require(name + '/engine').default);
+      }
+    },
+
+    /**
+     * Gets the instance of an Engine with the specified name and instanceId.
+     *
+     * @private
+     * @method _getEngineInstance
+     * @param {Object} engineInfo
+     * @param {String} engineInfo.name
+     * @param {String} engineInfo.instanceId
+     * @return {EngineInstance}
+     */
+    _getEngineInstance({ name, instanceId }) {
+      let engineInstances = this._engineInstances;
+      return engineInstances[name] && engineInstances[name][instanceId];
+    },
+
+    /**
+     * Loads an instance of an Engine with the specified name and instanceId.
+     * Returns a Promise for both Eager and Lazy Engines. This function loads the
+     * assets for any Lazy Engines.
+     *
+     * @private
+     * @method _loadEngineInstance
+     * @param {Object} engineInfo
+     * @param {String} engineInfo.name
+     * @param {String} engineInfo.instanceId
+     * @param {String} engineInfo.mountPoint
+     * @return {Promise<EngineInstance>}
+     */
+    _loadEngineInstance({ name, instanceId, mountPoint }) {
+      let enginePromises = this._enginePromises;
+
+      if (!enginePromises[name]) {
+        enginePromises[name] = Object.create(null);
+      }
+
+      let enginePromise = enginePromises[name][instanceId];
+
+      // We already have a Promise for this engine instance
+      if (enginePromise) {
+        return enginePromise;
+      }
+
+      if (this._engineIsLoaded(name)) {
+        // The Engine is loaded, but has no Promise
+        enginePromise = Ember.RSVP.resolve();
+      } else {
+        // The Engine is not loaded and has no Promise
+        enginePromise = this._assetLoader.loadBundle(name).then(() => this._registerEngine(name), error => {
+          enginePromises[name][instanceId] = undefined;
+          throw error;
+        });
+      }
+
+      return enginePromises[name][instanceId] = enginePromise.then(() => {
+        return this._constructEngineInstance({ name, instanceId, mountPoint });
+      });
+    },
+
+    /**
+     * Constructs an instance of an Engine based on an engineInfo object.
+     * TODO: Figure out if this works with nested Engines.
+     *
+     * @private
+     * @method _constructEngineInstance
+     * @param {Object} engineInfo
+     * @param {String} engineInfo.name
+     * @param {String} engineInfo.instanceId
+     * @param {String} engineInfo.mountPoint
+     * @return {Promise<EngineInstance>}
+     */
+    _constructEngineInstance({ name, instanceId, mountPoint }) {
+      let owner = Ember.getOwner(this);
+
+      (true && !(owner.hasRegistration(`engine:${name}`)) && Ember.assert("You attempted to mount the engine '" + name + "' in your router map, but the engine cannot be found.", owner.hasRegistration(`engine:${name}`)));
+
+
+      let engineInstances = this._engineInstances;
+
+      if (!engineInstances[name]) {
+        engineInstances[name] = Object.create(null);
+      }
+
+      let engineInstance = owner.buildChildEngineInstance(name, {
+        routable: true,
+        mountPoint
+      });
+
+      engineInstances[name][instanceId] = engineInstance;
+
+      return engineInstance.boot().then(() => {
+        return engineInstance;
+      });
+    }
+  });
+});
+;define('ember-engines/components/link-to-component', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.LinkComponent.extend({
+    didReceiveAttrs() {
+      this._super(...arguments);
+
+      let owner = Ember.getOwner(this);
+
+      (true && !(owner.mountPoint !== undefined) && Ember.assert(`You attempted to use {{link-to}} within a routeless engine, this is not supported. Use {{link-to-external}} to construct links within a routeless engine. See http://ember-engines.com/guide/linking-and-external-links for more info.`, owner.mountPoint !== undefined));
+
+
+      if (owner.mountPoint) {
+        // Prepend engine mount point to targetRouteName
+        this._prefixProperty(owner.mountPoint, 'targetRouteName');
+
+        // Prepend engine mount point to current-when if set
+        if (Ember.get(this, 'current-when') !== null) {
+          this._prefixProperty(owner.mountPoint, 'current-when');
+        }
+      }
+    },
+
+    _prefixProperty(prefix, prop) {
+      let propValue = Ember.get(this, prop);
+
+      // Sometimes `targetRouteName` will be a class
+      if (Ember.typeOf(propValue) !== 'string') {
+        return;
+      }
+
+      let namespacedPropValue;
+      if (prop === 'current-when') {
+        // `current-when` is a space-separated list of routes
+        namespacedPropValue = propValue.split(' ');
+        namespacedPropValue = namespacedPropValue.map(propValue => this._namespacePropertyValue(prefix, propValue));
+        namespacedPropValue = namespacedPropValue.join(' ');
+      } else {
+        namespacedPropValue = this._namespacePropertyValue(prefix, propValue);
+      }
+
+      Ember.set(this, prop, namespacedPropValue);
+    },
+
+    _namespacePropertyValue(prefix, propValue) {
+      if (propValue === 'application') {
+        return prefix;
+      } else {
+        return prefix + '.' + propValue;
+      }
+    }
+  });
+});
+;define('ember-engines/components/link-to-external-component', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.LinkComponent.extend({
+    didReceiveAttrs() {
+      this._super(...arguments);
+
+      const owner = Ember.getOwner(this);
+
+      if (owner.mountPoint) {
+        const targetRouteName = Ember.get(this, 'targetRouteName');
+        const externalRoute = owner._getExternalRoute(targetRouteName);
+        Ember.set(this, 'targetRouteName', externalRoute);
+      }
+    }
+  });
+});
+;define('ember-engines/engine-instance', ['exports', '@ember/engines/instance'], function (exports, _instance) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _instance.default;
+});
+;define('ember-engines/engine', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Engine;
+});
+;define('ember-engines/initializers/engines', ['exports', 'ember-engines/-private/route-ext', 'ember-engines/-private/router-ext', 'ember-engines/-private/engine-ext', 'ember-engines/-private/engine-instance-ext'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.initialize = initialize;
+
+
+  // TODO: Move to ensure they run prior to instantiating Ember.Application
+  // Load extensions to Ember
+  function initialize() {}
+
+  exports.default = {
+    name: 'engines',
+    initialize
+  };
+});
+;define("ember-engines/routes", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = buildRoutes;
+  function buildRoutes(callback) {
+    callback.isRouteMap = true;
+    return callback;
+  }
+});
 ;define('ember-inflector/index', ['exports', 'ember-inflector/lib/system', 'ember-inflector/lib/ext/string'], function (exports, _system) {
   'use strict';
 
@@ -99530,6 +100663,200 @@ define("ember-resolver/features", [], function () {
     "block": "{\"symbols\":[],\"statements\":[[7,\"div\"],[11,\"id\",\"ember-welcome-page-id-selector\"],[12,\"data-ember-version\",[28,[[21,\"emberVersion\"]]]],[9],[0,\"\\n  \"],[7,\"div\"],[11,\"class\",\"columns\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"tomster\"],[9],[0,\"\\n      \"],[7,\"img\"],[11,\"src\",\"ember-welcome-page/images/construction.png\"],[11,\"alt\",\"Under construction\"],[9],[10],[0,\"\\n    \"],[10],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"welcome\"],[9],[0,\"\\n      \"],[7,\"h2\"],[11,\"id\",\"title\"],[9],[0,\"Congratulations, you made it!\"],[10],[0,\"\\n\\n      \"],[7,\"p\"],[9],[0,\"You’ve officially spun up your very first Ember app :-)\"],[10],[0,\"\\n      \"],[7,\"p\"],[9],[0,\"You’ve got one more decision to make: what do you want to do next? We’d suggest one of the following to help you get going:\"],[10],[0,\"\\n      \"],[7,\"ol\"],[9],[0,\"\\n        \"],[7,\"li\"],[9],[7,\"a\"],[12,\"href\",[28,[\"https://guides.emberjs.com/v\",[21,\"emberVersion\"],\"/getting-started/quick-start/\"]]],[9],[0,\"Quick Start\"],[10],[0,\" - a quick introduction to how Ember works. Learn about defining your first route, writing a UI component and deploying your application.\"],[10],[0,\"\\n        \"],[7,\"li\"],[9],[7,\"a\"],[12,\"href\",[28,[\"https://guides.emberjs.com/v\",[21,\"emberVersion\"],\"/tutorial/ember-cli/\"]]],[9],[0,\"Ember Guides\"],[10],[0,\" - this is our more thorough, hands-on intro to Ember. Your crash course in Ember philosophy, background and some in-depth discussion of how things work (and why they work the way they do).\"],[10],[0,\"\\n      \"],[10],[0,\"\\n      \"],[7,\"p\"],[9],[0,\"If you run into problems, you can check \"],[7,\"a\"],[11,\"href\",\"http://stackoverflow.com/questions/tagged/ember.js\"],[9],[0,\"Stack Overflow\"],[10],[0,\" or \"],[7,\"a\"],[11,\"href\",\"http://discuss.emberjs.com/\"],[9],[0,\"our forums\"],[10],[0,\"  for ideas and answers—someone’s probably been through the same thing and already posted an answer.  If not, you can post your \"],[7,\"strong\"],[9],[0,\"own\"],[10],[0,\" question. People love to help new Ember developers get started, and our \"],[7,\"a\"],[11,\"href\",\"https://emberjs.com/community/\"],[9],[0,\"Ember Community\"],[10],[0,\" is incredibly supportive.\"],[10],[0,\"\\n    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n    \"],[7,\"p\"],[11,\"class\",\"postscript\"],[9],[0,\"To remove this welcome message, remove the \"],[7,\"code\"],[9],[0,\"{{welcome-page}}\"],[10],[0,\" component from your \"],[7,\"code\"],[9],[0,\"application.hbs\"],[10],[0,\" file.\"],[7,\"br\"],[9],[10],[0,\"You'll see this page update soon after!\"],[10],[0,\"\\n\"],[10],[0,\"\\n\"]],\"hasEval\":false}",
     "meta": {
       "moduleName": "ember-welcome-page/templates/components/welcome-page.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/config/environment", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  var config;
+
+  try {
+    var metaName = 'downloads/config/environment';
+    var rawConfig = document.querySelector('meta[name="' + metaName + '"]').getAttribute('content');
+    config = JSON.parse(unescape(rawConfig));
+  } catch (err) {
+    throw new Error('Could not read config from meta tag with name "' + metaName + '" due to error: ' + err);
+  }
+
+  var _default = config;
+  _exports.default = _default;
+});
+;define("downloads/engine", ["exports", "ember-engines/engine", "ember-load-initializers", "downloads/resolver", "downloads/config/environment"], function (_exports, _engine, _emberLoadInitializers, _resolver, _environment) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  const {
+    modulePrefix
+  } = _environment.default;
+
+  const Eng = _engine.default.extend({
+    modulePrefix,
+    Resolver: _resolver.default
+  });
+
+  (0, _emberLoadInitializers.default)(Eng, modulePrefix);
+  var _default = Eng;
+  _exports.default = _default;
+});
+;define("downloads/resolver", ["exports", "ember-resolver"], function (_exports, _emberResolver) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  var _default = _emberResolver.default;
+  _exports.default = _default;
+});
+;define("downloads/routes", ["exports", "ember-engines/routes"], function (_exports, _routes) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = (0, _routes.default)(function () {
+    this.route('programs', function () {
+      this.route('bioinformatics');
+      this.route('cross-dating');
+      this.route('res');
+    });
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/templates/application", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "xncPeM4x",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"div\"],[11,\"class\",\"col-12 col-xl-6 mr-auto ml-auto pt-5\"],[9],[0,\"\\n  \"],[1,[21,\"outlet\"],false],[0,\"\\n\"],[10]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "downloads/templates/application.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/templates/graphics", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "jHskAvn0",
+    "block": "{\"symbols\":[],\"statements\":[[1,[21,\"outlet\"],false]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "downloads/templates/graphics.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/templates/programs", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "wOi/2guH",
+    "block": "{\"symbols\":[],\"statements\":[[1,[21,\"outlet\"],false]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "downloads/templates/programs.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/templates/programs/bioinformatics", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "W1iClsLP",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"h2\"],[9],[0,\"Bioinformatics Algorithms\"],[10],[0,\"\\n\"],[7,\"hr\"],[11,\"class\",\"underline\"],[9],[10],[0,\"\\n\"],[7,\"h4\"],[9],[0,\"2018-11-17 - Alexander Mattheis\"],[10],[0,\"\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  I have implemented with JavaScript and\\n  the \"],[7,\"a\"],[11,\"href\",\"https://knockoutjs.com/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Knockout\"],[10],[0,\" framework\\n  visually more elaborate versions of algorithms known in Bioinformatics, when I studied computer science.\\n  The resulting project has been integrated in the RNA-Playground of\\n  \"],[7,\"a\"],[11,\"href\",\"http://rna.informatik.uni-freiburg.de/Teaching/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"this\"],[10],[0,\" website.\\n\"],[10],[0,\"\\n\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  The project is also available on GitHub,\\n  such that if you like you can play around, download and extend it like you want.\\n  In the video below, you will find all information you need, so details about the implementation\\n  and a live-presentation of the project.\\n\"],[10],[0,\"\\n\\n\"],[7,\"div\"],[11,\"class\",\"embed-responsive embed-responsive-16by9\"],[9],[0,\"\\n  \"],[7,\"iframe\"],[11,\"class\",\"embed-responsive-item\"],[11,\"src\",\"https://www.youtube-nocookie.com/embed/mRXmV0J1nAA\"],[11,\"frameborder\",\"0\"],[11,\"allow\",\"autoplay; encrypted-media\"],[11,\"allowfullscreen\",\"\"],[9],[10],[0,\"\\n\"],[10],[0,\"\\n\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  The software was written with the help of JavaScript, HTML5 and CSS3.\\n\"],[10],[0,\"\\n\\n\"],[7,\"b\"],[9],[0,\"Did you get interested?\"],[10],[0,\"\\n\"],[7,\"a\"],[11,\"href\",\"https://github.com/BackofenLab/RNA-Playground\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"RNA-Playground\"],[10]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "downloads/templates/programs/bioinformatics.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/templates/programs/cross-dating", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "FMTYwFaI",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"h2\"],[9],[0,\"Cross-Dating\"],[10],[0,\"\\n\"],[7,\"hr\"],[11,\"class\",\"underline\"],[9],[10],[0,\"\\n\"],[7,\"h4\"],[9],[0,\"2018-11-17 - Alexander Mattheis\"],[10],[0,\"\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  The correct dates of wood pieces can be determined by annual rings.\\n  Therefore, one can just measure the widths or maximum densities of individual rings\\n  and then shift them in a chronology with known dates to determine the exact calendar year.\\n  But such established approaches do not work well with short pieces,\\n  i.e. with wood pieces containing only a few annual rings.\\n  My new approach which I have developed in cooperation with Dr. Martin Raden\\n  and PD Dr. Hans-Peter Kahle, however, is different.\\n  It has been shown that it can accurately determine the date for even shorter wood pieces correctly.\\n  Therefore, it uses series of densities within a ring.\\n  By this it becomes one of the most accurate, existing approaches in dendrochronology, today!\\n\"],[10],[0,\"\\n\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  Information about how this grandiose approach works,\\n  you see below in the presentation which I held on the fifth of September 2018.\\n\"],[10],[0,\"\\n\\n\"],[7,\"div\"],[11,\"class\",\"embed-responsive embed-responsive-16by9\"],[9],[0,\"\\n  \"],[7,\"iframe\"],[11,\"class\",\"embed-responsive-item\"],[11,\"src\",\"https://www.youtube-nocookie.com/embed/p4GZlmuU7d8\"],[11,\"frameborder\",\"0\"],[11,\"allow\",\"autoplay; encrypted-media\"],[11,\"allowfullscreen\",\"\"],[9],[10],[0,\"\\n\"],[10],[0,\"\\n\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  The software was written with the help of the statistical programming language\\n  \"],[7,\"a\"],[11,\"href\",\"https://www.r-project.org/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"R\"],[10],[0,\" and has been released\\n  under the \"],[7,\"a\"],[11,\"href\",\"https://opensource.org/licenses/MIT\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"MIT licence\"],[10],[0,\",\\n  such that even a commercial use is still possible.\\n\"],[10],[0,\"\\n\\n\"],[7,\"b\"],[9],[0,\"Did you get interested?\"],[10],[0,\" \"],[7,\"a\"],[11,\"href\",\"https://github.com/AlexanderMattheis/Cross-Dating\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Cross-Dating\"],[10],[0,\"\\n\"]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "downloads/templates/programs/cross-dating.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/templates/programs/index", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "jrM8kaHU",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"h2\"],[9],[0,\"Programs \"],[7,\"span\"],[11,\"class\",\"fas fa-laptop-code\"],[9],[10],[10],[0,\"\\n\"],[7,\"hr\"],[11,\"class\",\"underline\"],[9],[10],[0,\"\\n\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  The following programs are open source, the code has been therefore released inter alia\\n  under the \"],[7,\"a\"],[11,\"href\",\"http://unlicense.org/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Unlicense-licence\"],[10],[0,\" such\\n  that you can use and adapt the programs even for commercial purposes without considering any conditions.\\n  Many programs can be executed under Linux, Mac, as well as Windows.\\n  So, please give them a try on your favourite operating system!\\n\"],[10],[0,\"\\n\\n\"],[7,\"br\"],[9],[10],[0,\"\\n\\n\"],[7,\"div\"],[11,\"class\",\"container\"],[9],[0,\"\\n  \"],[7,\"div\"],[11,\"class\",\"card col-10 col-sm-7 col-md-12 ml-auto mr-auto\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"row\"],[9],[0,\"\\n      \"],[7,\"div\"],[11,\"class\",\"col-md-4\"],[9],[0,\"\\n        \"],[7,\"img\"],[11,\"src\",\"../downloads/assets/images/bioinformatics_algorithms_logo.png\"],[11,\"class\",\"w-100\"],[9],[10],[0,\"\\n      \"],[10],[0,\"\\n\\n      \"],[7,\"div\"],[11,\"class\",\"col-md-8\"],[9],[0,\"\\n        \"],[7,\"div\"],[11,\"class\",\"card-block\"],[9],[0,\"\\n          \"],[7,\"h4\"],[11,\"class\",\"card-title\"],[9],[0,\"Bioinformatics Algorithms\"],[10],[0,\"\\n\\n          \"],[7,\"p\"],[11,\"class\",\"card-text\"],[9],[0,\"\\n            Visually more elaborate versions of algorithms known from Bioinformatics\\n            implemented with JavaScript and the\\n            \"],[7,\"a\"],[11,\"href\",\"https://knockoutjs.com/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Knockout\"],[10],[0,\" framework.\\n            The resulting project has been integrated in the RNA-Playground of\\n            \"],[7,\"a\"],[11,\"href\",\"http://rna.informatik.uni-freiburg.de/Teaching/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"this\"],[10],[0,\" website.\\n          \"],[10],[0,\"\\n\\n\"],[4,\"link-to\",[\"programs.bioinformatics\"],null,{\"statements\":[[0,\"            \"],[7,\"btn\"],[11,\"class\",\"btn btn-primary\"],[9],[0,\"Read More\"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"        \"],[10],[0,\"\\n      \"],[10],[0,\"\\n    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n\\n  \"],[7,\"div\"],[11,\"class\",\"card col-10 col-sm-7 col-md-12 ml-auto mr-auto\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"row\"],[9],[0,\"\\n      \"],[7,\"div\"],[11,\"class\",\"col-md-4\"],[9],[0,\"\\n        \"],[7,\"img\"],[11,\"src\",\"../downloads/assets/images/cross_dating_logo.png\"],[11,\"class\",\"w-100\"],[9],[10],[0,\"\\n      \"],[10],[0,\"\\n\\n      \"],[7,\"div\"],[11,\"class\",\"col-md-8\"],[9],[0,\"\\n        \"],[7,\"div\"],[11,\"class\",\"card-block\"],[9],[0,\"\\n          \"],[7,\"h4\"],[11,\"class\",\"card-title\"],[9],[0,\"Cross-Dating\"],[10],[0,\"\\n\\n          \"],[7,\"p\"],[11,\"class\",\"card-text\"],[9],[0,\"\\n            Newly developed cross-dating algorithm for density series from wood samples.\\n            This approach determines the date for even shorter wood pieces correctly than with given methods before\\n            in dendrochronology before.\\n          \"],[10],[0,\"\\n\\n\"],[4,\"link-to\",[\"programs.cross-dating\"],null,{\"statements\":[[0,\"            \"],[7,\"btn\"],[11,\"class\",\"btn btn-primary\"],[9],[0,\"Read More\"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"        \"],[10],[0,\"\\n      \"],[10],[0,\"\\n    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n\\n  \"],[7,\"div\"],[11,\"class\",\"card col-10 col-sm-7 col-md-12 ml-auto mr-auto\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"row\"],[9],[0,\"\\n      \"],[7,\"div\"],[11,\"class\",\"col-md-4\"],[9],[0,\"\\n        \"],[7,\"img\"],[11,\"src\",\"../downloads/assets/images/res_logo.png\"],[11,\"class\",\"w-100\"],[9],[10],[0,\"\\n      \"],[10],[0,\"\\n\\n      \"],[7,\"div\"],[11,\"class\",\"col-md-8\"],[9],[0,\"\\n        \"],[7,\"div\"],[11,\"class\",\"card-block\"],[9],[0,\"\\n          \"],[7,\"h4\"],[11,\"class\",\"card-title\"],[9],[0,\"Relationship-Enhancement-Scripts\"],[10],[0,\"\\n\\n          \"],[7,\"p\"],[11,\"class\",\"card-text\"],[9],[0,\"\\n            Are you constantly stressed by your operating system? You are constantly in dispute?\\n            Then I have something for you,\\n            \"],[7,\"a\"],[11,\"href\",\"https://github.com/AlexanderMattheis/Relationship-Enhancement-Scripts\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"\\n              RES\"],[10],[0,\"\\n            for a better, trustworthy cooperation between humans and machines.\\n          \"],[10],[0,\"\\n\\n\"],[4,\"link-to\",[\"programs.res\"],null,{\"statements\":[[0,\"            \"],[7,\"btn\"],[11,\"class\",\"btn btn-primary\"],[9],[0,\"Read More\"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"        \"],[10],[0,\"\\n      \"],[10],[0,\"\\n    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n\"],[10]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "downloads/templates/programs/index.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("downloads/templates/programs/res", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "n5bo62qc",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"h2\"],[9],[0,\"Relationship-Enhancement-Scripts\"],[10],[0,\"\\n\"],[7,\"hr\"],[11,\"class\",\"underline\"],[9],[10],[0,\"\\n\"],[7,\"h4\"],[9],[0,\"2018-11-17 - Alexander Mattheis\"],[10],[0,\"\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  Are you constantly stressed by your operating system? You are constantly in dispute?\\n  Then I have something for you, the\\n  \"],[7,\"a\"],[11,\"href\",\"https://github.com/AlexanderMattheis/Relationship-Enhancement-Scripts\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"\\n    Relationship-Enhancement-Scripts\\n  \"],[10],[0,\"\\n  for a better, trustworthy cooperation between humans and machines.\\n  That scripts should simplify your life and give you more control over your operating system.\\n  All scripts can be directly executed under Windows 10 Version 1703 without any installation of further software.\\n\"],[10],[0,\"\\n\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  \"],[7,\"b\"],[9],[0,\"Hint:\"],[10],[0,\" You can install \"],[7,\"a\"],[11,\"href\",\"https://github.com/PowerShell/PowerShell\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Powershell\"],[10],[0,\"\\n  on your Mac and Linux system, too. But the scripts were written with Powershell 5.1+\\n  and designed for Windows 10 Version 1703 up to 1803. So, I cannot guarantee that they will work\\n  on other systems than Windows 10 Version 1703 up to 1803.\\n\"],[10],[0,\"\\n\\n\"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n  You find all scripts on my GitHub-repository. But a few are also described below:\\n\"],[10],[0,\"\\n\\n\"],[7,\"br\"],[9],[10],[0,\"\\n\\n\"],[7,\"h3\"],[9],[0,\"Dated Folder Creator\"],[10],[0,\"\\n\"],[7,\"p\"],[9],[0,\"\\n  Creates a number of folders with the current date and a count with padding\\n  e.g. \"],[7,\"em\"],[9],[0,\"2018-10-14-01, 2018-10-14-02, ..., 2018-10-14-12\"],[10],[0,\".\\n\"],[10],[0,\"\\n\\n\"],[7,\"br\"],[9],[10],[0,\"\\n\\n\"],[7,\"h3\"],[9],[0,\"Files Lister\"],[10],[0,\"\\n\"],[7,\"p\"],[9],[0,\"\\n  Lists all files from current directory with different settings.\\n\"],[10],[0,\"\\n\\n\"],[7,\"br\"],[9],[10],[0,\"\\n\\n\"],[7,\"h3\"],[9],[0,\"Processes Lister\"],[10],[0,\"\\n\"],[7,\"p\"],[9],[0,\"\\n  Lists the names from active processes.\\n\"],[10],[0,\"\\n\\n\"],[7,\"br\"],[9],[10],[0,\"\\n\\n\"],[7,\"h3\"],[9],[0,\"Services Lister\"],[10],[0,\"\\n\"],[7,\"p\"],[9],[0,\"\\n  Lists the names from services.\\n\"],[10],[0,\"\\n\\n\"],[7,\"br\"],[9],[10],[0,\"\\n\\n\"],[7,\"h3\"],[9],[0,\"Windows 10 Configurator\"],[10],[0,\"\\n\"],[7,\"p\"],[9],[0,\"\\n  Configures Windows 10 Version 1703 up to 1803 after a reinstallation:\\n  \"],[7,\"ul\"],[11,\"class\",\"small-text\"],[9],[0,\"\\n    \"],[7,\"li\"],[9],[0,\"activates the classic photo viewer\"],[10],[0,\"\\n    \"],[7,\"li\"],[9],[0,\"activates name extensions\"],[10],[0,\"\\n    \"],[7,\"li\"],[9],[0,\"activates thin taskbar with small taskbar icons\"],[10],[0,\"\\n    \"],[7,\"li\"],[9],[0,\"removes shortcut name extensions e.g. \\\"- Shortcut\\\"\"],[10],[0,\"\\n    \"],[7,\"li\"],[9],[0,\"sets the taskbar glom-level i.e. taskbar buttons only combined if necessary\"],[10],[0,\"\\n  \"],[10],[0,\"\\n\"],[10],[0,\"\\n\\n\"],[7,\"br\"],[9],[10],[0,\"\\n\\n\"],[7,\"b\"],[9],[0,\"Did you get interested?\"],[10],[0,\"\\n\"],[7,\"a\"],[11,\"href\",\"https://github.com/AlexanderMattheis/Relationship-Enhancement-Scripts\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"\\n  Relationship-Enhancement-Scripts\\n\"],[10],[0,\"\\n\"]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "downloads/templates/programs/res.hbs"
     }
   });
 

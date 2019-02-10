@@ -11257,6 +11257,171 @@ define('@ember/test-helpers/wait-until', ['exports', '@ember/test-helpers/-utils
     });
   }
 });
+define('ember-asset-loader/test-support/loaded-asset-state', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.getLoadedAssetState = getLoadedAssetState;
+  exports.cacheLoadedAssetState = cacheLoadedAssetState;
+  exports.resetLoadedAssetState = resetLoadedAssetState;
+
+
+  let cachedRequireEntries;
+  let cachedScriptTags;
+  let cachedLinkTags;
+
+  /**
+   * Determines whether an array contains the provided item.
+   *
+   * @param {Array} array
+   * @param {Any} item
+   * @return {Boolean}
+   */
+  function has(array, item) {
+    return array.indexOf(item) !== -1;
+  }
+
+  /**
+   * Removes a DOM Node from the document.
+   *
+   * @param {Node} node
+   * @return {Void}
+   */
+  function removeNode(node) {
+    node.parentNode.removeChild(node);
+  }
+
+  /**
+   * Converts an iterable object into an actual Array.
+   *
+   * @param {Iterable} iterable
+   * @return {Array}
+   */
+  function toArray(iterable) {
+    return Array.prototype.slice.call(iterable);
+  }
+
+  /**
+   * Returns all of the HTML Elements matching a given selector as an array.
+   *
+   * @param {String} selector
+   * @return {Array<HTMLElement>}
+   */
+  function getAll(selector) {
+    const htmlCollection = document.querySelectorAll(selector);
+    return toArray(htmlCollection);
+  }
+
+  /**
+   * Deletes an entry from require's list of modules.
+   *
+   * @param {String} entry
+   * @return {Void}
+   */
+  function resetRequireEntry(entry) {
+    delete requirejs.entries[entry];
+  }
+
+  /**
+   * Compares two arrays, if they're different, invokes a callback for each
+   * entry that does not appear in the initial array.
+   *
+   * @param {Array} initial
+   * @param {Array} current
+   * @param {Function} diffHandler
+   * @return {Void}
+   */
+  function compareAndIterate(initial, current, diffHandler) {
+    if (initial.length < current.length) {
+      for (let i = 0; i < current.length; i++) {
+        let entry = current[i];
+        if (!has(initial, entry)) {
+          diffHandler(entry);
+        }
+      }
+    }
+  }
+
+  /**
+   * Gets the current loaded asset state including scripts, links, and require
+   * modules.
+   *
+   * @return {Object}
+   */
+  function getLoadedAssetState() {
+    return {
+      requireEntries: Object.keys(requirejs.entries),
+      scripts: getAll('script'),
+      links: getAll('link')
+    };
+  }
+
+  /**
+   * Caches the current loaded asset state with regards to links, scripts, and JS
+   * modules currently present.
+   *
+   * @return {Void}
+   */
+  function cacheLoadedAssetState() {
+    ({
+      requireEntries: cachedRequireEntries,
+      scripts: cachedScriptTags,
+      links: cachedLinkTags
+    } = getLoadedAssetState());
+  }
+
+  /**
+   * Restores the loaded asset state to the previous cached value with regards to
+   * links, scripts, and JS modules.
+   *
+   * @return {Void}
+   */
+  function resetLoadedAssetState() {
+    Ember.Logger.info('Resetting loaded asset state. This will attempt to restore the state of loaded assets to the last cached value. If an asset modified some global state, we cannot guarantee it will be reset. For more information see: https://github.com/trentmwillis/ember-asset-loader#resetting-test-state');
+
+    const {
+      requireEntries: currentRequireEntries,
+      scripts: currentScriptTags,
+      links: currentLinkTags
+    } = getLoadedAssetState();
+
+    compareAndIterate(cachedRequireEntries, currentRequireEntries, resetRequireEntry);
+    compareAndIterate(cachedScriptTags, currentScriptTags, removeNode);
+    compareAndIterate(cachedLinkTags, currentLinkTags, removeNode);
+  }
+});
+define('ember-asset-loader/test-support/preload-assets', ['exports', 'ember-asset-loader/services/asset-loader'], function (exports, _assetLoader) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = preloadAssets;
+
+
+  const { Test, RSVP } = Ember;
+
+  /**
+   * Preloads all the bundles specified in an asset manifest
+   * to make sure all files are available for testing.
+   *
+   * Uses the Ember.Test.Promise class to make sure tests
+   * wait for the assets to load first.
+   *
+   * @return {Promise}
+   */
+  function preloadAssets(manifest) {
+    const loader = _assetLoader.default.create();
+    loader.pushManifest(manifest);
+
+    const bundlePromises = Object.keys(manifest.bundles).map(bundle => loader.loadBundle(bundle));
+    const allBundles = RSVP.all(bundlePromises);
+
+    return Test.resolve(allBundles);
+  }
+});
 define('ember-cli-test-loader/test-support/index', ['exports'], function (exports) {
   /* globals requirejs, require */
   "use strict";
@@ -11353,6 +11518,45 @@ define('ember-cli-test-loader/test-support/index', ['exports'], function (export
     }
   }exports.default = TestLoader;
   ;
+});
+define('ember-engines/test-support/engine-resolver-for', ['exports', 'ember-resolver'], function (exports, _emberResolver) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = engineResolverFor;
+
+
+  /**
+   * Gets the resolver class used by an Engine and creates an instance to be used
+   * with test modules. Ex:
+   *
+   *   moduleForComponent('some-component', 'Integration Test', {
+   *     resolver: engineResolverFor('ember-blog')
+   *   });
+   *
+   * Uses the module found at `<engine-name>/resolver` as the class. If no module
+   * exists at that path, then a default EmberResolver instance is created.
+   *
+   * You can optionally specify a modulePrefix in the event that the modulePrefix
+   * differs from the engineName.
+   *
+   * @method engineResolverFor
+   * @param {String} engineName
+   * @param {String} [modulePrefix]
+   * @return {Resolver}
+   */
+  function engineResolverFor(engineName, modulePrefix = engineName) {
+    let Resolver;
+
+    if (require.has(`${engineName}/resolver`)) {
+      Resolver = require(`${engineName}/resolver`).default;
+    } else {
+      Resolver = _emberResolver.default;
+    }
+    return Resolver.create({ namespace: { modulePrefix } });
+  } /* global require */
 });
 define('ember-qunit/adapter', ['exports', 'qunit', '@ember/test-helpers/has-ember-version'], function (exports, _qunit, _hasEmberVersion) {
   'use strict';

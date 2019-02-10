@@ -1,2 +1,14 @@
+/* ASSETS */
+@import 'fonts';
+@import 'images';
 
-@import "ember-bootstrap/bootstrap";
+/* LIBRARIES */
+@import 'ember-bootstrap/bootstrap';
+
+/* ROUTES */
+@import 'base';
+
+@import 'routes/home';
+@import 'routes/downloads';
+@import 'routes/tutorials';
+@import 'routes/about';

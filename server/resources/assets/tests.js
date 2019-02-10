@@ -21,9 +21,25 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
   "use strict";
 
   QUnit.module('TemplateLint');
+  QUnit.test('bitcorn/templates/about.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'bitcorn/templates/about.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('bitcorn/templates/about/authors.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'bitcorn/templates/about/authors.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('bitcorn/templates/about/page.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'bitcorn/templates/about/page.hbs should pass TemplateLint.\n\nbitcorn/templates/about/page.hbs\n  4:2  error  img tags must have an alt attribute  img-alt-attributes\n');
+  });
   QUnit.test('bitcorn/templates/application.hbs', function (assert) {
     assert.expect(1);
     assert.ok(true, 'bitcorn/templates/application.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('bitcorn/templates/home.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'bitcorn/templates/home.hbs should pass TemplateLint.\n\n');
   });
 });
 define("bitcorn/tests/lint/tests.lint-test", [], function () {
@@ -40,6 +56,50 @@ define("bitcorn/tests/test-helper", ["bitcorn/app", "bitcorn/config/environment"
 
   (0, _testHelpers.setApplication)(_app.default.create(_environment.default.APP));
   (0, _emberQunit.start)();
+});
+define("bitcorn/tests/unit/routes/about-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | about', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:about');
+      assert.ok(route);
+    });
+  });
+});
+define("bitcorn/tests/unit/routes/about/authors-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | about/authors', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:about/authors');
+      assert.ok(route);
+    });
+  });
+});
+define("bitcorn/tests/unit/routes/about/page-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | about/page', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:about/page');
+      assert.ok(route);
+    });
+  });
+});
+define("bitcorn/tests/unit/routes/home-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | home', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:home');
+      assert.ok(route);
+    });
+  });
 });
 define('bitcorn/config/environment', [], function() {
   var prefix = 'bitcorn';

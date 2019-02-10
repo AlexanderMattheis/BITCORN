@@ -824,6 +824,19 @@
     }
   });
 });
+;define("bitcorn/components/link-to-external", ["exports", "ember-engines/components/link-to-external-component"], function (_exports, _linkToExternalComponent) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(_exports, "default", {
+    enumerable: true,
+    get: function () {
+      return _linkToExternalComponent.default;
+    }
+  });
+});
 ;define("bitcorn/components/welcome-page", ["exports", "ember-welcome-page/components/welcome-page"], function (_exports, _welcomePage) {
   "use strict";
 
@@ -835,6 +848,84 @@
     get: function () {
       return _welcomePage.default;
     }
+  });
+});
+;define("bitcorn/config/asset-manifest", ["exports", "require", "bitcorn/config/environment"], function (_exports, _require, _environment) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  const modulePrefix = _environment.default.modulePrefix;
+  const metaName = `${modulePrefix}/config/asset-manifest`;
+  const nodeName = `${modulePrefix}/config/node-asset-manifest`;
+  let config = {};
+
+  try {
+    // If we have a Node version of the asset manifest, use that for FastBoot and
+    // similar environments.
+    if (_require.default.has(nodeName)) {
+      config = (0, _require.default)(nodeName).default; // eslint-disable-line
+    } else {
+      const rawConfig = document.querySelector('meta[name="' + metaName + '"]').getAttribute('content');
+      config = JSON.parse(unescape(rawConfig));
+    }
+  } catch (err) {
+    throw new Error('Failed to load asset manifest. For browser environments, verify the meta tag with name "' + metaName + '" is present. For non-browser environments, verify that you included the node-asset-manifest module.');
+  }
+
+  var _default = config;
+  _exports.default = _default;
+});
+;define("bitcorn/downloads/tests/addon.lint-test", [], function () {
+  "use strict";
+
+  QUnit.module('ESLint | addon');
+  QUnit.test('addon/engine.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/engine.js should pass ESLint\n\n');
+  });
+  QUnit.test('addon/resolver.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/resolver.js should pass ESLint\n\n');
+  });
+  QUnit.test('addon/routes.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/routes.js should pass ESLint\n\n');
+  });
+});
+;define("bitcorn/downloads/tests/templates.template.lint-test", [], function () {
+  "use strict";
+
+  QUnit.module('TemplateLint');
+  QUnit.test('addon/templates/application.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/templates/application.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('addon/templates/graphics.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/templates/graphics.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('addon/templates/programs.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/templates/programs.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('addon/templates/programs/bioinformatics.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/templates/programs/bioinformatics.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('addon/templates/programs/cross-dating.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/templates/programs/cross-dating.hbs should pass TemplateLint.\n\n');
+  });
+  QUnit.test('addon/templates/programs/index.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'addon/templates/programs/index.hbs should pass TemplateLint.\n\naddon/templates/programs/index.hbs\n  79:21  error  Incorrect indentation for `a` beginning at L78:C12. Expected `</a>` ending at L79:C21 to be at an indentation of 12 but was found at 17.  block-indentation\n  18:8  error  img tags must have an alt attribute  img-alt-attributes\n  44:8  error  img tags must have an alt attribute  img-alt-attributes\n  68:8  error  img tags must have an alt attribute  img-alt-attributes\n');
+  });
+  QUnit.test('addon/templates/programs/res.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'addon/templates/programs/res.hbs should pass TemplateLint.\n\n');
   });
 });
 ;define("bitcorn/helpers/app-version", ["exports", "bitcorn/config/environment", "ember-cli-app-version/utils/regexp"], function (_exports, _environment, _regexp) {
@@ -1077,6 +1168,25 @@
   };
   _exports.default = _default;
 });
+;define("bitcorn/initializers/engines", ["exports", "ember-engines/initializers/engines"], function (_exports, _engines) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(_exports, "default", {
+    enumerable: true,
+    get: function () {
+      return _engines.default;
+    }
+  });
+  Object.defineProperty(_exports, "initialize", {
+    enumerable: true,
+    get: function () {
+      return _engines.initialize;
+    }
+  });
+});
 ;define("bitcorn/initializers/export-application-global", ["exports", "bitcorn/config/environment"], function (_exports, _environment) {
   "use strict";
 
@@ -1165,6 +1275,29 @@
   };
   _exports.default = _default;
 });
+;define("bitcorn/instance-initializers/load-asset-manifest", ["exports", "bitcorn/config/asset-manifest"], function (_exports, _assetManifest) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.initialize = initialize;
+  _exports.default = void 0;
+
+  /**
+   * Initializes the AssetLoader service with a generated asset-manifest.
+   */
+  function initialize(instance) {
+    const service = instance.lookup('service:asset-loader');
+    service.pushManifest(_assetManifest.default);
+  }
+
+  var _default = {
+    name: 'load-asset-manifest',
+    initialize
+  };
+  _exports.default = _default;
+});
 ;define("bitcorn/resolver", ["exports", "ember-resolver"], function (_exports, _emberResolver) {
   "use strict";
 
@@ -1186,9 +1319,86 @@
     location: _environment.default.locationType,
     rootURL: _environment.default.rootURL
   });
-  Router.map(function () {});
+  Router.map(function () {
+    this.route('home');
+    this.mount('downloads');
+    this.route('about', function () {
+      this.route('authors');
+      this.route('page');
+    });
+  });
   var _default = Router;
   _exports.default = _default;
+});
+;define("bitcorn/routes/about", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class About extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = About;
+});
+;define("bitcorn/routes/about/authors", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class AboutAuthors extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = AboutAuthors;
+});
+;define("bitcorn/routes/about/page", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class AboutPage extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = AboutPage;
+});
+;define("bitcorn/routes/home", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Home extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = Home;
+});
+;define("bitcorn/routes/index", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Index extends Ember.Route.extend({
+    beforeModel() {
+      // transitioning without knowledge about the model
+      this.replaceWith("home");
+    }
+
+  }) {}
+
+  _exports.default = Index;
 });
 ;define("bitcorn/services/ajax", ["exports", "ember-ajax/services/ajax"], function (_exports, _ajax) {
   "use strict";
@@ -1203,6 +1413,73 @@
     }
   });
 });
+;define("bitcorn/services/asset-loader", ["exports", "ember-asset-loader/services/asset-loader"], function (_exports, _assetLoader) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(_exports, "default", {
+    enumerable: true,
+    get: function () {
+      return _assetLoader.default;
+    }
+  });
+});
+;define("bitcorn/templates/about", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "t1fi8S+F",
+    "block": "{\"symbols\":[],\"statements\":[[1,[21,\"outlet\"],false]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/about.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("bitcorn/templates/about/authors", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "9yokrGfZ",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"div\"],[11,\"class\",\"col-12 col-xl-6 mr-auto ml-auto mt-5\"],[9],[0,\"\\n  \"],[7,\"h2\"],[9],[0,\"About Authors \"],[7,\"span\"],[11,\"class\",\"fas fa-users\"],[9],[10],[10],[0,\"\\n  \"],[7,\"hr\"],[11,\"class\",\"underline\"],[9],[10],[0,\"\\n  \"],[7,\"h3\"],[9],[0,\"Alex Mattheis\"],[10],[0,\"\\n  \"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n    I was born in the early 90s and interested in robots since 1996/1997.\\n    The reason therefore was presumably among others,\\n    \"],[7,\"a\"],[11,\"href\",\"https://www.youtube.com/watch?v=TYerSLXmjQU\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Robocop\"],[10],[0,\", a classic\\n    \"],[7,\"a\"],[11,\"href\",\"https://en.wikipedia.org/wiki/Nintendo_Entertainment_System\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"NES\"],[10],[0,\" game\\n    character. In the year 2000, my family got our first computer and since then I wanted become a programmer\\n    to create my own games. Around 2008, we also got an internet connection. In this time, I started with computer\\n    languages, HTML, and CSS, but also, I got interested in creative photo- and video-editing software\\n    I've found in the internet e.g.\\n  \"],[10],[0,\"\\n  \"],[7,\"ul\"],[9],[0,\"\\n    \"],[7,\"li\"],[9],[0,\"\\n      \"],[7,\"a\"],[11,\"href\",\"https://en.wikipedia.org/wiki/Adobe_After_Effects\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Adobe After Effects\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"li\"],[9],[0,\"\\n      \"],[7,\"a\"],[11,\"href\",\"https://en.wikipedia.org/wiki/Photoshop\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Adobe Photoshop\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"li\"],[9],[0,\"\\n      \"],[7,\"a\"],[11,\"href\",\"https://en.wikipedia.org/wiki/Adobe_Premiere_Pro\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Adobe Premiere\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"li\"],[9],[0,\"\\n      \"],[7,\"a\"],[11,\"href\",\"https://en.wikipedia.org/wiki/Vegas_Pro\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Sony Vegas\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"li\"],[9],[0,\"...\"],[10],[0,\"\\n  \"],[10],[0,\"\\n\\n  \"],[7,\"br\"],[9],[10],[0,\"\\n\\n  \"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n    Sadly, the stuff was not for free, only 30 days trial versions. And so, I started learning\\n    free open source programs like\\n  \"],[10],[0,\"\\n  \"],[7,\"ul\"],[9],[0,\"\\n    \"],[7,\"li\"],[9],[7,\"a\"],[11,\"href\",\"https://www.blender.org/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Blender 2.49\"],[10],[10],[0,\"\\n    \"],[7,\"li\"],[9],[7,\"a\"],[11,\"href\",\"https://www.gimp.org/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Gimp 2.6\"],[10],[10],[0,\"\\n    \"],[7,\"li\"],[9],[7,\"a\"],[11,\"href\",\"https://inkscape.org/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Incscape 0.47\"],[10],[10],[0,\"\\n    \"],[7,\"li\"],[9],[0,\"...\"],[10],[0,\"\\n  \"],[10],[0,\"\\n\\n  \"],[7,\"br\"],[9],[10],[0,\"\\n\\n  \"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n    by the help of YouTube tutorials (e.g.\\n    \"],[7,\"a\"],[11,\"href\",\"https://www.youtube.com/channel/UC4HBuWzyB-J04WmTh3xQwHw\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"jxTutorials\"],[10],[0,\")\\n    and sites like \"],[7,\"a\"],[11,\"href\",\"http://blenderhilfe.de\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"BlenderHilfe\"],[10],[0,\",\\n    \"],[7,\"a\"],[11,\"href\",\"https://www.blenderguru.com/\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"Blender Guru\"],[10],[0,\"\\n    or Screencasters Heathenx. Apart from that, I'm today a studied programmer with interest in\\n    visualization of algorithms, graphics, and computer languages. I know lots of programming languages\\n    and I own a master's degree in computer science.\\n  \"],[10],[0,\"\\n\"],[10]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/about/authors.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
+;define("bitcorn/templates/about/page", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "PcT+RvzA",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"div\"],[11,\"class\",\"col-12 col-xl-6 mr-auto ml-auto mt-5\"],[9],[0,\"\\n  \"],[7,\"h2\"],[9],[0,\"About Page \"],[7,\"span\"],[11,\"class\",\"far fa-newspaper\"],[9],[10],[10],[0,\"\\n  \"],[7,\"hr\"],[11,\"class\",\"underline\"],[9],[10],[0,\"\\n  \"],[7,\"img\"],[11,\"class\",\"embedded-logo img-fluid\"],[11,\"src\",\"../assets/images/logo.png\"],[9],[10],[0,\"\\n\\n  \"],[7,\"p\"],[9],[0,\"\\n    Bitcorn is an interactive learning platform whose development\\n    started between October and November 2018. The idea for the name and the\\n    content of that website, I get while taking a walk at midday in the beginning of November 2018.\\n    Before, I just played around and created a website without a real idea in my head.\\n    Now, it is a webpage designed mainly for computer algorithms, but also maths and other stuff.\\n    Interactive means in the case of Bitcorn, that you watch a video or presentation\\n    and can play afterwards with the presented algorithm on the website.\\n    But additionally, you can also download free\\n    \"],[7,\"a\"],[11,\"href\",\"https://creativecommons.org/publicdomain/zero/1.0/deed.de\"],[11,\"target\",\"_blank\"],[11,\"rel\",\"noopener\"],[9],[0,\"CC0-licence\"],[10],[0,\"\\n    graphics, models, and fonts or get creative programming ideas in the downloads section.\\n    So, with Bitcorn you get full support for your programming career. Is this not cool?\\n  \"],[10],[0,\"\\n\"],[10]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/about/page.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
 ;define("bitcorn/templates/application", ["exports"], function (_exports) {
   "use strict";
 
@@ -1212,8 +1489,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "XUkp0voB",
-    "block": "{\"symbols\":[],\"statements\":[[0,\"Hello World\"]],\"hasEval\":false}",
+    "id": "NPQCanQY",
+    "block": "{\"symbols\":[\"navbar\",\"nav\",\"dd\",\"menu\",\"dd\",\"dd\",\"menu\"],\"statements\":[[7,\"div\"],[11,\"id\",\"top\"],[9],[0,\"\\n\"],[4,\"bs-navbar\",null,null,{\"statements\":[[0,\"    \"],[7,\"a\"],[11,\"href\",\"/\"],[11,\"class\",\"navbar-brand\"],[9],[7,\"div\"],[11,\"class\",\"logo\"],[9],[10],[10],[0,\"\\n\\n    \"],[1,[22,1,[\"toggle\"]],false],[0,\" \"],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"content\"]],\"expected `navbar.content` to be a contextual component but found a string. Did you mean `(component navbar.content)`? ('bitcorn/templates/application.hbs' @ L6:C7) \"],null]],null,{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"nav\"]],\"expected `navbar.nav` to be a contextual component but found a string. Did you mean `(component navbar.nav)`? ('bitcorn/templates/application.hbs' @ L7:C9) \"],null]],[[\"class\"],[\"ml-auto\"]],{\"statements\":[[0,\"        \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,2,[\"item\"]],\"expected `nav.item` to be a contextual component but found a string. Did you mean `(component nav.item)`? ('bitcorn/templates/application.hbs' @ L9:C11) \"],null]],null,{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,2,[\"link-to\"]],\"expected `nav.link-to` to be a contextual component but found a string. Did you mean `(component nav.link-to)`? ('bitcorn/templates/application.hbs' @ L9:C24) \"],null],\"home\"],null,{\"statements\":[[0,\"Home\"]],\"parameters\":[]},null]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,6,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L13:C13) \"],null]],[[\"class\"],[\"navbar-button\"]],{\"statements\":[[0,\"Downloads\"]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,6,[\"menu\"]],\"expected `dd.menu` to be a contextual component but found a string. Did you mean `(component dd.menu)`? ('bitcorn/templates/application.hbs' @ L15:C13) \"],null]],[[\"class\"],[\"navbar-menu\"]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,7,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L16:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,7,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L17:C17) \"],null],\"downloads.programs\"],null,{\"statements\":[[0,\"Programs\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[7]},null]],\"parameters\":[6]},null],[0,\"\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,5,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L24:C13) \"],null]],[[\"class\"],[\"navbar-button\"]],{\"statements\":[[0,\"Tutorials\"]],\"parameters\":[]},null],[0,\"\\n\\n\"]],\"parameters\":[5]},null],[0,\"\\n\"],[4,\"bs-dropdown\",null,null,{\"statements\":[[0,\"          \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,3,[\"button\"]],\"expected `dd.button` to be a contextual component but found a string. Did you mean `(component dd.button)`? ('bitcorn/templates/application.hbs' @ L30:C13) \"],null]],[[\"class\"],[\"navbar-button\"]],{\"statements\":[[0,\"About\"]],\"parameters\":[]},null],[0,\"\\n\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,3,[\"menu\"]],\"expected `dd.menu` to be a contextual component but found a string. Did you mean `(component dd.menu)`? ('bitcorn/templates/application.hbs' @ L32:C13) \"],null]],[[\"class\"],[\"navbar-menu\"]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L33:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L34:C17) \"],null],\"about.authors\"],null,{\"statements\":[[0,\"Authors\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"item\"]],\"expected `menu.item` to be a contextual component but found a string. Did you mean `(component menu.item)`? ('bitcorn/templates/application.hbs' @ L37:C15) \"],null]],null,{\"statements\":[[0,\"              \"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,4,[\"link-to\"]],\"expected `menu.link-to` to be a contextual component but found a string. Did you mean `(component menu.link-to)`? ('bitcorn/templates/application.hbs' @ L38:C17) \"],null],\"about.page\"],null,{\"statements\":[[0,\"Page\"]],\"parameters\":[]},null],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[4]},null]],\"parameters\":[3]},null],[0,\"\\n\"]],\"parameters\":[2]},null]],\"parameters\":[]},null]],\"parameters\":[1]},null],[0,\"\\n  \"],[1,[21,\"outlet\"],false],[0,\"\\n\"],[10]],\"hasEval\":false}",
     "meta": {
       "moduleName": "bitcorn/templates/application.hbs"
     }
@@ -1247,6 +1524,24 @@
     }
   });
 });
+;define("bitcorn/templates/home", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "E5sKT7es",
+    "block": "{\"symbols\":[],\"statements\":[],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/home.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
 ;
 
 ;define('bitcorn/config/environment', [], function() {
@@ -1270,7 +1565,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0+5d7d4cbe"});
+            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0+16265dbd"});
           }
         
 //# sourceMappingURL=bitcorn.map

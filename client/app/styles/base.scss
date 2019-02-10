@@ -1,0 +1,29 @@
+/* SPECIFIC */
+// WebKit and Blink browsers
+::selection {
+  background: $yellow;
+  color: white;
+}
+
+/* Gecko browsers */
+::-moz-selection {
+  background: $yellow;
+  color: white;
+}
+
+/* UNSPECIFIC */
+.base {
+  // TAG
+
+  // ID
+
+  // CLASS
+
+  /* RESOLUTION DEPENDANT */
+  // TAG
+
+  // ID
+
+  // CLASS
+}
+

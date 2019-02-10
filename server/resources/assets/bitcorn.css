@@ -1,4 +1,21 @@
 @charset "UTF-8";
+/* ASSETS */
+@font-face {
+  font-family: "OpenSans-Light";
+  src: url("../assets/fonts/OpenSans-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NovaMono";
+  src: url("../assets/fonts/NovaMono.ttf") format("truetype");
+}
+.logo {
+  background: url("../assets/images/logo.svg") no-repeat;
+  display: block;
+  height: 70px;
+  width: 200px;
+}
+
+/* LIBRARIES */
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -9510,6 +9527,23 @@ h3 {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+/* ROUTES */
+/* SPECIFIC */
+::selection {
+  background: #ffc107;
+  color: white;
+}
+
+/* Gecko browsers */
+::-moz-selection {
+  background: #ffc107;
+  color: white;
+}
+
+/* UNSPECIFIC */
+.base {
+  /* RESOLUTION DEPENDANT */
 }
 
 /*# sourceMappingURL=bitcorn.css.map */

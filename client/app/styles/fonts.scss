@@ -1,0 +1,11 @@
+$fonts: "../assets/fonts";
+
+@font-face {
+  font-family: "OpenSans-Light";
+  src: url("#{$fonts}/OpenSans-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "NovaMono";
+  src: url("#{$fonts}/NovaMono.ttf") format("truetype");
+}

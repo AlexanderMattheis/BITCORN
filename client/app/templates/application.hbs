@@ -1,1 +1,48 @@
-Hello World
+<div id="top">
+  {{#bs-navbar as |navbar|}}
+    <a href="/" class="navbar-brand"><div class="logo"></div></a>
+
+    {{navbar.toggle}} {{!-- sandwich --}}
+    {{#navbar.content}}
+      {{#navbar.nav class="ml-auto" as |nav| }}
+        {{!-- home --}}
+        {{#nav.item}}{{#nav.link-to "home"}}Home{{/nav.link-to}}{{/nav.item}}
+
+        {{!-- downloads --}}
+        {{#bs-dropdown as |dd|}}
+          {{#dd.button class="navbar-button"}}Downloads{{/dd.button}}
+
+          {{#dd.menu class="navbar-menu" as |menu|}}
+            {{#menu.item}}
+              {{#menu.link-to "downloads.programs"}}Programs{{/menu.link-to}}
+            {{/menu.item}}
+          {{/dd.menu}}
+        {{/bs-dropdown}}
+
+        {{!-- tutorials --}}
+        {{#bs-dropdown as |dd|}}
+          {{#dd.button class="navbar-button"}}Tutorials{{/dd.button}}
+
+        {{/bs-dropdown}}
+
+        {{!-- about --}}
+        {{#bs-dropdown as |dd|}}
+          {{#dd.button class="navbar-button"}}About{{/dd.button}}
+
+          {{#dd.menu class="navbar-menu" as |menu|}}
+            {{#menu.item}}
+              {{#menu.link-to "about.authors"}}Authors{{/menu.link-to}}
+            {{/menu.item}}
+
+            {{#menu.item}}
+              {{#menu.link-to "about.page"}}Page{{/menu.link-to}}
+            {{/menu.item}}
+          {{/dd.menu}}
+        {{/bs-dropdown}}
+
+      {{/navbar.nav}}
+    {{/navbar.content}}
+  {{/bs-navbar}}
+
+  {{outlet}}
+</div>
