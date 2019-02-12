@@ -1,1 +1,20 @@
-{{outlet}}
+<div class="col-12 col-xl-6 mr-auto ml-auto mt-5">
+  <h2>Contact <span class="far fa-envelope"></span></h2>
+  <hr class="underline">
+  <p class="content">
+    Have you some feedback or you found a bug, mistake, whatever on my page and you want to report this?
+    Then write me please a short message using the contact form below. No matter what, write me.
+    I'll answer you soon and say "Thank you!" to you.
+  </p>
+
+  {{#bs-form class="needs-validation" model=model formLayout="horizontal" onSubmit=(action "submit") as |form|}}
+    {{form.element id="email" controlType="email" label="E-Mail" placeholder="Your e-mail address" property="email"
+                   customError="Each mail should consist at least out of ten symbols!"}}
+
+    {{form.element id="message" class="message" controlType="textarea" label="Message"
+                   property="message" customError="Each message should be at least 15 characters long,
+                   not containing any special symbols like '+', '*', '$', .. !"}}
+
+    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+  {{/bs-form}}
+</div>

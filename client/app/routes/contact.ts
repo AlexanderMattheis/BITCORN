@@ -1,7 +1,12 @@
 import Route from '@ember/routing/route';
 
 export default class Contact extends Route.extend({
-  // anything which *must* be merged to prototype here
+  model(): object {
+    return {
+      email: "",
+      message: ""
+    };
+  }
 }) {
   // normal class body definition here
 }

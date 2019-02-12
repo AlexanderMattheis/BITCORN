@@ -1,3 +1,7 @@
+.btn {
+  margin-bottom: 10px;
+}
+
 .btn-outline-secondary {
   color: $color-font;
   border-color: $color-font-bg;
@@ -12,6 +16,10 @@
 .card {
   margin: 10px;
   min-width: 240px;
+}
+
+.card-block {
+  padding: 10px;
 }
 
 .carousel {

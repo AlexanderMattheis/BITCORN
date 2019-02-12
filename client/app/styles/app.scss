@@ -8,12 +8,7 @@
 @import "ember-bootstrap/bootstrap";
 
 /* ROUTES */
-@import "base";
-
-@import "routes/home";
-@import "routes/downloads";
-@import "routes/tutorials";
-@import "routes/about";
+@import "routes";
 
 /* THEME */
 @import "theme/bootstrap";

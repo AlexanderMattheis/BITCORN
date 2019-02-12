@@ -9622,6 +9622,15 @@ h4 {
   /* to stick footer to bottom of page */
 }
 
+.active {
+  color: red;
+}
+
+.connections a {
+  font-size: 4em;
+  margin: 1em;
+}
+
 .content {
   text-align: justify;
 }
@@ -9655,6 +9664,7 @@ h4 {
   border: none;
   color: #7c7c7d;
   font-size: 17.6px;
+  margin: 0 5px 0 5px;
 }
 .menu-button:hover {
   background-color: #f8f9fa;
@@ -9703,28 +9713,27 @@ h4 {
 
   .carousel-caption {
     position: absolute;
-    top: 35%;
-    transform: translateY(-50%);
+    top: 40% !important;
   }
   .carousel-caption a {
     padding: 5px;
   }
   .carousel-caption h1 {
-    font-size: 3em;
+    font-size: 3em !important;
     text-shadow: 1px 1px 10px black;
     font-weight: 500;
     text-transform: uppercase;
   }
   .carousel-caption h3 {
-    font-size: 1em;
+    font-size: 1em !important;
     font-weight: 500;
-    padding-bottom: 1rem;
+    padding-bottom: 0.1rem !important;
     text-shadow: 1px 1px 10px black;
   }
 
   .connections a {
-    font-size: 2em;
-    padding: 0.5em;
+    font-size: 2em !important;
+    padding: 0.1em !important;
   }
 
   .embedded-logo {
@@ -9733,25 +9742,20 @@ h4 {
     max-width: 384px;
   }
 
-  .navbar li {
-    font-size: 0.9em !important;
-  }
-  .navbar .navbar-button {
-    font-size: medium;
-    padding-top: 12px;
+  .navbar .menu-button {
+    font-size: 1em;
+    max-width: 140px !important;
+    margin-left: -2px;
+    text-align: left;
   }
   .navbar .nav-link {
     margin-left: 10px !important;
-  }
-  .navbar .outsider {
-    margin-left: 25px;
   }
 }
 @media (min-width: 576px) and (max-width: 767px) {
   .carousel-caption {
     position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
+    top: 35% !important;
   }
   .carousel-caption h1 {
     font-size: 4em;
@@ -9762,7 +9766,7 @@ h4 {
   .carousel-caption h3 {
     font-size: 1em;
     font-weight: 500;
-    padding-bottom: 1rem;
+    padding-bottom: 0.3rem !important;
     text-shadow: 1px 1px 10px black;
   }
 
@@ -9772,25 +9776,36 @@ h4 {
     max-width: 384px;
   }
 
+  .menu-button {
+    max-width: 140px !important;
+    margin-left: -2px;
+    text-align: left;
+  }
+
   .nav-link {
     margin-left: 10px !important;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
+  .embedded-logo {
+    float: right;
+  }
+
+  .menu-button {
+    max-width: 140px !important;
+    margin-left: -2px;
+    text-align: left;
+  }
+
   .nav-link {
     margin-left: 10px !important;
   }
-
-  .embedded-logo {
-    float: right;
-  }
 }
-/* large or extra large */
 @media (min-width: 992px) {
   .embedded-logo {
     float: right;
-    max-height: 140px;
-    max-width: 384px;
+    max-height: 120px;
+    max-width: 330px;
   }
 }
 ::selection {
@@ -9804,6 +9819,10 @@ h4 {
 }
 
 /* THEME */
+.btn {
+  margin-bottom: 10px;
+}
+
 .btn-outline-secondary {
   color: #202020;
   border-color: #d6d6d6;
@@ -9818,6 +9837,10 @@ h4 {
 .card {
   margin: 10px;
   min-width: 240px;
+}
+
+.card-block {
+  padding: 10px;
 }
 
 .carousel {
@@ -9868,11 +9891,6 @@ h4 {
 
 .nav-link {
   font-size: 1.1em !important;
-}
-
-.connections a {
-  font-size: 4em;
-  margin: 1em;
 }
 
 .fa-github {

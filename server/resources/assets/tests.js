@@ -43,7 +43,7 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
   });
   QUnit.test('bitcorn/templates/home.hbs', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'bitcorn/templates/home.hbs should pass TemplateLint.\n\nbitcorn/templates/home.hbs\n  39:30  error  Duplicate attribute \'type\' found in the Element.  no-duplicate-attributes\n');
+    assert.ok(false, 'bitcorn/templates/home.hbs should pass TemplateLint.\n\nbitcorn/templates/home.hbs\n  64:4  error  img tags must have an alt attribute  img-alt-attributes\n  79:4  error  img tags must have an alt attribute  img-alt-attributes\n  94:4  error  img tags must have an alt attribute  img-alt-attributes\n  39:30  error  Duplicate attribute \'type\' found in the Element.  no-duplicate-attributes\n');
   });
   QUnit.test('bitcorn/templates/imprint.hbs', function (assert) {
     assert.expect(1);

@@ -24,32 +24,31 @@
 
   .carousel-caption {
     position: absolute;
-    top: 35%;
-    transform: translateY(-50%);
+    top: 40% !important;
 
     a {
       padding: 5px;
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 3em !important;
       text-shadow: 1px 1px 10px black;
       font-weight: 500;
       text-transform: uppercase;
     }
 
     h3 {
-      font-size: 1em;
+      font-size: 1em !important;
       font-weight: 500;
-      padding-bottom: 1rem;
+      padding-bottom: 0.1rem !important;
       text-shadow: 1px 1px 10px black;
     }
   }
 
   .connections {
     a {
-      font-size: 2em;
-      padding: 0.5em;
+      font-size: 2em !important;
+      padding: 0.1em !important;
     }
   }
 
@@ -60,21 +59,15 @@
   }
 
   .navbar {
-    li {
-      font-size: 0.9em !important;
-    }
-
-    .navbar-button {
-      font-size: medium;
-      padding-top: 12px;
+    .menu-button {
+      font-size: 1em;
+      max-width: 140px !important;
+      margin-left: -2px;
+      text-align: left;
     }
 
     .nav-link {
       margin-left: 10px !important;
-    }
-
-    .outsider {
-      margin-left: 25px;
     }
   }
 }

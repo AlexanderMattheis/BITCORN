@@ -1,8 +1,7 @@
 @media (min-width: 576px) and (max-width: 767px) {
   .carousel-caption {
     position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
+    top: 35% !important;
 
     h1 {
       font-size: 4em;
@@ -14,7 +13,7 @@
     h3 {
       font-size: 1em;
       font-weight: 500;
-      padding-bottom: 1rem;
+      padding-bottom: 0.3rem !important;
       text-shadow: 1px 1px 10px black;
     }
   }
@@ -23,6 +22,12 @@
     float: right;
     max-height: 140px;
     max-width: 384px;
+  }
+
+  .menu-button {
+    max-width: 140px !important;
+    margin-left: -2px;
+    text-align: left;
   }
 
   .nav-link {
