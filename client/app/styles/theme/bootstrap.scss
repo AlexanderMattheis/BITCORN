@@ -61,6 +61,14 @@
   display: none !important;
 }
 
+.dropdown {
+  padding-top: 4px;
+}
+
+.dropdown-toggle::after {
+  display:none;
+}
+
 .jumbotron {
   padding: 1em;
 }

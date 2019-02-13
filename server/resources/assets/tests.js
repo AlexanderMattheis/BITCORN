@@ -1,5 +1,29 @@
 'use strict';
 
+define("bitcorn/tests/integration/components/bs-navbar-test", ["qunit", "ember-qunit", "@ember/test-helpers"], function (_qunit, _emberQunit, _testHelpers) {
+  "use strict";
+
+  (0, _qunit.module)('Integration | Component | bs-navbar', function (hooks) {
+    (0, _emberQunit.setupRenderingTest)(hooks);
+    (0, _qunit.test)('it renders', async function (assert) {
+      // Set any properties with this.set('myProperty', 'value');
+      // Handle any actions with this.set('myAction', function(val) { ... });
+      await (0, _testHelpers.render)(Ember.HTMLBars.template({
+        "id": "eSyNx50A",
+        "block": "{\"symbols\":[],\"statements\":[[1,[21,\"bs-navbar\"],false]],\"hasEval\":false}",
+        "meta": {}
+      }));
+      assert.equal(this.element.textContent.trim(), ''); // Template block usage:
+
+      await (0, _testHelpers.render)(Ember.HTMLBars.template({
+        "id": "WIQA37iL",
+        "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"bs-navbar\",null,null,{\"statements\":[[0,\"        template block text\\n\"]],\"parameters\":[]},null],[0,\"    \"]],\"hasEval\":false}",
+        "meta": {}
+      }));
+      assert.equal(this.element.textContent.trim(), 'template block text');
+    });
+  });
+});
 define("bitcorn/tests/lint/app.lint-test", [], function () {
   "use strict";
 
@@ -31,7 +55,7 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
   });
   QUnit.test('bitcorn/templates/about/page.hbs', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'bitcorn/templates/about/page.hbs should pass TemplateLint.\n\nbitcorn/templates/about/page.hbs\n  4:2  error  img tags must have an alt attribute  img-alt-attributes\n');
+    assert.ok(true, 'bitcorn/templates/about/page.hbs should pass TemplateLint.\n\n');
   });
   QUnit.test('bitcorn/templates/application.hbs', function (assert) {
     assert.expect(1);
@@ -43,7 +67,7 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
   });
   QUnit.test('bitcorn/templates/home.hbs', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'bitcorn/templates/home.hbs should pass TemplateLint.\n\nbitcorn/templates/home.hbs\n  64:4  error  img tags must have an alt attribute  img-alt-attributes\n  79:4  error  img tags must have an alt attribute  img-alt-attributes\n  94:4  error  img tags must have an alt attribute  img-alt-attributes\n  39:30  error  Duplicate attribute \'type\' found in the Element.  no-duplicate-attributes\n');
+    assert.ok(true, 'bitcorn/templates/home.hbs should pass TemplateLint.\n\n');
   });
   QUnit.test('bitcorn/templates/imprint.hbs', function (assert) {
     assert.expect(1);

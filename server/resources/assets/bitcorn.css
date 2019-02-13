@@ -9622,10 +9622,6 @@ h4 {
   /* to stick footer to bottom of page */
 }
 
-.active {
-  color: red;
-}
-
 .connections a {
   font-size: 4em;
   margin: 1em;
@@ -9633,6 +9629,10 @@ h4 {
 
 .content {
   text-align: justify;
+}
+
+.dark-font {
+  color: #4a4a4b !important;
 }
 
 .embedded-logo {
@@ -9647,11 +9647,8 @@ h4 {
   /* CLASSES */
   /* LIBRARY */
 }
-.menu .about-link {
-  width: 90px;
-}
 .menu .download-link {
-  width: 132px;
+  width: 110px;
 }
 .menu .dropdown-item {
   padding: 10px 12px 10px 12px;
@@ -9742,10 +9739,12 @@ h4 {
     max-width: 384px;
   }
 
-  .navbar .menu-button {
-    font-size: 1em;
-    max-width: 140px !important;
+  .navbar .dropdown {
     margin-left: -2px;
+  }
+  .navbar .menu-button {
+    font-size: 1em !important;
+    max-width: 140px !important;
     text-align: left;
   }
   .navbar .nav-link {
@@ -9875,6 +9874,14 @@ h4 {
 
 .d-block {
   display: none !important;
+}
+
+.dropdown {
+  padding-top: 4px;
+}
+
+.dropdown-toggle::after {
+  display: none;
 }
 
 .jumbotron {

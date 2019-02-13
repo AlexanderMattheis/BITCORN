@@ -4,15 +4,19 @@
 
     {{navbar.toggle}} {{!-- sandwich --}}
     {{#navbar.content}}
-      {{#navbar.nav class="ml-auto" as |nav| }}
+      {{#navbar.nav id="headbar" class="ml-auto" as |nav| }}
         {{!-- home --}}
-        {{#nav.item}}{{#nav.link-to "home"}}Home{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item class="menu-button"}}{{#nav.link-to "home"}}Home{{/nav.link-to}}{{/nav.item}}
 
         {{!-- downloads --}}
-        {{#bs-dropdown as |dd|}}
+        {{#bs-dropdown class="dropdown" as |dd|}}
           {{#dd.button class="menu-button"}}Downloads{{/dd.button}}
 
           {{#dd.menu class="menu" as |menu|}}
+            {{#menu.item}}
+              {{#menu.link-to "downloads.graphics" class="download-link"}}Graphics{{/menu.link-to}}
+            {{/menu.item}}
+
             {{#menu.item}}
               {{#menu.link-to "downloads.programs" class="download-link"}}Programs{{/menu.link-to}}
             {{/menu.item}}
@@ -20,13 +24,12 @@
         {{/bs-dropdown}}
 
         {{!-- tutorials --}}
-        {{#bs-dropdown as |dd|}}
+        {{#bs-dropdown class="dropdown" as |dd|}}
           {{#dd.button class="menu-button"}}Tutorials{{/dd.button}}
-
         {{/bs-dropdown}}
 
         {{!-- about --}}
-        {{#bs-dropdown as |dd|}}
+        {{#bs-dropdown class="dropdown" as |dd|}}
           {{#dd.button class="menu-button"}}About{{/dd.button}}
 
           {{#dd.menu class="menu" as |menu|}}

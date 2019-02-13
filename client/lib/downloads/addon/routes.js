@@ -6,4 +6,7 @@ export default buildRoutes(function() {
     this.route('cross-dating');
     this.route('res');
   });
+
+  this.route('graphics', function () {
+  });
 });
