@@ -77,6 +77,10 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
     assert.expect(1);
     assert.ok(true, 'bitcorn/templates/privacy.hbs should pass TemplateLint.\n\n');
   });
+  QUnit.test('bitcorn/templates/settings.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'bitcorn/templates/settings.hbs should pass TemplateLint.\n\n');
+  });
 });
 define("bitcorn/tests/lint/tests.lint-test", [], function () {
   "use strict";
@@ -92,6 +96,56 @@ define("bitcorn/tests/test-helper", ["bitcorn/app", "bitcorn/config/environment"
 
   (0, _testHelpers.setApplication)(_app.default.create(_environment.default.APP));
   (0, _emberQunit.start)();
+});
+define("bitcorn/tests/unit/initializers/settings-cookies-test", ["bitcorn/initializers/settings-cookies", "qunit", "ember-qunit", "bitcorn/tests/helpers/destroy-app"], function (_settingsCookies, _qunit, _emberQunit, _destroyApp) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Initializer | settings-cookies', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    hooks.beforeEach(function () {
+      this.TestApplication = Ember.Application.extend();
+      this.TestApplication.initializer({
+        name: 'initializer under test',
+        initialize: _settingsCookies.initialize
+      });
+      this.application = this.TestApplication.create({
+        autoboot: false
+      });
+    });
+    hooks.afterEach(function () {
+      (0, _destroyApp.default)(this.application);
+    }); // Replace this with your real tests.
+
+    (0, _qunit.test)('it works', async function (assert) {
+      await this.application.boot();
+      assert.ok(true);
+    });
+  });
+});
+define("bitcorn/tests/unit/initializers/snow-starter-test", ["bitcorn/initializers/snow-starter", "qunit", "ember-qunit", "bitcorn/tests/helpers/destroy-app"], function (_snowStarter, _qunit, _emberQunit, _destroyApp) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Initializer | snow-starter', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    hooks.beforeEach(function () {
+      this.TestApplication = Ember.Application.extend();
+      this.TestApplication.initializer({
+        name: 'initializer under test',
+        initialize: _snowStarter.initialize
+      });
+      this.application = this.TestApplication.create({
+        autoboot: false
+      });
+    });
+    hooks.afterEach(function () {
+      (0, _destroyApp.default)(this.application);
+    }); // Replace this with your real tests.
+
+    (0, _qunit.test)('it works', async function (assert) {
+      await this.application.boot();
+      assert.ok(true);
+    });
+  });
 });
 define("bitcorn/tests/unit/routes/about-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
   "use strict";
@@ -166,6 +220,17 @@ define("bitcorn/tests/unit/routes/privacy-test", ["qunit", "ember-qunit"], funct
     (0, _emberQunit.setupTest)(hooks);
     (0, _qunit.test)('it exists', function (assert) {
       let route = this.owner.lookup('route:privacy');
+      assert.ok(route);
+    });
+  });
+});
+define("bitcorn/tests/unit/routes/settings-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  (0, _qunit.module)('Unit | Route | settings', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:settings');
       assert.ok(route);
     });
   });

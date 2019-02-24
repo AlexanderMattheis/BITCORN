@@ -1,0 +1,21 @@
+<div class="col-12 col-xl-6 mr-auto ml-auto mt-5">
+  <h2>Settings <span class="fas fa-cog"></span></h2>
+  <hr class="underline">
+  <p class="content">
+    Here you can change the page settings. Therefore, cookies are used.
+    <b>Actually, you have to reload the page after changing the settings to recognize any difference.</b>
+    By changing an option <b>you agree with the usage of cookies</b> on this page.
+    You can change your opinion at any time by clicking on Reset-button below.
+    By doing so, all set cookies from this page are deleted.
+  </p>
+
+  <label class="input" for="let-it-snow">
+    <span>Let it snow!</span>
+  </label>
+
+  {{input class="input-text" type="checkbox" id="let-it-snow" checked=isSnowing change=(action "changeSnowState")
+          tabindex=-1}}
+  <br>
+  <br>
+  {{bs-button id="reset" defaultText="Reset" type="primary" buttonType="button" onClick=(action "reset")}}
+</div>

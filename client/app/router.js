@@ -17,6 +17,7 @@ Router.map(function() {
   this.route('contact');
   this.route('imprint');
   this.route('privacy');
+  this.route('settings');
 });
 
 export default Router;

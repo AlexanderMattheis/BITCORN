@@ -897,6 +897,128 @@
   var _default = config;
   _exports.default = _default;
 });
+;define("bitcorn/controllers/contact", ["exports", "bitcorn/system/defaults", "bitcorn/system/regex"], function (_exports, _defaults, _regex) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Contact extends Ember.Controller.extend({
+    actions: {
+      submit() {
+        let form = document.querySelector(".needs-validation");
+        this.coverLegality("email-field", "d-block", 0);
+        this.coverLegality("message-field", "d-block", 1); // test correctness
+
+        let isLegalMail = this.isLegalMail(form, new RegExp(_regex.default.AllowedPattern.MAIL));
+        let isLegalMessage = this.isLegalMessage(form, new RegExp(_regex.default.AllowedPattern.MESSAGE));
+        this.uncoverLegality(isLegalMail, "email-field", "d-block", 0);
+        this.uncoverLegality(isLegalMessage, "message-field", "d-block", 1);
+      }
+
+    },
+
+    coverLegality(fieldId, messageClass, messageNumber) {
+      let field = document.querySelector("#" + fieldId); // @ts-ignore
+
+      field.classList.remove("is-invalid");
+      let messages = document.querySelectorAll("." + messageClass); // ordered list!
+
+      messages[messageNumber].style.setProperty("display", "none", "important");
+    },
+
+    isLegalMail(form, allowedMailPattern) {
+      // @ts-ignore
+      let mailField = form[0];
+      mailField.classList.remove("is-invalid");
+      let mail = mailField.value;
+      return allowedMailPattern.test(mail) && mail.length >= _defaults.default.Lengths.MAIL_ADDRESS;
+    },
+
+    isLegalMessage(form, allowedMessagePattern) {
+      // @ts-ignore
+      let messageField = form[1];
+      messageField.classList.remove("is-invalid");
+      let message = messageField.value;
+      return allowedMessagePattern.test(message) && message.length >= _defaults.default.Lengths.MESSAGE;
+    },
+
+    uncoverLegality(isLegal, fieldId, messageClass, messageNumber) {
+      if (!isLegal) {
+        let field = document.querySelector("#" + fieldId); // @ts-ignore
+
+        field.classList.add("is-invalid");
+        let messages = document.querySelectorAll("." + messageClass); // ordered list!
+
+        messages[messageNumber].style.setProperty("display", "block", "important");
+      }
+    }
+
+  }) {}
+
+  _exports.default = Contact;
+});
+;define("bitcorn/controllers/settings", ["exports", "bitcorn/system/cookies", "bitcorn/system/defaults"], function (_exports, _cookies, _defaults) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  //import Messages from "../system/messages";
+  class Settings extends Ember.Controller.extend({
+    isSnowing: false,
+
+    init() {
+      this.isSnowing = _cookies.default.isSnowing;
+    },
+
+    actions: {
+      changeSnowState() {
+        this.set('isSnowing', !this.get('isSnowing'));
+
+        if (this.get('isSnowing')) {
+          this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, true, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
+        } else {
+          this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, false, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
+        }
+      },
+
+      reset() {
+        this.resetCookies(); //this.showMessage(Messages.COOKIES_EXPIRED);
+      }
+
+    },
+
+    resetCookies() {
+      for (let key in _defaults.default.Cookies.Available) {
+        // @ts-ignore
+        this.setCookie(_defaults.default.Cookies.Available[key], undefined, 0);
+      }
+    },
+
+    setCookie(name, value, numDaysExpiring) {
+      let date = new Date();
+      date.setTime(date.getTime() + numDaysExpiring * 24 * 60 * 60 * 1000);
+      let expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires;
+    },
+
+    showMessage(message) {
+      let alert = document.getElementById("alert-message");
+      alert.classList.remove("invisible");
+      let messageBox = document.createElement("div");
+      messageBox.innerHTML = message;
+      alert.appendChild(messageBox); // test
+    }
+
+  }) {}
+
+  _exports.default = Settings;
+});
 ;define("bitcorn/downloads/tests/addon.lint-test", [], function () {
   "use strict";
 
@@ -1285,6 +1407,64 @@
   };
   _exports.default = _default;
 });
+;define("bitcorn/initializers/settings-cookies", ["exports", "bitcorn/system/cookies", "bitcorn/system/defaults"], function (_exports, _cookies, _defaults) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.initialize = initialize;
+  _exports.default = void 0;
+
+  function initialize() {
+    debugger;
+    _cookies.default.isSnowing = getCookieValue(_defaults.default.Cookies.Available.IS_SNOWING);
+  }
+
+  function getCookieValue(name) {
+    name = name + "=";
+    let cookieParams = document.cookie.split(';');
+
+    for (let i = 0; i < cookieParams.length; i++) {
+      let param = cookieParams[i];
+
+      if (param.indexOf(name) === 0) {
+        return JSON.parse(param.substring(name.length, param.length));
+      }
+    } // @ts-ignore
+
+
+    return undefined;
+  }
+
+  var _default = {
+    before: 'snow-starter',
+    initialize
+  };
+  _exports.default = _default;
+});
+;define("bitcorn/initializers/snow-starter", ["exports", "bitcorn/system/cookies", "bitcorn/view/effects/snow"], function (_exports, _cookies, _snow) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.initialize = initialize;
+  _exports.default = void 0;
+
+  function initialize() {
+    if (!Ember.testing && _cookies.default.isSnowing) {
+      let effect = new _snow.default();
+      effect.start();
+    }
+  }
+
+  var _default = {
+    after: 'settings-cookies',
+    initialize
+  };
+  _exports.default = _default;
+});
 ;define("bitcorn/instance-initializers/ember-data", ["exports", "ember-data/initialize-store-service"], function (_exports, _initializeStoreService) {
   "use strict";
 
@@ -1321,6 +1501,23 @@
   };
   _exports.default = _default;
 });
+;define("bitcorn/logic/math/randomizer", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Randomizer {
+    static getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min); // since using pixels, only integers
+    }
+
+  }
+
+  _exports.default = Randomizer;
+});
 ;define("bitcorn/resolver", ["exports", "ember-resolver"], function (_exports, _emberResolver) {
   "use strict";
 
@@ -1353,6 +1550,7 @@
     this.route('contact');
     this.route('imprint');
     this.route('privacy');
+    this.route('settings');
   });
   var _default = Router;
   _exports.default = _default;
@@ -1473,6 +1671,19 @@
 
   _exports.default = Privacy;
 });
+;define("bitcorn/routes/settings", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Settings extends Ember.Route.extend({// anything which *must* be merged to prototype here
+  }) {}
+
+  _exports.default = Settings;
+});
 ;define("bitcorn/services/ajax", ["exports", "ember-ajax/services/ajax"], function (_exports, _ajax) {
   "use strict";
 
@@ -1498,6 +1709,84 @@
       return _assetLoader.default;
     }
   });
+});
+;define("bitcorn/system/colors", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  var _default = {
+    Particle: {
+      SNOWFLAKE: "#ffffff"
+    }
+  };
+  _exports.default = _default;
+});
+;define("bitcorn/system/cookies", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Cookies {}
+
+  _exports.default = Cookies;
+});
+;define("bitcorn/system/defaults", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  var _default = {
+    Cookies: {
+      Available: {
+        IS_SNOWING: "isSnowing"
+      },
+      NUM_DAYS_EXPIRING: 30
+    },
+    Effects: {
+      PERCENT_SNOWFLAKES: 1 / 14440,
+      SNOW_SPEED: 1
+    },
+    Lengths: {
+      MAIL_ADDRESS: 10,
+      MESSAGE: 15
+    }
+  };
+  _exports.default = _default;
+});
+;define("bitcorn/system/messages", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  var _default = {
+    COOKIES_EXPIRED: "<strong>Successfully Deleted</strong> Cookies have been expired. Reload the page!"
+  };
+  _exports.default = _default;
+});
+;define("bitcorn/system/regex", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  var _default = {
+    AllowedPattern: {
+      MAIL: "^([A-Za-z0-9]+(\.|\-|\_)?[A-Za-z0-9]+)+@[A-Za-z]+\.[A-Za-z]{2}$",
+      MESSAGE: "^[A-Za-zÀ-ÖØ-öø-ÿ\.\:\,\;\?\!\(\)\ \'\"\r\n]+$"
+    }
+  };
+  _exports.default = _default;
 });
 ;define("bitcorn/templates/about", ["exports"], function (_exports) {
   "use strict";
@@ -1669,6 +1958,24 @@
 
   _exports.default = _default;
 });
+;define("bitcorn/templates/settings", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _default = Ember.HTMLBars.template({
+    "id": "mwxXWWjj",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"div\"],[11,\"class\",\"col-12 col-xl-6 mr-auto ml-auto mt-5\"],[9],[0,\"\\n  \"],[7,\"h2\"],[9],[0,\"Settings \"],[7,\"span\"],[11,\"class\",\"fas fa-cog\"],[9],[10],[10],[0,\"\\n  \"],[7,\"hr\"],[11,\"class\",\"underline\"],[9],[10],[0,\"\\n  \"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n    Here you can change the page settings. Therefore, cookies are used.\\n    \"],[7,\"b\"],[9],[0,\"Actually, you have to reload the page after changing the settings to recognize any difference.\"],[10],[0,\"\\n    By changing an option \"],[7,\"b\"],[9],[0,\"you agree with the usage of cookies\"],[10],[0,\" on this page.\\n    You can change your opinion at any time by clicking on Reset-button below.\\n    By doing so, all set cookies from this page are deleted.\\n  \"],[10],[0,\"\\n\\n  \"],[7,\"label\"],[11,\"class\",\"input\"],[11,\"for\",\"let-it-snow\"],[9],[0,\"\\n    \"],[7,\"span\"],[9],[0,\"Let it snow!\"],[10],[0,\"\\n  \"],[10],[0,\"\\n\\n  \"],[1,[27,\"input\",null,[[\"class\",\"type\",\"id\",\"checked\",\"change\",\"tabindex\"],[\"input-text\",\"checkbox\",\"let-it-snow\",[23,[\"isSnowing\"]],[27,\"action\",[[22,0,[]],\"changeSnowState\"],null],-1]]],false],[0,\"\\n  \"],[7,\"br\"],[9],[10],[0,\"\\n  \"],[7,\"br\"],[9],[10],[0,\"\\n  \"],[1,[27,\"bs-button\",null,[[\"id\",\"defaultText\",\"type\",\"buttonType\",\"onClick\"],[\"reset\",\"Reset\",\"primary\",\"button\",[27,\"action\",[[22,0,[]],\"reset\"],null]]]],false],[0,\"\\n\"],[10]],\"hasEval\":false}",
+    "meta": {
+      "moduleName": "bitcorn/templates/settings.hbs"
+    }
+  });
+
+  _exports.default = _default;
+});
 ;define("bitcorn/tutorials/tests/addon.lint-test", [], function () {
   "use strict";
 
@@ -1695,6 +2002,163 @@
     assert.ok(true, 'addon/templates/application.hbs should pass TemplateLint.\n\n');
   });
 });
+;define("bitcorn/view/effects/effect", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Effect {
+    constructor() {
+      // do not change the request id, it is defined as non-zero value
+      this._callbackRequestID = 0; // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+    }
+
+    get callbackRequestID() {
+      return this._callbackRequestID;
+    }
+
+    set callbackRequestID(value) {
+      this._callbackRequestID = value;
+    }
+
+    start() {
+      let effectsCanvas = document.querySelector('#effects');
+      effectsCanvas.width = window.innerWidth;
+      effectsCanvas.height = window.innerHeight;
+      let canvasContext = effectsCanvas.getContext('2d');
+      let canvasData = {
+        context: canvasContext,
+        width: effectsCanvas.width,
+        height: effectsCanvas.height
+      };
+      this.init(canvasData);
+      this.animate(canvasData);
+      addEventListener('resize', () => {
+        // resize canvas
+        effectsCanvas.width = window.innerWidth;
+        effectsCanvas.height = window.innerHeight; // stop last animation
+
+        if (this.callbackRequestID !== 0) {
+          window.cancelAnimationFrame(this.callbackRequestID);
+        } // update
+        // @ts-ignore
+
+
+        canvasData.width = innerWidth; // @ts-ignore
+
+        canvasData.height = innerHeight;
+        this.init(canvasData);
+        this.animate(canvasData);
+      });
+    }
+
+  }
+
+  _exports.default = Effect;
+});
+;define("bitcorn/view/effects/particle/snowflake", ["exports", "bitcorn/system/colors"], function (_exports, _colors) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Snowflake {
+    constructor(x, y, dy, radius) {
+      this._x = x;
+      this._y = y;
+      this._dy = dy;
+      this._radius = radius;
+    }
+
+    update(canvasData) {
+      if (this._y + this._radius + this._dy > canvasData.height) {
+        // reset snowflake
+        this._y = 0;
+      }
+
+      this._y += this._dy;
+    }
+
+    draw(canvasData) {
+      canvasData.context.beginPath();
+      canvasData.context.arc(this._x, this._y, this._radius, 0, Math.PI * 2, false);
+      canvasData.context.fillStyle = _colors.default.Particle.SNOWFLAKE;
+      canvasData.context.fill();
+      canvasData.context.closePath();
+    }
+
+  }
+
+  _exports.default = Snowflake;
+});
+;define("bitcorn/view/effects/snow", ["exports", "bitcorn/system/defaults", "bitcorn/view/effects/effect", "bitcorn/logic/math/randomizer", "bitcorn/view/effects/particle/snowflake"], function (_exports, _defaults, _effect, _randomizer, _snowflake) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  class Snow extends _effect.default {
+    constructor() {
+      super();
+      this._snowflakes = [];
+    }
+
+    get snowflakes() {
+      return this._snowflakes;
+    }
+
+    set snowflakes(value) {
+      this._snowflakes = value;
+    }
+    /**
+     * @override
+     */
+
+
+    init(canvasData) {
+      this.snowflakes = [];
+      let numSnowFlakes = Math.floor(canvasData.width * canvasData.height * _defaults.default.Effects.PERCENT_SNOWFLAKES);
+
+      for (let i = 0; i < numSnowFlakes; i++) {
+        let radius = _randomizer.default.getRandomNumber(4, 8);
+
+        let x = _randomizer.default.getRandomNumber(radius, canvasData.width - radius);
+
+        let y = _randomizer.default.getRandomNumber(radius, canvasData.height - radius);
+
+        let dy = _randomizer.default.getRandomNumber(1, 2);
+
+        this.snowflakes.push(new _snowflake.default(x, y, dy, radius));
+      }
+    }
+    /**
+     * @override
+     */
+
+
+    animate(canvasData) {
+      this.callbackRequestID = window.requestAnimationFrame(() => {
+        this.animate(canvasData);
+      });
+      canvasData.context.clearRect(0, 0, canvasData.width, canvasData.height);
+
+      for (let i = 0; i < this.snowflakes.length; i++) {
+        this.snowflakes[i].update(canvasData);
+        this.snowflakes[i].draw(canvasData);
+      }
+    }
+
+  }
+
+  _exports.default = Snow;
+});
 ;
 
 ;define('bitcorn/config/environment', [], function() {
@@ -1718,7 +2182,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0+fa3a656d"});
+            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"0.0.0+6f595153"});
           }
         
 //# sourceMappingURL=bitcorn.map
