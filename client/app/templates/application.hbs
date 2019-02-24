@@ -43,7 +43,7 @@
           {{/dd.menu}}
         {{/bs-dropdown}}
 
-        {{#nav.item class="outsider"}}{{#nav.link-to "settings"}}<span class="fas fa-cog"></span>{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}<a class="outsider" onclick={{action "activateSettings"}}><span class="fas fa-cog"></span></a>{{/nav.item}}
       {{/navbar.nav}}
     {{/navbar.content}}
   {{/bs-navbar}}
@@ -62,3 +62,8 @@
     Copyright &copy; 2019 Alexander Mattheis
   </span>
 </div>
+
+
+{{#if settingsActive}}
+  {{settings-modal deactivateSettings=(action "deactivateSettings")}}
+{{/if}}

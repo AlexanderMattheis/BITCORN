@@ -1,13 +1,12 @@
-import Controller from '@ember/controller';
+import Component from '@ember/component';
+import Cookies from "bitcorn/system/cookies";
+import Defaults from "bitcorn/system/defaults";
 
-import Cookies from "../system/cookies";
-import Defaults from "../system/defaults";
-//import Messages from "../system/messages";
-
-export default class Settings extends Controller.extend({
+export default class SettingsModal extends Component.extend({
   isSnowing: false,
 
   init() {
+    this._super(...arguments);
     this.isSnowing = Cookies.isSnowing;
   },
 
@@ -54,11 +53,4 @@ export default class Settings extends Controller.extend({
   }
 }) {
   // normal class body definition here
-}
-
-// DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
-declare module '@ember/controller' {
-  interface Registry {
-    'settings': Settings;
-  }
-}
+};

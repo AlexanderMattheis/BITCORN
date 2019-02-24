@@ -2,7 +2,6 @@ import Cookies from '../system/cookies';
 import Defaults from "../system/defaults";
 
 export function initialize(): void {
-  debugger;
   Cookies.isSnowing = getCookieValue(Defaults.Cookies.Available.IS_SNOWING);
 }
 

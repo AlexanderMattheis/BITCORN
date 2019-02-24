@@ -1,0 +1,26 @@
+{{#bs-modal size="lg" as |modal|}}
+  {{#modal.header}}
+    <h3><span class="fas fa-cog"></span> Settings</h3>
+  {{/modal.header}}
+
+  {{#modal.body}}
+    <p class="content">
+      Here you can change the page settings. Therefore, cookies are used.
+      By changing an option <b>you agree with the usage of cookies</b> on this page.
+      You can change your opinion at any time by clicking on the Reset-button below.
+      By doing so, all set cookies from this page are deleted.
+    </p>
+
+    <label class="input" for="snow-particles">
+      <span>snow-particles</span>
+    </label>
+
+    {{input class="input-text" type="checkbox" id="snow-particles" checked=isSnowing change=(action "changeSnowState")
+            tabindex=-1}}
+  {{/modal.body}}
+
+  {{#modal.footer}}
+    {{bs-button id="ok" defaultText="OK" type="secondary" buttonType="button" onClick=deactivateSettings}}
+    {{bs-button id="reset" defaultText="Reset" type="primary" buttonType="button" onClick=(action "reset")}}
+  {{/modal.footer}}
+{{/bs-modal}}
