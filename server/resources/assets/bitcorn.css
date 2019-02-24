@@ -9622,6 +9622,11 @@ h4 {
   /* to stick footer to bottom of page */
 }
 
+.button {
+  font-size: 17.6px;
+  padding-top: 2px;
+}
+
 .connections a {
   font-size: 4em;
   margin: 1em;
@@ -9673,6 +9678,11 @@ h4 {
   min-height: 100px;
 }
 
+.outsider {
+  margin-left: 10px;
+  padding-top: 3px;
+}
+
 .overline {
   margin-bottom: 10px;
   margin-top: 15px;
@@ -9695,6 +9705,11 @@ h4 {
   }
 
   /* CLASSES */
+  .button {
+    font-size: 1em;
+    padding-left: 5px;
+  }
+
   .btn {
     font-size: 0.9em;
     line-height: 0.9em;
@@ -9749,6 +9764,10 @@ h4 {
   }
   .navbar .nav-link {
     margin-left: 10px !important;
+  }
+
+  .outsider {
+    margin-left: 3px;
   }
 }
 @media (min-width: 576px) and (max-width: 767px) {
@@ -9897,7 +9916,7 @@ h4 {
 }
 
 .nav-link {
-  font-size: 1.1em !important;
+  font-size: 1em;
 }
 
 .fa-github {

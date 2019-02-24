@@ -6,7 +6,7 @@
     {{#navbar.content}}
       {{#navbar.nav id="headbar" class="ml-auto" as |nav| }}
         {{!-- home --}}
-        {{#nav.item class="menu-button"}}{{#nav.link-to "home"}}Home{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item class="button"}}{{#nav.link-to "home"}}Home{{/nav.link-to}}{{/nav.item}}
 
         {{!-- downloads --}}
         {{#bs-dropdown class="dropdown" as |dd|}}
@@ -43,6 +43,7 @@
           {{/dd.menu}}
         {{/bs-dropdown}}
 
+        {{#nav.item class="outsider"}}{{#nav.link-to "settings"}}<span class="fas fa-cog"></span>{{/nav.link-to}}{{/nav.item}}
       {{/navbar.nav}}
     {{/navbar.content}}
   {{/bs-navbar}}

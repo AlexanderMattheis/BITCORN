@@ -1,3 +1,8 @@
+.button {
+  font-size: 17.6px;
+  padding-top: 2px;
+}
+
 .connections {
   a {
     font-size: 4em;
@@ -55,6 +60,11 @@
     max-height: 300px;
     min-height: 100px;
   }
+}
+
+.outsider {
+  margin-left: 10px;
+  padding-top: 3px;
 }
 
 .overline {
