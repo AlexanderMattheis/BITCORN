@@ -1,7 +1,29 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # Don't track content of these folders
-/client/node_modules/
 /out/
 /.idea/
 /.vertx/
+
+# compiled output
+/server/resources/
+/client/tmp/
+
+# dependencies
+/client/bower_components/
+/client/node_modules/
+
+# misc
+/client/.env*
+/client/.sass-cache
+/client/connect.lock
+/client/coverage/
+/client/libpeerconnection.log
+/client/npm-debug.log*
+/client/testem.log
+/client/yarn-error.log
+
+# ember-try
+/client/.node_modules.ember-try/
+/client/bower.json.ember-try
+/client/package.json.ember-try
