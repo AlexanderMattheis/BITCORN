@@ -59,7 +59,7 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
   });
   QUnit.test('bitcorn/templates/application.hbs', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'bitcorn/templates/application.hbs should pass TemplateLint.\n\nbitcorn/templates/application.hbs\n  46:41  error  Interaction added to non-interactive element  no-invalid-interactive\n');
+    assert.ok(false, 'bitcorn/templates/application.hbs should pass TemplateLint.\n\nbitcorn/templates/application.hbs\n  46:55  error  Interaction added to non-interactive element  no-invalid-interactive\n');
   });
   QUnit.test('bitcorn/templates/components/settings-modal.hbs', function (assert) {
     assert.expect(1);

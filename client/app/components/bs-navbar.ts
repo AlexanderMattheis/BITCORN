@@ -4,6 +4,7 @@ export default class BsNavbar extends Navbar.extend({
   didInsertElement() {
     this._super(...arguments);
 
+    debugger;
     const itemsContainer: HTMLElement = document.getElementById("headbar") as HTMLElement;
     const menuItems: HTMLCollection = itemsContainer.getElementsByClassName("menu-button");
 
