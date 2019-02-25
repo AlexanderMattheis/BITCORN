@@ -1,4 +1,4 @@
-{{#bs-modal size="lg" as |modal|}}
+{{#bs-modal size="lg" onHidden=deactivateSettings as |modal|}}
   {{#modal.header}}
     <h3><span class="fas fa-cog"></span> Settings</h3>
   {{/modal.header}}
@@ -20,7 +20,7 @@
   {{/modal.body}}
 
   {{#modal.footer}}
-    {{bs-button id="ok" defaultText="OK" type="secondary" buttonType="button" onClick=deactivateSettings}}
-    {{bs-button id="reset" defaultText="Reset" type="primary" buttonType="button" onClick=(action "reset")}}
+    {{bs-button id="reset" class="darker" defaultText="Reset" type="secondary" buttonType="button" onClick=(action "reset")}}
+    {{bs-button id="ok" defaultText="OK" type="primary" buttonType="button" onClick=deactivateSettings}}
   {{/modal.footer}}
 {{/bs-modal}}

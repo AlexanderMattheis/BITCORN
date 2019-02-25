@@ -1,11 +1,23 @@
-// WebKit and Blink browsers
+// Microsoft: removing scrollbar
+body {
+  -ms-overflow-style: none;
+}
+
+// Gecko browsers: selection color
+::-moz-selection {
+  background: $yellow;
+  color: white;
+}
+
+// WebKit and Blink browsers: selection color
 ::selection {
   background: $yellow;
   color: white;
 }
 
-// Gecko browsers
-::-moz-selection {
-  background: $yellow;
-  color: white;
+// WebKit: removing scrollbar
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
+

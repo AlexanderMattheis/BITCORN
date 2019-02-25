@@ -57,6 +57,12 @@
   }
 }
 
+.close {
+  &:focus {
+    outline: none;
+  }
+}
+
 .d-block {
   display: none !important;
 }
