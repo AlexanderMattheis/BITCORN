@@ -9,6 +9,7 @@ export default class Application extends Controller.extend({
     },
 
     deactivateSettings() {
+      debugger;
       this.set('settingsActive', false);
     }
   }

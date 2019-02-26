@@ -24,6 +24,12 @@ export default class SettingsModal extends Component.extend({
     reset() {
       this.resetCookies();
       //this.showMessage(Messages.COOKIES_EXPIRED);
+    },
+
+    reload() {
+      // @ts-ignore
+      this.get('deactivateSettings')();
+      location.reload();
     }
   },
 

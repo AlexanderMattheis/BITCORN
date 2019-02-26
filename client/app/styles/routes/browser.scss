@@ -3,14 +3,14 @@ body {
   -ms-overflow-style: none;
 }
 
-// Gecko browsers: selection color
-::-moz-selection {
+// WebKit and Blink browsers: selection color
+::selection {
   background: $yellow;
   color: white;
 }
 
-// WebKit and Blink browsers: selection color
-::selection {
+// Gecko browsers: selection color
+::-moz-selection {
   background: $yellow;
   color: white;
 }

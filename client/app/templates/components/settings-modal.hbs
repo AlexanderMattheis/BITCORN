@@ -11,16 +11,32 @@
       By doing so, all set cookies from this page are deleted.
     </p>
 
-    <label class="input" for="snow-particles">
-      <span>snow-particles</span>
+    <label class="settings-input" for="particles">
+      <span>Particles</span>
     </label>
 
-    {{input class="input-text" type="checkbox" id="snow-particles" checked=isSnowing change=(action "changeSnowState")
+    <select class="settings-select">
+      <option value="none">None</option>
+      <option value="snow">Snow</option>
+    </select>
+
+    {{input class="input-text" type="checkbox" id="particles" checked=isSnowing change=(action "changeSnowState")
             tabindex=-1}}
+
+    <br>
+
+    <label class="settings-input" for="music">
+      <span>Music</span>
+    </label>
+
+    <select class="settings-select">
+      <option value="none">1</option>
+      <option value="snow">2</option>
+    </select>
   {{/modal.body}}
 
   {{#modal.footer}}
     {{bs-button id="reset" class="darker" defaultText="Reset" type="secondary" buttonType="button" onClick=(action "reset")}}
-    {{bs-button id="ok" defaultText="OK" type="primary" buttonType="button" onClick=deactivateSettings}}
+    {{bs-button id="apply" defaultText="Apply" type="primary" buttonType="button" onClick=(action "reload")}}
   {{/modal.footer}}
 {{/bs-modal}}
