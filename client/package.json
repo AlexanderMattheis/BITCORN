@@ -1,10 +1,10 @@
 {
   "name": "bitcorn",
-  "version": "0.0.0",
+  "version": "3.1.0",
   "private": true,
-  "description": "Small description for bitcorn goes here",
+  "description": "Frontend of Bitcorn",
   "repository": "",
-  "license": "MIT",
+  "license": "Unlicence",
   "author": "",
   "directories": {
     "doc": "doc",
@@ -18,16 +18,18 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@ember-decorators/babel-transforms": "^3.1.5",
     "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
-    "@types/ember": "^3.0.26",
-    "@types/ember-data": "^3.1.3",
+    "@types/ember": "^3.0.27",
+    "@types/ember-data": "^3.1.4",
     "@types/ember-qunit": "^3.4.5",
     "@types/ember-test-helpers": "^1.0.4",
     "@types/ember-testing-helpers": "0.0.3",
     "@types/ember__test-helpers": "^0.7.7",
     "@types/qunit": "^2.5.4",
     "@types/rsvp": "^4.0.2",
+    "babel-eslint": "^8.2.6",
     "bootstrap": "^4.2.1",
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.1.0",
@@ -43,9 +45,11 @@
     "ember-cli-sass": "^9.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.1",
-    "ember-cli-typescript": "^1.5.0",
+    "ember-cli-typescript": "^2.0.0-rc.2",
+    "ember-cli-typescript-blueprints": "^2.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
     "ember-data": "~3.7.0",
+    "ember-decorators": "^5.1.4",
     "ember-engines": "^0.5.26",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.1.0",
@@ -58,7 +62,7 @@
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
     "sass": "^1.16.1",
-    "typescript": "^3.2.4"
+    "typescript": "^3.3.3333"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
