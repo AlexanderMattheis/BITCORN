@@ -1,20 +1,27 @@
+import {action} from '@ember-decorators/object';
+
 import Controller from '@ember/controller';
 
-export default class Application extends Controller.extend({
-  settingsActive: false,
+export default class Application extends Controller {
+  // @ts-ignore
+  private settingsActive: boolean;
 
-  actions: {
-    activateSettings() {
-      this.set('settingsActive', true);
-    },
-
-    deactivateSettings() {
-      debugger;
-      this.set('settingsActive', false);
-    }
+  init() {
+    super.init();
+    this.settingsActive = false;
   }
-}) {
-  // normal class body definition here
+
+  @action
+  activateSettings() {
+    // @ts-ignore
+    this.set('settingsActive', true);
+  }
+
+  @action
+  deactivateSettings() {
+    // @ts-ignore
+    this.set('settingsActive', false);
+  }
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.

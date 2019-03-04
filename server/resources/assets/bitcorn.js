@@ -637,6 +637,7 @@
   });
   _exports.default = void 0;
 
+  // @ts-ignore
   class BsNavbar extends _bsNavbar.default {
     didInsertElement() {
       const itemsContainer = document.getElementById("headbar");
@@ -853,73 +854,89 @@
     }
   });
 });
-;define("bitcorn/components/settings-modal", ["exports", "bitcorn/system/cookies", "bitcorn/system/defaults"], function (_exports, _cookies, _defaults) {
+;define("bitcorn/components/settings-modal", ["exports", "@babel/runtime/helpers/esm/decorate", "@babel/runtime/helpers/esm/getPrototypeOf", "@babel/runtime/helpers/esm/get", "@ember-decorators/object", "bitcorn/system/cookies", "bitcorn/system/defaults"], function (_exports, _decorate2, _getPrototypeOf2, _get2, _object, _cookies, _defaults) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
   _exports.default = void 0;
+  let SettingsModal = (0, _decorate2.default)(null, function (_initialize, _EmberComponent) {
+    class SettingsModal extends _EmberComponent {
+      constructor(...args) {
+        super(...args);
 
-  class SettingsModal extends Ember.Component.extend({
-    isSnowing: false,
-
-    init() {
-      this._super(...arguments);
-
-      this.isSnowing = _cookies.default.isSnowing;
-    },
-
-    actions: {
-      changeSnowState() {
-        this.set('isSnowing', !this.get('isSnowing'));
-
-        if (this.get('isSnowing')) {
-          this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, true, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
-        } else {
-          this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, false, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
-        }
-      },
-
-      reset() {
-        this.resetCookies(); //this.showMessage(Messages.COOKIES_EXPIRED);
-      },
-
-      reload() {
-        // @ts-ignore
-        this.get('deactivateSettings')();
-        location.reload();
+        _initialize(this);
       }
 
-    },
-
-    resetCookies() {
-      for (let key in _defaults.default.Cookies.Available) {
-        // @ts-ignore
-        this.setCookie(_defaults.default.Cookies.Available[key], undefined, 0);
-      }
-    },
-
-    setCookie(name, value, numDaysExpiring) {
-      let date = new Date();
-      date.setTime(date.getTime() + numDaysExpiring * 24 * 60 * 60 * 1000);
-      let expires = "expires=" + date.toUTCString();
-      document.cookie = name + "=" + value + ";" + expires;
-    },
-
-    showMessage(message) {
-      let alert = document.getElementById("alert-message");
-      alert.classList.remove("invisible");
-      let messageBox = document.createElement("div");
-      messageBox.innerHTML = message;
-      alert.appendChild(messageBox); // test
     }
 
-  }) {// normal class body definition here
-  }
+    return {
+      F: SettingsModal,
+      d: [{
+        kind: "field",
+        key: "isSnowing",
+        value: void 0
+      }, {
+        kind: "method",
+        key: "init",
+        value: // @ts-ignore
+        function init() {
+          (0, _get2.default)((0, _getPrototypeOf2.default)(SettingsModal.prototype), "init", this).call(this);
+          this.isSnowing = _cookies.default.isSnowing;
+        }
+      }, {
+        kind: "method",
+        decorators: [_object.action],
+        key: "changeSnowState",
+        value: function changeSnowState() {
+          // @ts-ignore
+          this.set('isSnowing', !this.get('isSnowing')); // @ts-ignore
 
+          if (this.get('isSnowing')) {
+            this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, true, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
+          } else {
+            this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, false, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
+          }
+        }
+      }, {
+        kind: "method",
+        key: "setCookie",
+        value: function setCookie(name, value, numDaysExpiring) {
+          const date = new Date();
+          date.setTime(date.getTime() + numDaysExpiring * 24 * 60 * 60 * 1000);
+          const expires = "expires=" + date.toUTCString();
+          document.cookie = name + "=" + value + ";" + expires;
+        }
+      }, {
+        kind: "method",
+        decorators: [_object.action],
+        key: "reset",
+        value: function reset() {
+          this.resetCookies();
+        }
+      }, {
+        kind: "method",
+        key: "resetCookies",
+        value: function resetCookies() {
+          for (let key in _defaults.default.Cookies.Available) {
+            // @ts-ignore
+            this.setCookie(_defaults.default.Cookies.Available[key], undefined, 0);
+          }
+        }
+      }, {
+        kind: "method",
+        decorators: [_object.action],
+        key: "reload",
+        value: function reload() {
+          // @ts-ignore
+          this.get('deactivateSettings')();
+          location.reload();
+        }
+      }]
+    };
+  }, Ember.Component);
   _exports.default = SettingsModal;
-  ;
 });
 ;define("bitcorn/components/welcome-page", ["exports", "ember-welcome-page/components/welcome-page"], function (_exports, _welcomePage) {
   "use strict";
@@ -980,95 +997,139 @@
 
   _exports.default = _default;
 });
-;define("bitcorn/controllers/application", ["exports"], function (_exports) {
+;define("bitcorn/controllers/application", ["exports", "@babel/runtime/helpers/esm/decorate", "@babel/runtime/helpers/esm/getPrototypeOf", "@babel/runtime/helpers/esm/get", "@ember-decorators/object"], function (_exports, _decorate2, _getPrototypeOf2, _get2, _object) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
   _exports.default = void 0;
+  let Application = (0, _decorate2.default)(null, function (_initialize, _EmberController) {
+    class Application extends _EmberController {
+      constructor(...args) {
+        super(...args);
 
-  class Application extends Ember.Controller.extend({
-    settingsActive: false,
-    actions: {
-      activateSettings() {
-        this.set('settingsActive', true);
-      },
-
-      deactivateSettings() {
-        debugger;
-        this.set('settingsActive', false);
+        _initialize(this);
       }
 
     }
-  }) {} // normal class body definition here
-  // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
 
+    return {
+      F: Application,
+      d: [{
+        kind: "field",
+        key: "settingsActive",
+        value: void 0
+      }, {
+        kind: "method",
+        key: "init",
+        value: // @ts-ignore
+        function init() {
+          (0, _get2.default)((0, _getPrototypeOf2.default)(Application.prototype), "init", this).call(this);
+          this.settingsActive = false;
+        }
+      }, {
+        kind: "method",
+        decorators: [_object.action],
+        key: "activateSettings",
+        value: function activateSettings() {
+          // @ts-ignore
+          this.set('settingsActive', true);
+        }
+      }, {
+        kind: "method",
+        decorators: [_object.action],
+        key: "deactivateSettings",
+        value: function deactivateSettings() {
+          // @ts-ignore
+          this.set('settingsActive', false);
+        }
+      }]
+    };
+  }, Ember.Controller); // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
 
   _exports.default = Application;
 });
-;define("bitcorn/controllers/contact", ["exports", "bitcorn/system/defaults", "bitcorn/system/regex"], function (_exports, _defaults, _regex) {
+;define("bitcorn/controllers/contact", ["exports", "@babel/runtime/helpers/esm/decorate", "@ember-decorators/object", "bitcorn/system/defaults", "bitcorn/system/regex"], function (_exports, _decorate2, _object, _defaults, _regex) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
   _exports.default = void 0;
+  let Contact = (0, _decorate2.default)(null, function (_initialize, _EmberController) {
+    class Contact extends _EmberController {
+      constructor(...args) {
+        super(...args);
 
-  class Contact extends Ember.Controller.extend({
-    actions: {
-      submit() {
-        let form = document.querySelector(".needs-validation");
-        this.coverLegality("email-field", "d-block", 0);
-        this.coverLegality("message-field", "d-block", 1); // test correctness
-
-        let isLegalMail = this.isLegalMail(form, new RegExp(_regex.default.AllowedPattern.MAIL));
-        let isLegalMessage = this.isLegalMessage(form, new RegExp(_regex.default.AllowedPattern.MESSAGE));
-        this.uncoverLegality(isLegalMail, "email-field", "d-block", 0);
-        this.uncoverLegality(isLegalMessage, "message-field", "d-block", 1);
+        _initialize(this);
       }
 
-    },
-
-    coverLegality(fieldId, messageClass, messageNumber) {
-      let field = document.querySelector("#" + fieldId); // @ts-ignore
-
-      field.classList.remove("is-invalid");
-      let messages = document.querySelectorAll("." + messageClass); // ordered list!
-
-      messages[messageNumber].style.setProperty("display", "none", "important");
-    },
-
-    isLegalMail(form, allowedMailPattern) {
-      // @ts-ignore
-      let mailField = form[0];
-      mailField.classList.remove("is-invalid");
-      let mail = mailField.value;
-      return allowedMailPattern.test(mail) && mail.length >= _defaults.default.Lengths.MAIL_ADDRESS;
-    },
-
-    isLegalMessage(form, allowedMessagePattern) {
-      // @ts-ignore
-      let messageField = form[1];
-      messageField.classList.remove("is-invalid");
-      let message = messageField.value;
-      return allowedMessagePattern.test(message) && message.length >= _defaults.default.Lengths.MESSAGE;
-    },
-
-    uncoverLegality(isLegal, fieldId, messageClass, messageNumber) {
-      if (!isLegal) {
-        let field = document.querySelector("#" + fieldId); // @ts-ignore
-
-        field.classList.add("is-invalid");
-        let messages = document.querySelectorAll("." + messageClass); // ordered list!
-
-        messages[messageNumber].style.setProperty("display", "block", "important");
-      }
     }
 
-  }) {} // normal class body definition here
-  // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
+    return {
+      F: Contact,
+      d: [{
+        kind: "method",
+        decorators: [_object.action],
+        key: "submit",
+        value: function submit() {
+          const form = document.querySelector(".needs-validation");
+          this.coverLegality("email-field", "d-block", 0);
+          this.coverLegality("message-field", "d-block", 1); // test correctness
 
+          const isLegalMail = this.isLegalMail(form, new RegExp(_regex.default.AllowedPattern.MAIL));
+          const isLegalMessage = this.isLegalMessage(form, new RegExp(_regex.default.AllowedPattern.MESSAGE));
+          this.uncoverLegality(isLegalMail, "email-field", "d-block", 0);
+          this.uncoverLegality(isLegalMessage, "message-field", "d-block", 1);
+        }
+      }, {
+        kind: "method",
+        key: "coverLegality",
+        value: function coverLegality(fieldId, messageClass, messageNumber) {
+          const field = document.querySelector("#" + fieldId); // @ts-ignore
+
+          field.classList.remove("is-invalid");
+          const messages = document.querySelectorAll("." + messageClass); // ordered list!
+
+          messages[messageNumber].style.setProperty("display", "none", "important");
+        }
+      }, {
+        kind: "method",
+        key: "isLegalMail",
+        value: function isLegalMail(form, allowedMailPattern) {
+          // @ts-ignore
+          const mailField = form[0];
+          mailField.classList.remove("is-invalid");
+          const mail = mailField.value;
+          return allowedMailPattern.test(mail) && mail.length >= _defaults.default.Lengths.MAIL_ADDRESS;
+        }
+      }, {
+        kind: "method",
+        key: "isLegalMessage",
+        value: function isLegalMessage(form, allowedMessagePattern) {
+          // @ts-ignore
+          const messageField = form[1];
+          messageField.classList.remove("is-invalid");
+          const message = messageField.value;
+          return allowedMessagePattern.test(message) && message.length >= _defaults.default.Lengths.MESSAGE;
+        }
+      }, {
+        kind: "method",
+        key: "uncoverLegality",
+        value: function uncoverLegality(isLegal, fieldId, messageClass, messageNumber) {
+          if (!isLegal) {
+            const field = document.querySelector("#" + fieldId); // @ts-ignore
+
+            field.classList.add("is-invalid");
+            const messages = document.querySelectorAll("." + messageClass); // ordered list!
+
+            messages[messageNumber].style.setProperty("display", "block", "important");
+          }
+        }
+      }]
+    };
+  }, Ember.Controller); // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
 
   _exports.default = Contact;
 });
@@ -1475,10 +1536,10 @@
 
   function getCookieValue(name) {
     name = name + "=";
-    let cookieParams = document.cookie.split(';');
+    const cookieParams = document.cookie.split(';');
 
     for (let i = 0; i < cookieParams.length; i++) {
-      let param = cookieParams[i];
+      const param = cookieParams[i];
 
       if (param.indexOf(name) === 0) {
         return JSON.parse(param.substring(name.length, param.length));
@@ -1506,7 +1567,7 @@
 
   function initialize() {
     if (!Ember.testing && _cookies.default.isSnowing) {
-      let effect = new _snow.default();
+      const effect = new _snow.default();
       effect.start();
     }
   }
@@ -1614,8 +1675,7 @@
   });
   _exports.default = void 0;
 
-  class About extends Ember.Route.extend({// anything which *must* be merged to prototype here
-  }) {// normal class body definition here
+  class About extends Ember.Route {// anything which *must* be merged to prototype here
   }
 
   _exports.default = About;
@@ -1628,8 +1688,7 @@
   });
   _exports.default = void 0;
 
-  class AboutAuthors extends Ember.Route.extend({// anything which *must* be merged to prototype here
-  }) {// normal class body definition here
+  class AboutAuthors extends Ember.Route {// anything which *must* be merged to prototype here
   }
 
   _exports.default = AboutAuthors;
@@ -1642,8 +1701,7 @@
   });
   _exports.default = void 0;
 
-  class AboutPage extends Ember.Route.extend({// anything which *must* be merged to prototype here
-  }) {// normal class body definition here
+  class AboutPage extends Ember.Route {// anything which *must* be merged to prototype here
   }
 
   _exports.default = AboutPage;
@@ -1656,7 +1714,7 @@
   });
   _exports.default = void 0;
 
-  class Contact extends Ember.Route.extend({
+  class Contact extends Ember.Route {
     model() {
       return {
         email: "",
@@ -1664,7 +1722,6 @@
       };
     }
 
-  }) {// normal class body definition here
   }
 
   _exports.default = Contact;
@@ -1677,8 +1734,7 @@
   });
   _exports.default = void 0;
 
-  class Home extends Ember.Route.extend({}) {// normal class body definition here
-  }
+  class Home extends Ember.Route {}
 
   _exports.default = Home;
 });
@@ -1690,8 +1746,7 @@
   });
   _exports.default = void 0;
 
-  class Imprint extends Ember.Route.extend({// anything which *must* be merged to prototype here
-  }) {// normal class body definition here
+  class Imprint extends Ember.Route {// anything which *must* be merged to prototype here
   }
 
   _exports.default = Imprint;
@@ -1721,8 +1776,7 @@
   });
   _exports.default = void 0;
 
-  class Privacy extends Ember.Route.extend({// anything which *must* be merged to prototype here
-  }) {// normal class body definition here
+  class Privacy extends Ember.Route {// anything which *must* be merged to prototype here
   }
 
   _exports.default = Privacy;
@@ -2073,11 +2127,11 @@
     }
 
     start() {
-      let effectsCanvas = document.querySelector('#effects');
+      const effectsCanvas = document.querySelector('#effects');
       effectsCanvas.width = window.innerWidth;
       effectsCanvas.height = window.innerHeight;
-      let canvasContext = effectsCanvas.getContext('2d');
-      let canvasData = {
+      const canvasContext = effectsCanvas.getContext('2d');
+      const canvasData = {
         context: canvasContext,
         width: effectsCanvas.width,
         height: effectsCanvas.height
@@ -2177,16 +2231,16 @@
 
     init(canvasData) {
       this.snowflakes = [];
-      let numSnowFlakes = Math.floor(canvasData.width * canvasData.height * _defaults.default.Effects.PERCENT_SNOWFLAKES);
+      const numSnowFlakes = Math.floor(canvasData.width * canvasData.height * _defaults.default.Effects.PERCENT_SNOWFLAKES);
 
       for (let i = 0; i < numSnowFlakes; i++) {
-        let radius = _randomizer.default.getRandomNumber(4, 8);
+        const radius = _randomizer.default.getRandomNumber(4, 8);
 
-        let x = _randomizer.default.getRandomNumber(radius, canvasData.width - radius);
+        const x = _randomizer.default.getRandomNumber(radius, canvasData.width - radius);
 
-        let y = _randomizer.default.getRandomNumber(radius, canvasData.height - radius);
+        const y = _randomizer.default.getRandomNumber(radius, canvasData.height - radius);
 
-        let dy = _randomizer.default.getRandomNumber(1, 2);
+        const dy = _randomizer.default.getRandomNumber(1, 2);
 
         this.snowflakes.push(new _snowflake.default(x, y, dy, radius));
       }
@@ -2235,7 +2289,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"3.1.0+0d9c3629"});
+            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"3.1.0+3f3a93e1"});
           }
         
 //# sourceMappingURL=bitcorn.map

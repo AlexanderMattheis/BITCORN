@@ -15,12 +15,12 @@ export default abstract class Effect {
   }
 
   public start(): void {
-    let effectsCanvas = document.querySelector('#effects') as HTMLCanvasElement;
+    const effectsCanvas = document.querySelector('#effects') as HTMLCanvasElement;
     effectsCanvas.width = window.innerWidth;
     effectsCanvas.height = window.innerHeight;
 
-    let canvasContext: CanvasRenderingContext2D = effectsCanvas.getContext('2d') as CanvasRenderingContext2D;
-    let canvasData: object = { context: canvasContext, width: effectsCanvas.width, height: effectsCanvas.height };
+    const canvasContext: CanvasRenderingContext2D = effectsCanvas.getContext('2d') as CanvasRenderingContext2D;
+    const canvasData: object = {context: canvasContext, width: effectsCanvas.width, height: effectsCanvas.height};
 
     this.init(canvasData);
     this.animate(canvasData);
@@ -47,5 +47,6 @@ export default abstract class Effect {
   }
 
   protected abstract init(canvasData: any): void;
+
   protected abstract animate(canvasData: any): void;
 }

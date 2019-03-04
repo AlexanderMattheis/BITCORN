@@ -25,14 +25,14 @@ export default class Snow extends Effect {
   protected init(canvasData: any): void {
     this.snowflakes = [];
 
-    let numSnowFlakes = Math.floor((canvasData.width * canvasData.height) * Defaults.Effects.PERCENT_SNOWFLAKES);
+    const numSnowFlakes = Math.floor((canvasData.width * canvasData.height) * Defaults.Effects.PERCENT_SNOWFLAKES);
 
-    for (let i = 0; i < numSnowFlakes; i++){
-      let radius = Randomizer.getRandomNumber(4, 8);
+    for (let i = 0; i < numSnowFlakes; i++) {
+      const radius = Randomizer.getRandomNumber(4, 8);
 
-      let x = Randomizer.getRandomNumber(radius, canvasData.width - radius);
-      let y = Randomizer.getRandomNumber(radius, canvasData.height - radius);
-      let dy = Randomizer.getRandomNumber(1, 2);
+      const x = Randomizer.getRandomNumber(radius, canvasData.width - radius);
+      const y = Randomizer.getRandomNumber(radius, canvasData.height - radius);
+      const dy = Randomizer.getRandomNumber(1, 2);
 
       this.snowflakes.push(new Snowflake(x, y, dy, radius));
     }
@@ -48,7 +48,7 @@ export default class Snow extends Effect {
 
     canvasData.context.clearRect(0, 0, canvasData.width, canvasData.height);
 
-    for (let i = 0; i < this.snowflakes.length; i++){
+    for (let i = 0; i < this.snowflakes.length; i++) {
       this.snowflakes[i].update(canvasData);
       this.snowflakes[i].draw(canvasData);
     }

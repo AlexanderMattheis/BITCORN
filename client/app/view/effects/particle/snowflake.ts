@@ -6,7 +6,7 @@ export default class Snowflake {
   private _dy: number;
   private _radius: number;
 
-  public constructor(x: number, y: number, dy:number, radius:number) {
+  public constructor(x: number, y: number, dy: number, radius: number) {
     this._x = x;
     this._y = y;
     this._dy = dy;

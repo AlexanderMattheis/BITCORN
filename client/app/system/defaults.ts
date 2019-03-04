@@ -8,7 +8,7 @@ export default {
   },
 
   Effects: {
-    PERCENT_SNOWFLAKES: 1/14440,
+    PERCENT_SNOWFLAKES: 1 / 14440,
     SNOW_SPEED: 1
   },
 

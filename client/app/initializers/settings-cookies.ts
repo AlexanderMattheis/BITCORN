@@ -7,10 +7,10 @@ export function initialize(): void {
 
 function getCookieValue(name: string): any {
   name = name + "=";
-  let cookieParams: string[] = document.cookie.split(';');
+  const cookieParams: string[] = document.cookie.split(';');
 
-  for(let i: number = 0; i < cookieParams.length; i++) {
-    let param: string = cookieParams[i];
+  for (let i: number = 0; i < cookieParams.length; i++) {
+    const param: string = cookieParams[i];
 
     if (param.indexOf(name) === 0) {
       return JSON.parse(param.substring(name.length, param.length));

@@ -6,21 +6,12 @@ define("bitcorn/tests/integration/components/settings-modal-test", ["qunit", "em
   (0, _qunit.module)('Integration | Component | settings-modal', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
     (0, _qunit.test)('it renders', async function (assert) {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.set('myAction', function(val) { ... });
       await (0, _testHelpers.render)(Ember.HTMLBars.template({
         "id": "UO2DCNLN",
         "block": "{\"symbols\":[],\"statements\":[[1,[21,\"settings-modal\"],false]],\"hasEval\":false}",
         "meta": {}
       }));
-      assert.equal(this.element.textContent.trim(), ''); // Template block usage:
-
-      await (0, _testHelpers.render)(Ember.HTMLBars.template({
-        "id": "3mFlgLNX",
-        "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"settings-modal\",null,null,{\"statements\":[[0,\"        template block text\\n\"]],\"parameters\":[]},null],[0,\"    \"]],\"hasEval\":false}",
-        "meta": {}
-      }));
-      assert.equal(this.element.textContent.trim(), 'template block text');
+      assert.equal(this.element.textContent.trim(), '');
     });
   });
 });

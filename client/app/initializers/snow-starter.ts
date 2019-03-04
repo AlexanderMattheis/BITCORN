@@ -5,7 +5,7 @@ import Snow from "../view/effects/snow";
 
 export function initialize(): void {
   if (!Ember.testing && Cookies.isSnowing) {
-    let effect: Snow = new Snow();
+    const effect: Snow = new Snow();
     effect.start();
   }
 }
