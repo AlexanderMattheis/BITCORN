@@ -15,6 +15,7 @@ define("bitcorn/tests/integration/components/settings-modal-test", ["qunit", "em
     });
   });
 });
+
 define("bitcorn/tests/lint/app.lint-test", [], function () {
   "use strict";
 
@@ -32,6 +33,7 @@ define("bitcorn/tests/lint/app.lint-test", [], function () {
     assert.ok(true, 'router.js should pass ESLint\n\n');
   });
 });
+
 define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
   "use strict";
 
@@ -73,6 +75,7 @@ define("bitcorn/tests/lint/templates.template.lint-test", [], function () {
     assert.ok(true, 'bitcorn/templates/privacy.hbs should pass TemplateLint.\n\n');
   });
 });
+
 define("bitcorn/tests/lint/tests.lint-test", [], function () {
   "use strict";
 
@@ -82,12 +85,14 @@ define("bitcorn/tests/lint/tests.lint-test", [], function () {
     assert.ok(true, 'test-helper.js should pass ESLint\n\n');
   });
 });
+
 define("bitcorn/tests/test-helper", ["bitcorn/app", "bitcorn/config/environment", "@ember/test-helpers", "ember-qunit"], function (_app, _environment, _testHelpers, _emberQunit) {
   "use strict";
 
   (0, _testHelpers.setApplication)(_app.default.create(_environment.default.APP));
   (0, _emberQunit.start)();
 });
+
 define("bitcorn/tests/unit/controllers/index-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
   "use strict";
 
@@ -100,6 +105,7 @@ define("bitcorn/tests/unit/controllers/index-test", ["qunit", "ember-qunit"], fu
     });
   });
 });
+
 define('bitcorn/config/environment', [], function() {
   var prefix = 'bitcorn';
 try {

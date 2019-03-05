@@ -10,6 +10,7 @@ export default class SettingsModal extends Component {
 
   init() {
     super.init();
+    debugger;
     this.isSnowing = Cookies.isSnowing;
   }
 

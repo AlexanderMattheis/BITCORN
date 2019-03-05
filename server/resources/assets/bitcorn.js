@@ -18,6 +18,7 @@
   var _default = App;
   _exports.default = _default;
 });
+
 ;define("bitcorn/components/bs-accordion", ["exports", "ember-bootstrap/components/bs-accordion"], function (_exports, _bsAccordion) {
   "use strict";
 
@@ -31,6 +32,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-accordion/item", ["exports", "ember-bootstrap/components/bs-accordion/item"], function (_exports, _item) {
   "use strict";
 
@@ -44,6 +46,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-accordion/item/body", ["exports", "ember-bootstrap/components/bs-accordion/item/body"], function (_exports, _body) {
   "use strict";
 
@@ -57,6 +60,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-accordion/item/title", ["exports", "ember-bootstrap/components/bs-accordion/item/title"], function (_exports, _title) {
   "use strict";
 
@@ -70,6 +74,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-alert", ["exports", "ember-bootstrap/components/bs-alert"], function (_exports, _bsAlert) {
   "use strict";
 
@@ -83,6 +88,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-button-group", ["exports", "ember-bootstrap/components/bs-button-group"], function (_exports, _bsButtonGroup) {
   "use strict";
 
@@ -96,6 +102,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-button-group/button", ["exports", "ember-bootstrap/components/bs-button-group/button"], function (_exports, _button) {
   "use strict";
 
@@ -109,6 +116,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-button", ["exports", "ember-bootstrap/components/bs-button"], function (_exports, _bsButton) {
   "use strict";
 
@@ -122,6 +130,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-carousel", ["exports", "ember-bootstrap/components/bs-carousel"], function (_exports, _bsCarousel) {
   "use strict";
 
@@ -135,6 +144,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-carousel/slide", ["exports", "ember-bootstrap/components/bs-carousel/slide"], function (_exports, _slide) {
   "use strict";
 
@@ -148,6 +158,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-collapse", ["exports", "ember-bootstrap/components/bs-collapse"], function (_exports, _bsCollapse) {
   "use strict";
 
@@ -161,6 +172,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-dropdown", ["exports", "ember-bootstrap/components/bs-dropdown"], function (_exports, _bsDropdown) {
   "use strict";
 
@@ -174,6 +186,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-dropdown/button", ["exports", "ember-bootstrap/components/bs-dropdown/button"], function (_exports, _button) {
   "use strict";
 
@@ -187,6 +200,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-dropdown/menu", ["exports", "ember-bootstrap/components/bs-dropdown/menu"], function (_exports, _menu) {
   "use strict";
 
@@ -200,6 +214,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-dropdown/menu/divider", ["exports", "ember-bootstrap/components/bs-dropdown/menu/divider"], function (_exports, _divider) {
   "use strict";
 
@@ -213,6 +228,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-dropdown/menu/item", ["exports", "ember-bootstrap/components/bs-dropdown/menu/item"], function (_exports, _item) {
   "use strict";
 
@@ -226,6 +242,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-dropdown/menu/link-to", ["exports", "ember-bootstrap/components/bs-dropdown/menu/link-to"], function (_exports, _linkTo) {
   "use strict";
 
@@ -239,6 +256,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-dropdown/toggle", ["exports", "ember-bootstrap/components/bs-dropdown/toggle"], function (_exports, _toggle) {
   "use strict";
 
@@ -252,6 +270,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form", ["exports", "ember-bootstrap/components/bs-form"], function (_exports, _bsForm) {
   "use strict";
 
@@ -265,6 +284,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element", ["exports", "ember-bootstrap/components/bs-form/element"], function (_exports, _element) {
   "use strict";
 
@@ -278,6 +298,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/control", ["exports", "ember-bootstrap/components/bs-form/element/control"], function (_exports, _control) {
   "use strict";
 
@@ -291,6 +312,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/control/checkbox", ["exports", "ember-bootstrap/components/bs-form/element/control/checkbox"], function (_exports, _checkbox) {
   "use strict";
 
@@ -304,6 +326,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/control/input", ["exports", "ember-bootstrap/components/bs-form/element/control/input"], function (_exports, _input) {
   "use strict";
 
@@ -317,6 +340,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/control/radio", ["exports", "ember-bootstrap/components/bs-form/element/control/radio"], function (_exports, _radio) {
   "use strict";
 
@@ -330,6 +354,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/control/textarea", ["exports", "ember-bootstrap/components/bs-form/element/control/textarea"], function (_exports, _textarea) {
   "use strict";
 
@@ -343,6 +368,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/errors", ["exports", "ember-bootstrap/components/bs-form/element/errors"], function (_exports, _errors) {
   "use strict";
 
@@ -356,6 +382,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/feedback-icon", ["exports", "ember-bootstrap/components/bs-form/element/feedback-icon"], function (_exports, _feedbackIcon) {
   "use strict";
 
@@ -369,6 +396,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/help-text", ["exports", "ember-bootstrap/components/bs-form/element/help-text"], function (_exports, _helpText) {
   "use strict";
 
@@ -382,6 +410,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/label", ["exports", "ember-bootstrap/components/bs-form/element/label"], function (_exports, _label) {
   "use strict";
 
@@ -395,6 +424,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/layout/horizontal", ["exports", "ember-bootstrap/components/bs-form/element/layout/horizontal"], function (_exports, _horizontal) {
   "use strict";
 
@@ -408,6 +438,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/layout/horizontal/checkbox", ["exports", "ember-bootstrap/components/bs-form/element/layout/horizontal/checkbox"], function (_exports, _checkbox) {
   "use strict";
 
@@ -421,6 +452,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/layout/inline", ["exports", "ember-bootstrap/components/bs-form/element/layout/inline"], function (_exports, _inline) {
   "use strict";
 
@@ -434,6 +466,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/layout/inline/checkbox", ["exports", "ember-bootstrap/components/bs-form/element/layout/inline/checkbox"], function (_exports, _checkbox) {
   "use strict";
 
@@ -447,6 +480,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/layout/vertical", ["exports", "ember-bootstrap/components/bs-form/element/layout/vertical"], function (_exports, _vertical) {
   "use strict";
 
@@ -460,6 +494,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/element/layout/vertical/checkbox", ["exports", "ember-bootstrap/components/bs-form/element/layout/vertical/checkbox"], function (_exports, _checkbox) {
   "use strict";
 
@@ -473,6 +508,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-form/group", ["exports", "ember-bootstrap/components/bs-form/group"], function (_exports, _group) {
   "use strict";
 
@@ -486,6 +522,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal-simple", ["exports", "ember-bootstrap/components/bs-modal-simple"], function (_exports, _bsModalSimple) {
   "use strict";
 
@@ -499,6 +536,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal", ["exports", "ember-bootstrap/components/bs-modal"], function (_exports, _bsModal) {
   "use strict";
 
@@ -512,6 +550,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal/body", ["exports", "ember-bootstrap/components/bs-modal/body"], function (_exports, _body) {
   "use strict";
 
@@ -525,6 +564,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal/dialog", ["exports", "ember-bootstrap/components/bs-modal/dialog"], function (_exports, _dialog) {
   "use strict";
 
@@ -538,6 +578,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal/footer", ["exports", "ember-bootstrap/components/bs-modal/footer"], function (_exports, _footer) {
   "use strict";
 
@@ -551,6 +592,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal/header", ["exports", "ember-bootstrap/components/bs-modal/header"], function (_exports, _header) {
   "use strict";
 
@@ -564,6 +606,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal/header/close", ["exports", "ember-bootstrap/components/bs-modal/header/close"], function (_exports, _close) {
   "use strict";
 
@@ -577,6 +620,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-modal/header/title", ["exports", "ember-bootstrap/components/bs-modal/header/title"], function (_exports, _title) {
   "use strict";
 
@@ -590,6 +634,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-nav", ["exports", "ember-bootstrap/components/bs-nav"], function (_exports, _bsNav) {
   "use strict";
 
@@ -603,6 +648,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-nav/item", ["exports", "ember-bootstrap/components/bs-nav/item"], function (_exports, _item) {
   "use strict";
 
@@ -616,6 +662,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-nav/link-to", ["exports", "ember-bootstrap/components/bs-nav/link-to"], function (_exports, _linkTo) {
   "use strict";
 
@@ -629,6 +676,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-navbar", ["exports", "ember-bootstrap/components/bs-navbar"], function (_exports, _bsNavbar) {
   "use strict";
 
@@ -659,6 +707,7 @@
 
   _exports.default = BsNavbar;
 });
+
 ;define("bitcorn/components/bs-navbar/content", ["exports", "ember-bootstrap/components/bs-navbar/content"], function (_exports, _content) {
   "use strict";
 
@@ -672,6 +721,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-navbar/link-to", ["exports", "ember-bootstrap/components/bs-navbar/link-to"], function (_exports, _linkTo) {
   "use strict";
 
@@ -685,6 +735,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-navbar/nav", ["exports", "ember-bootstrap/components/bs-navbar/nav"], function (_exports, _nav) {
   "use strict";
 
@@ -698,6 +749,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-navbar/toggle", ["exports", "ember-bootstrap/components/bs-navbar/toggle"], function (_exports, _toggle) {
   "use strict";
 
@@ -711,6 +763,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-popover", ["exports", "ember-bootstrap/components/bs-popover"], function (_exports, _bsPopover) {
   "use strict";
 
@@ -724,6 +777,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-popover/element", ["exports", "ember-bootstrap/components/bs-popover/element"], function (_exports, _element) {
   "use strict";
 
@@ -737,6 +791,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-progress", ["exports", "ember-bootstrap/components/bs-progress"], function (_exports, _bsProgress) {
   "use strict";
 
@@ -750,6 +805,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-progress/bar", ["exports", "ember-bootstrap/components/bs-progress/bar"], function (_exports, _bar) {
   "use strict";
 
@@ -763,6 +819,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-tab", ["exports", "ember-bootstrap/components/bs-tab"], function (_exports, _bsTab) {
   "use strict";
 
@@ -776,6 +833,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-tab/pane", ["exports", "ember-bootstrap/components/bs-tab/pane"], function (_exports, _pane) {
   "use strict";
 
@@ -789,6 +847,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-tooltip", ["exports", "ember-bootstrap/components/bs-tooltip"], function (_exports, _bsTooltip) {
   "use strict";
 
@@ -802,6 +861,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/bs-tooltip/element", ["exports", "ember-bootstrap/components/bs-tooltip/element"], function (_exports, _element) {
   "use strict";
 
@@ -815,6 +875,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/ember-popper-targeting-parent", ["exports", "ember-popper/components/ember-popper-targeting-parent"], function (_exports, _emberPopperTargetingParent) {
   "use strict";
 
@@ -828,6 +889,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/ember-popper", ["exports", "ember-popper/components/ember-popper"], function (_exports, _emberPopper) {
   "use strict";
 
@@ -841,6 +903,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/link-to-external", ["exports", "ember-engines/components/link-to-external-component"], function (_exports, _linkToExternalComponent) {
   "use strict";
 
@@ -854,6 +917,7 @@
     }
   });
 });
+
 ;define("bitcorn/components/settings-modal", ["exports", "@babel/runtime/helpers/esm/decorate", "@babel/runtime/helpers/esm/getPrototypeOf", "@babel/runtime/helpers/esm/get", "@ember-decorators/object", "bitcorn/system/cookies", "bitcorn/system/defaults"], function (_exports, _decorate2, _getPrototypeOf2, _get2, _object, _cookies, _defaults) {
   "use strict";
 
@@ -883,6 +947,7 @@
         value: // @ts-ignore
         function init() {
           (0, _get2.default)((0, _getPrototypeOf2.default)(SettingsModal.prototype), "init", this).call(this);
+          debugger;
           this.isSnowing = _cookies.default.isSnowing;
         }
       }, {
@@ -938,6 +1003,7 @@
   }, Ember.Component);
   _exports.default = SettingsModal;
 });
+
 ;define("bitcorn/components/welcome-page", ["exports", "ember-welcome-page/components/welcome-page"], function (_exports, _welcomePage) {
   "use strict";
 
@@ -951,6 +1017,7 @@
     }
   });
 });
+
 ;define("bitcorn/config/asset-manifest", ["exports", "require", "bitcorn/config/environment"], function (_exports, _require, _environment) {
   "use strict";
 
@@ -979,6 +1046,7 @@
   var _default = config;
   _exports.default = _default;
 });
+
 ;define("bitcorn/config/environment.d", ["exports"], function (_exports) {
   "use strict";
 
@@ -997,6 +1065,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/controllers/application", ["exports", "@babel/runtime/helpers/esm/decorate", "@babel/runtime/helpers/esm/getPrototypeOf", "@babel/runtime/helpers/esm/get", "@ember-decorators/object"], function (_exports, _decorate2, _getPrototypeOf2, _get2, _object) {
   "use strict";
 
@@ -1050,6 +1119,7 @@
 
   _exports.default = Application;
 });
+
 ;define("bitcorn/controllers/contact", ["exports", "@babel/runtime/helpers/esm/decorate", "@ember-decorators/object", "bitcorn/system/defaults", "bitcorn/system/regex"], function (_exports, _decorate2, _object, _defaults, _regex) {
   "use strict";
 
@@ -1133,6 +1203,7 @@
 
   _exports.default = Contact;
 });
+
 ;define("bitcorn/downloads/tests/addon.lint-test", [], function () {
   "use strict";
 
@@ -1150,6 +1221,7 @@
     assert.ok(true, 'addon/routes.js should pass ESLint\n\n');
   });
 });
+
 ;define("bitcorn/downloads/tests/templates.template.lint-test", [], function () {
   "use strict";
 
@@ -1187,6 +1259,7 @@
     assert.ok(true, 'addon/templates/programs/res.hbs should pass TemplateLint.\n\n');
   });
 });
+
 ;define("bitcorn/helpers/app-version", ["exports", "bitcorn/config/environment", "ember-cli-app-version/utils/regexp"], function (_exports, _environment, _regexp) {
   "use strict";
 
@@ -1226,6 +1299,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/helpers/bs-contains", ["exports", "ember-bootstrap/helpers/bs-contains"], function (_exports, _bsContains) {
   "use strict";
 
@@ -1245,6 +1319,7 @@
     }
   });
 });
+
 ;define("bitcorn/helpers/bs-eq", ["exports", "ember-bootstrap/helpers/bs-eq"], function (_exports, _bsEq) {
   "use strict";
 
@@ -1264,6 +1339,7 @@
     }
   });
 });
+
 ;define("bitcorn/helpers/cancel-all", ["exports", "ember-concurrency/helpers/cancel-all"], function (_exports, _cancelAll) {
   "use strict";
 
@@ -1277,6 +1353,7 @@
     }
   });
 });
+
 ;define("bitcorn/helpers/perform", ["exports", "ember-concurrency/helpers/perform"], function (_exports, _perform) {
   "use strict";
 
@@ -1290,6 +1367,7 @@
     }
   });
 });
+
 ;define("bitcorn/helpers/pluralize", ["exports", "ember-inflector/lib/helpers/pluralize"], function (_exports, _pluralize) {
   "use strict";
 
@@ -1300,6 +1378,7 @@
   var _default = _pluralize.default;
   _exports.default = _default;
 });
+
 ;define("bitcorn/helpers/singularize", ["exports", "ember-inflector/lib/helpers/singularize"], function (_exports, _singularize) {
   "use strict";
 
@@ -1310,6 +1389,7 @@
   var _default = _singularize.default;
   _exports.default = _default;
 });
+
 ;define("bitcorn/helpers/task", ["exports", "ember-concurrency/helpers/task"], function (_exports, _task) {
   "use strict";
 
@@ -1323,6 +1403,7 @@
     }
   });
 });
+
 ;define("bitcorn/initializers/app-version", ["exports", "ember-cli-app-version/initializer-factory", "bitcorn/config/environment"], function (_exports, _initializerFactory, _environment) {
   "use strict";
 
@@ -1343,6 +1424,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/initializers/container-debug-adapter", ["exports", "ember-resolver/resolvers/classic/container-debug-adapter"], function (_exports, _containerDebugAdapter) {
   "use strict";
 
@@ -1362,6 +1444,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/initializers/ember-concurrency", ["exports", "ember-concurrency/initializers/ember-concurrency"], function (_exports, _emberConcurrency) {
   "use strict";
 
@@ -1375,6 +1458,7 @@
     }
   });
 });
+
 ;define("bitcorn/initializers/ember-data", ["exports", "ember-data/setup-container", "ember-data"], function (_exports, _setupContainer, _emberData) {
   "use strict";
 
@@ -1427,6 +1511,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/initializers/engines", ["exports", "ember-engines/initializers/engines"], function (_exports, _engines) {
   "use strict";
 
@@ -1446,6 +1531,7 @@
     }
   });
 });
+
 ;define("bitcorn/initializers/export-application-global", ["exports", "bitcorn/config/environment"], function (_exports, _environment) {
   "use strict";
 
@@ -1500,6 +1586,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/initializers/load-bootstrap-config", ["exports", "bitcorn/config/environment", "ember-bootstrap/config"], function (_exports, _environment, _config) {
   "use strict";
 
@@ -1521,6 +1608,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/initializers/settings-cookies", ["exports", "bitcorn/system/cookies", "bitcorn/system/defaults"], function (_exports, _cookies, _defaults) {
   "use strict";
 
@@ -1556,6 +1644,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/initializers/snow-starter", ["exports", "bitcorn/system/cookies", "bitcorn/view/effects/snow"], function (_exports, _cookies, _snow) {
   "use strict";
 
@@ -1578,6 +1667,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/instance-initializers/ember-data", ["exports", "ember-data/initialize-store-service"], function (_exports, _initializeStoreService) {
   "use strict";
 
@@ -1591,6 +1681,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/instance-initializers/load-asset-manifest", ["exports", "bitcorn/config/asset-manifest"], function (_exports, _assetManifest) {
   "use strict";
 
@@ -1614,6 +1705,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/logic/math/randomizer", ["exports"], function (_exports) {
   "use strict";
 
@@ -1631,6 +1723,7 @@
 
   _exports.default = Randomizer;
 });
+
 ;define("bitcorn/resolver", ["exports", "ember-resolver"], function (_exports, _emberResolver) {
   "use strict";
 
@@ -1641,6 +1734,7 @@
   var _default = _emberResolver.default;
   _exports.default = _default;
 });
+
 ;define("bitcorn/router", ["exports", "bitcorn/config/environment"], function (_exports, _environment) {
   "use strict";
 
@@ -1667,6 +1761,7 @@
   var _default = Router;
   _exports.default = _default;
 });
+
 ;define("bitcorn/routes/about", ["exports"], function (_exports) {
   "use strict";
 
@@ -1680,6 +1775,7 @@
 
   _exports.default = About;
 });
+
 ;define("bitcorn/routes/about/authors", ["exports"], function (_exports) {
   "use strict";
 
@@ -1693,6 +1789,7 @@
 
   _exports.default = AboutAuthors;
 });
+
 ;define("bitcorn/routes/about/page", ["exports"], function (_exports) {
   "use strict";
 
@@ -1706,6 +1803,7 @@
 
   _exports.default = AboutPage;
 });
+
 ;define("bitcorn/routes/contact", ["exports"], function (_exports) {
   "use strict";
 
@@ -1726,6 +1824,7 @@
 
   _exports.default = Contact;
 });
+
 ;define("bitcorn/routes/home", ["exports"], function (_exports) {
   "use strict";
 
@@ -1738,6 +1837,7 @@
 
   _exports.default = Home;
 });
+
 ;define("bitcorn/routes/imprint", ["exports"], function (_exports) {
   "use strict";
 
@@ -1751,6 +1851,7 @@
 
   _exports.default = Imprint;
 });
+
 ;define("bitcorn/routes/index", ["exports"], function (_exports) {
   "use strict";
 
@@ -1768,6 +1869,7 @@
 
   _exports.default = Index;
 });
+
 ;define("bitcorn/routes/privacy", ["exports"], function (_exports) {
   "use strict";
 
@@ -1781,6 +1883,7 @@
 
   _exports.default = Privacy;
 });
+
 ;define("bitcorn/services/ajax", ["exports", "ember-ajax/services/ajax"], function (_exports, _ajax) {
   "use strict";
 
@@ -1794,6 +1897,7 @@
     }
   });
 });
+
 ;define("bitcorn/services/asset-loader", ["exports", "ember-asset-loader/services/asset-loader"], function (_exports, _assetLoader) {
   "use strict";
 
@@ -1807,6 +1911,7 @@
     }
   });
 });
+
 ;define("bitcorn/system/colors", ["exports"], function (_exports) {
   "use strict";
 
@@ -1821,6 +1926,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/system/cookies", ["exports"], function (_exports) {
   "use strict";
 
@@ -1834,6 +1940,7 @@
   _exports.default = Cookies;
   Cookies.isSnowing = void 0;
 });
+
 ;define("bitcorn/system/defaults", ["exports"], function (_exports) {
   "use strict";
 
@@ -1859,6 +1966,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/system/messages", ["exports"], function (_exports) {
   "use strict";
 
@@ -1871,6 +1979,7 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/system/regex", ["exports"], function (_exports) {
   "use strict";
 
@@ -1886,9 +1995,11 @@
   };
   _exports.default = _default;
 });
+
 ;define("bitcorn/system/types", [], function () {
   "use strict";
 });
+
 ;define("bitcorn/templates/about", ["exports"], function (_exports) {
   "use strict";
 
@@ -1907,6 +2018,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/about/authors", ["exports"], function (_exports) {
   "use strict";
 
@@ -1925,6 +2037,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/about/page", ["exports"], function (_exports) {
   "use strict";
 
@@ -1943,6 +2056,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/application", ["exports"], function (_exports) {
   "use strict";
 
@@ -1961,6 +2075,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/components/ember-popper-targeting-parent", ["exports", "ember-popper/templates/components/ember-popper-targeting-parent"], function (_exports, _emberPopperTargetingParent) {
   "use strict";
 
@@ -1974,6 +2089,7 @@
     }
   });
 });
+
 ;define("bitcorn/templates/components/ember-popper", ["exports", "ember-popper/templates/components/ember-popper"], function (_exports, _emberPopper) {
   "use strict";
 
@@ -1987,6 +2103,7 @@
     }
   });
 });
+
 ;define("bitcorn/templates/components/settings-modal", ["exports"], function (_exports) {
   "use strict";
 
@@ -2005,6 +2122,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/contact", ["exports"], function (_exports) {
   "use strict";
 
@@ -2023,6 +2141,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/home", ["exports"], function (_exports) {
   "use strict";
 
@@ -2041,6 +2160,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/imprint", ["exports"], function (_exports) {
   "use strict";
 
@@ -2059,6 +2179,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/templates/privacy", ["exports"], function (_exports) {
   "use strict";
 
@@ -2077,6 +2198,7 @@
 
   _exports.default = _default;
 });
+
 ;define("bitcorn/tutorials/tests/addon.lint-test", [], function () {
   "use strict";
 
@@ -2094,6 +2216,7 @@
     assert.ok(true, 'addon/routes.js should pass ESLint\n\n');
   });
 });
+
 ;define("bitcorn/tutorials/tests/templates.template.lint-test", [], function () {
   "use strict";
 
@@ -2103,6 +2226,7 @@
     assert.ok(true, 'addon/templates/application.hbs should pass TemplateLint.\n\n');
   });
 });
+
 ;define("bitcorn/view/effects/effect", ["exports"], function (_exports) {
   "use strict";
 
@@ -2161,6 +2285,7 @@
 
   _exports.default = Effect;
 });
+
 ;define("bitcorn/view/effects/particle/snowflake", ["exports", "bitcorn/system/colors"], function (_exports, _colors) {
   "use strict";
 
@@ -2202,6 +2327,7 @@
 
   _exports.default = Snowflake;
 });
+
 ;define("bitcorn/view/effects/snow", ["exports", "bitcorn/system/defaults", "bitcorn/view/effects/effect", "bitcorn/logic/math/randomizer", "bitcorn/view/effects/particle/snowflake"], function (_exports, _defaults, _effect, _randomizer, _snowflake) {
   "use strict";
 
@@ -2266,6 +2392,7 @@
 
   _exports.default = Snow;
 });
+
 ;
 
 ;define('bitcorn/config/environment', [], function() {
@@ -2289,7 +2416,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"3.1.0+3f3a93e1"});
+            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"3.1.0+1750bf18"});
           }
         
 //# sourceMappingURL=bitcorn.map
