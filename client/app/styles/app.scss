@@ -4,11 +4,11 @@
 @import "images";
 @import "system";
 
-/* LIBRARIES */
+/* EXTERN */
 @import "ember-bootstrap/bootstrap";
 
-/* ROUTES */
-@import "routes";
+/* GENERAL */
+@import "general";
 
 /* THEME */
 @import "theme/bootstrap";

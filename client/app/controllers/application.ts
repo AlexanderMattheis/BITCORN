@@ -12,13 +12,13 @@ export default class Application extends Controller {
   }
 
   @action
-  activateSettings() {
+  activateSettings(): void {
     // @ts-ignore
     this.set('settingsActive', true);
   }
 
   @action
-  deactivateSettings() {
+  deactivateSettings(): void {
     // @ts-ignore
     this.set('settingsActive', false);
   }

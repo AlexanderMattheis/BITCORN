@@ -1,5 +1,7 @@
 import {action} from '@ember-decorators/object';
 
+import { Indexable, Listener } from "bitcorn/system/types";
+
 import Component from '@ember/component';
 import Cookies from "bitcorn/system/cookies";
 import Defaults from "bitcorn/system/defaults";
@@ -8,22 +10,41 @@ export default class SettingsModal extends Component {
   // @ts-ignore
   private isSnowing: boolean;
 
-  init() {
+  init(): void {
     super.init();
-    debugger;
     this.isSnowing = Cookies.isSnowing;
   }
 
-  @action
-  changeSnowState() {
-    // @ts-ignore
-    this.set('isSnowing', !this.get('isSnowing'));
+  didInsertElement(): void {
+    this.addSelectListener('#particles-select', this.setParticleType);
+    this.addSelectListener('#music-select', this.setMusicType);
+  }
 
-    // @ts-ignore
-    if (this.get('isSnowing')) {
-      this.setCookie(Defaults.Cookies.Available.IS_SNOWING, true, Defaults.Cookies.NUM_DAYS_EXPIRING);
-    } else {
-      this.setCookie(Defaults.Cookies.Available.IS_SNOWING, false, Defaults.Cookies.NUM_DAYS_EXPIRING);
+  private addSelectListener(id: string, listener: Listener<Event, void>): void {
+    const particlesSelector: HTMLElement = document.querySelector(id) as HTMLElement;
+    particlesSelector.addEventListener('change', listener);
+  }
+
+  private setParticleType(event: Event): void {
+    const particleType: string = (<HTMLSelectElement> event!.target).value;
+
+    switch (particleType) {
+      case 'snow':
+        this.activateCookie(particleType);
+        break;
+      default:
+        this.resetCookies(Defaults.Cookies.Particles);
+    }
+  }
+
+  private activateCookie(particleType: string): void {
+    this.setCookie(particleType, true, Defaults.Cookies.NUM_DAYS_EXPIRING);
+    // activate checkbox
+  }
+
+  private resetCookies(cookieType: Indexable<string, string>): void {
+    for (let key in cookieType) {
+      this.setCookie(cookieType[key], undefined, 0);
     }
   }
 
@@ -34,20 +55,34 @@ export default class SettingsModal extends Component {
     document.cookie = name + "=" + value + ";" + expires;
   }
 
-  @action
-  reset() {
-    this.resetCookies();
+  private setMusicType(event: Event): void {
+    console.log((<HTMLSelectElement> event!.target).value);
   }
 
-  private resetCookies() {
-    for (let key in Defaults.Cookies.Available) {
-      // @ts-ignore
-      this.setCookie(Defaults.Cookies.Available[key], undefined, 0);
+  @action
+  changeSnowState(): void {
+    // @ts-ignore
+    this.set('isSnowing', !this.get('isSnowing'));
+
+    // @ts-ignore
+    if (this.get('isSnowing')) {
+      this.setCookie(Defaults.Cookies.Particles.SNOW, true, Defaults.Cookies.NUM_DAYS_EXPIRING);
+    } else {
+      this.setCookie(Defaults.Cookies.Particles.SNOW, false, Defaults.Cookies.NUM_DAYS_EXPIRING);
     }
   }
 
   @action
-  reload() {
+  reset(): void {
+    this.resetAllCookies();
+  }
+
+  private resetAllCookies(): void {
+
+  }
+
+  @action
+  reload(): void {
     // @ts-ignore
     this.get('deactivateSettings')();
     location.reload();

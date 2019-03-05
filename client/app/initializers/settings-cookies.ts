@@ -2,7 +2,7 @@ import Cookies from '../system/cookies';
 import Defaults from "../system/defaults";
 
 export function initialize(): void {
-  Cookies.isSnowing = getCookieValue(Defaults.Cookies.Available.IS_SNOWING);
+  Cookies.isSnowing = getCookieValue(Defaults.Cookies.Particles.SNOW);
 }
 
 function getCookieValue(name: string): any {

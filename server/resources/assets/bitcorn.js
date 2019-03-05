@@ -947,21 +947,49 @@
         value: // @ts-ignore
         function init() {
           (0, _get2.default)((0, _getPrototypeOf2.default)(SettingsModal.prototype), "init", this).call(this);
-          debugger;
           this.isSnowing = _cookies.default.isSnowing;
         }
       }, {
         kind: "method",
-        decorators: [_object.action],
-        key: "changeSnowState",
-        value: function changeSnowState() {
-          // @ts-ignore
-          this.set('isSnowing', !this.get('isSnowing')); // @ts-ignore
+        key: "didInsertElement",
+        value: function didInsertElement() {
+          this.addSelectListener('#particles-select', this.setParticleType);
+          this.addSelectListener('#music-select', this.setMusicType);
+        }
+      }, {
+        kind: "method",
+        key: "addSelectListener",
+        value: function addSelectListener(id, listener) {
+          const particlesSelector = document.querySelector(id);
+          particlesSelector.addEventListener('change', listener);
+        }
+      }, {
+        kind: "method",
+        key: "setParticleType",
+        value: function setParticleType(event) {
+          const particleType = event.target.value;
 
-          if (this.get('isSnowing')) {
-            this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, true, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
-          } else {
-            this.setCookie(_defaults.default.Cookies.Available.IS_SNOWING, false, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
+          switch (particleType) {
+            case 'snow':
+              this.activateCookie(particleType);
+              break;
+
+            default:
+              this.resetCookies(_defaults.default.Cookies.Particles);
+          }
+        }
+      }, {
+        kind: "method",
+        key: "activateCookie",
+        value: function activateCookie(particleType) {
+          this.setCookie(particleType, true, _defaults.default.Cookies.NUM_DAYS_EXPIRING); // activate checkbox
+        }
+      }, {
+        kind: "method",
+        key: "resetCookies",
+        value: function resetCookies(cookieType) {
+          for (let key in cookieType) {
+            this.setCookie(cookieType[key], undefined, 0);
           }
         }
       }, {
@@ -975,20 +1003,35 @@
         }
       }, {
         kind: "method",
-        decorators: [_object.action],
-        key: "reset",
-        value: function reset() {
-          this.resetCookies();
+        key: "setMusicType",
+        value: function setMusicType(event) {
+          console.log(event.target.value);
         }
       }, {
         kind: "method",
-        key: "resetCookies",
-        value: function resetCookies() {
-          for (let key in _defaults.default.Cookies.Available) {
-            // @ts-ignore
-            this.setCookie(_defaults.default.Cookies.Available[key], undefined, 0);
+        decorators: [_object.action],
+        key: "changeSnowState",
+        value: function changeSnowState() {
+          // @ts-ignore
+          this.set('isSnowing', !this.get('isSnowing')); // @ts-ignore
+
+          if (this.get('isSnowing')) {
+            this.setCookie(_defaults.default.Cookies.Particles.SNOW, true, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
+          } else {
+            this.setCookie(_defaults.default.Cookies.Particles.SNOW, false, _defaults.default.Cookies.NUM_DAYS_EXPIRING);
           }
         }
+      }, {
+        kind: "method",
+        decorators: [_object.action],
+        key: "reset",
+        value: function reset() {
+          this.resetAllCookies();
+        }
+      }, {
+        kind: "method",
+        key: "resetAllCookies",
+        value: function resetAllCookies() {}
       }, {
         kind: "method",
         decorators: [_object.action],
@@ -1619,7 +1662,7 @@
   _exports.default = void 0;
 
   function initialize() {
-    _cookies.default.isSnowing = getCookieValue(_defaults.default.Cookies.Available.IS_SNOWING);
+    _cookies.default.isSnowing = getCookieValue(_defaults.default.Cookies.Particles.SNOW);
   }
 
   function getCookieValue(name) {
@@ -1950,8 +1993,8 @@
   _exports.default = void 0;
   var _default = {
     Cookies: {
-      Available: {
-        IS_SNOWING: "isSnowing"
+      Particles: {
+        SNOW: "snow"
       },
       NUM_DAYS_EXPIRING: 30
     },
@@ -2113,8 +2156,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "rsl5FZrv",
-    "block": "{\"symbols\":[\"modal\"],\"statements\":[[4,\"bs-modal\",null,[[\"size\",\"onHidden\"],[\"lg\",[23,[\"deactivateSettings\"]]]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"header\"]],\"expected `modal.header` to be a contextual component but found a string. Did you mean `(component modal.header)`? ('bitcorn/templates/components/settings-modal.hbs' @ L2:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[7,\"h3\"],[9],[7,\"span\"],[11,\"class\",\"fas fa-cog\"],[9],[10],[0,\" Settings\"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"body\"]],\"expected `modal.body` to be a contextual component but found a string. Did you mean `(component modal.body)`? ('bitcorn/templates/components/settings-modal.hbs' @ L6:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n      Here you can change the page settings. Therefore, cookies are used.\\n      By changing an option \"],[7,\"b\"],[9],[0,\"you agree with the usage of cookies\"],[10],[0,\" on this page.\\n      You can change your opinion at any time by clicking on the Reset-button below.\\n      By doing so, all set cookies from this page are deleted.\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"label\"],[11,\"class\",\"settings-input\"],[11,\"for\",\"particles\"],[9],[0,\"\\n      \"],[7,\"span\"],[9],[0,\"Particles\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"select\"],[11,\"class\",\"settings-select\"],[9],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"none\"],[9],[0,\"None\"],[10],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"snow\"],[9],[0,\"Snow\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[1,[27,\"input\",null,[[\"class\",\"type\",\"id\",\"checked\",\"change\",\"tabindex\"],[\"input-text\",\"checkbox\",\"particles\",[23,[\"isSnowing\"]],[27,\"action\",[[22,0,[]],\"changeSnowState\"],null],-1]]],false],[0,\"\\n\\n    \"],[7,\"br\"],[9],[10],[0,\"\\n\\n    \"],[7,\"label\"],[11,\"class\",\"settings-input\"],[11,\"for\",\"music\"],[9],[0,\"\\n      \"],[7,\"span\"],[9],[0,\"Music\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"select\"],[11,\"class\",\"settings-select\"],[9],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"none\"],[9],[0,\"1\"],[10],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"snow\"],[9],[0,\"2\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"footer\"]],\"expected `modal.footer` to be a contextual component but found a string. Did you mean `(component modal.footer)`? ('bitcorn/templates/components/settings-modal.hbs' @ L38:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[1,[27,\"bs-button\",null,[[\"id\",\"class\",\"defaultText\",\"type\",\"buttonType\",\"onClick\"],[\"reset\",\"darker\",\"Reset\",\"secondary\",\"button\",[27,\"action\",[[22,0,[]],\"reset\"],null]]]],false],[0,\"\\n    \"],[1,[27,\"bs-button\",null,[[\"id\",\"defaultText\",\"type\",\"buttonType\",\"onClick\"],[\"apply\",\"Apply\",\"primary\",\"button\",[27,\"action\",[[22,0,[]],\"reload\"],null]]]],false],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[1]},null]],\"hasEval\":false}",
+    "id": "igrtK/lI",
+    "block": "{\"symbols\":[\"modal\"],\"statements\":[[4,\"bs-modal\",null,[[\"size\",\"onHidden\"],[\"lg\",[23,[\"deactivateSettings\"]]]],{\"statements\":[[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"header\"]],\"expected `modal.header` to be a contextual component but found a string. Did you mean `(component modal.header)`? ('bitcorn/templates/components/settings-modal.hbs' @ L2:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[7,\"h3\"],[9],[7,\"span\"],[11,\"class\",\"fas fa-cog\"],[9],[10],[0,\" Settings\"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"body\"]],\"expected `modal.body` to be a contextual component but found a string. Did you mean `(component modal.body)`? ('bitcorn/templates/components/settings-modal.hbs' @ L6:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[7,\"p\"],[11,\"class\",\"content\"],[9],[0,\"\\n      Here you can change the page settings. Therefore, cookies are used.\\n      By changing an option \"],[7,\"b\"],[9],[0,\"you agree with the usage of cookies\"],[10],[0,\" on this page.\\n      You can change your opinion at any time by clicking on the Reset-button below.\\n      By doing so, all set cookies from this page are deleted.\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"label\"],[11,\"class\",\"settings-input\"],[11,\"for\",\"music\"],[9],[0,\"\\n      \"],[7,\"span\"],[9],[0,\"Music\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"select\"],[11,\"id\",\"music-select\"],[11,\"class\",\"settings-select\"],[9],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"none\"],[9],[0,\"None\"],[10],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"a-new-beginning\"],[9],[0,\"A New Beginning\"],[10],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"dreams\"],[9],[0,\"Dreams\"],[10],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"endless-motion\"],[9],[0,\"Endless Motion\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"br\"],[9],[10],[0,\"\\n\\n    \"],[7,\"label\"],[11,\"class\",\"settings-input\"],[11,\"for\",\"particles\"],[9],[0,\"\\n      \"],[7,\"span\"],[9],[0,\"Particles\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[7,\"select\"],[11,\"id\",\"particles-select\"],[11,\"class\",\"settings-select\"],[9],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"none\"],[9],[0,\"None\"],[10],[0,\"\\n      \"],[7,\"option\"],[11,\"value\",\"snow\"],[9],[0,\"Snow\"],[10],[0,\"\\n    \"],[10],[0,\"\\n\\n    \"],[1,[27,\"input\",null,[[\"class\",\"type\",\"id\",\"checked\",\"change\",\"tabindex\"],[\"input-text\",\"checkbox\",\"particles\",[23,[\"isSnowing\"]],[27,\"action\",[[22,0,[]],\"changeSnowState\"],null],-1]]],false],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n\"],[4,\"component\",[[27,\"-assert-implicit-component-helper-argument\",[[22,1,[\"footer\"]],\"expected `modal.footer` to be a contextual component but found a string. Did you mean `(component modal.footer)`? ('bitcorn/templates/components/settings-modal.hbs' @ L40:C5) \"],null]],null,{\"statements\":[[0,\"    \"],[1,[27,\"bs-button\",null,[[\"id\",\"class\",\"defaultText\",\"type\",\"buttonType\",\"onClick\"],[\"reset\",\"darker\",\"Reset\",\"secondary\",\"button\",[27,\"action\",[[22,0,[]],\"reset\"],null]]]],false],[0,\"\\n    \"],[1,[27,\"bs-button\",null,[[\"id\",\"defaultText\",\"type\",\"buttonType\",\"onClick\"],[\"apply\",\"Apply\",\"primary\",\"button\",[27,\"action\",[[22,0,[]],\"reload\"],null]]]],false],[0,\"\\n\"]],\"parameters\":[]},null]],\"parameters\":[1]},null]],\"hasEval\":false}",
     "meta": {
       "moduleName": "bitcorn/templates/components/settings-modal.hbs"
     }
@@ -2416,7 +2459,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"3.1.0+1750bf18"});
+            require("bitcorn/app")["default"].create({"name":"bitcorn","version":"3.1.0+843565a4"});
           }
         
 //# sourceMappingURL=bitcorn.map

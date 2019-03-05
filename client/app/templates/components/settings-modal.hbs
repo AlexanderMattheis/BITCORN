@@ -11,28 +11,30 @@
       By doing so, all set cookies from this page are deleted.
     </p>
 
+    <label class="settings-input" for="music">
+      <span>Music</span>
+    </label>
+
+    <select id="music-select" class="settings-select">
+      <option value="none">None</option>
+      <option value="a-new-beginning">A New Beginning</option>
+      <option value="dreams">Dreams</option>
+      <option value="endless-motion">Endless Motion</option>
+    </select>
+
+    <br>
+
     <label class="settings-input" for="particles">
       <span>Particles</span>
     </label>
 
-    <select class="settings-select">
+    <select id="particles-select" class="settings-select">
       <option value="none">None</option>
       <option value="snow">Snow</option>
     </select>
 
     {{input class="input-text" type="checkbox" id="particles" checked=isSnowing change=(action "changeSnowState")
             tabindex=-1}}
-
-    <br>
-
-    <label class="settings-input" for="music">
-      <span>Music</span>
-    </label>
-
-    <select class="settings-select">
-      <option value="none">1</option>
-      <option value="snow">2</option>
-    </select>
   {{/modal.body}}
 
   {{#modal.footer}}

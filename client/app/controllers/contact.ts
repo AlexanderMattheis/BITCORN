@@ -20,7 +20,7 @@ export default class Contact extends Controller {
     this.uncoverLegality(isLegalMessage, "message-field", "d-block", 1);
   }
 
-  private coverLegality(fieldId: string, messageClass: string, messageNumber: number) {
+  private coverLegality(fieldId: string, messageClass: string, messageNumber: number): void {
     const field: (HTMLInputElement | null) = document.querySelector("#" + fieldId);
     // @ts-ignore
     field.classList.remove("is-invalid");
@@ -29,7 +29,7 @@ export default class Contact extends Controller {
     messages[messageNumber].style.setProperty("display", "none", "important");
   }
 
-  private isLegalMail(form: (HTMLElement | null), allowedMailPattern: RegExp) {
+  private isLegalMail(form: (HTMLElement | null), allowedMailPattern: RegExp): boolean {
     // @ts-ignore
     const mailField: HTMLInputElement = form[0];
     mailField.classList.remove("is-invalid");
@@ -37,7 +37,7 @@ export default class Contact extends Controller {
     return allowedMailPattern.test(mail) && mail.length >= Defaults.Lengths.MAIL_ADDRESS;
   }
 
-  private isLegalMessage(form: (HTMLElement | null), allowedMessagePattern: RegExp) {
+  private isLegalMessage(form: (HTMLElement | null), allowedMessagePattern: RegExp): boolean {
     // @ts-ignore
     const messageField: HTMLInputElement = form[1];
     messageField.classList.remove("is-invalid");
@@ -45,7 +45,7 @@ export default class Contact extends Controller {
     return allowedMessagePattern.test(message) && message.length >= Defaults.Lengths.MESSAGE;
   }
 
-  private uncoverLegality(isLegal: boolean, fieldId: string, messageClass: string, messageNumber: number) {
+  private uncoverLegality(isLegal: boolean, fieldId: string, messageClass: string, messageNumber: number): void {
     if (!isLegal) {
       const field: (HTMLInputElement | null) = document.querySelector("#" + fieldId);
       // @ts-ignore
