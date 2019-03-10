@@ -16,8 +16,7 @@ export default class SettingsModal extends Component {
   }
 
   didInsertElement(): void {
-    this.addSelectListener('#particles-select', this.setParticleType);
-    this.addSelectListener('#music-select', this.setMusicType);
+    //this.addSelectListener('#particles-select', this.setParticleType);
   }
 
   private addSelectListener(id: string, listener: Listener<Event, void>): void {
@@ -53,10 +52,6 @@ export default class SettingsModal extends Component {
     date.setTime(date.getTime() + (numDaysExpiring * 24 * 60 * 60 * 1000));
     const expires: string = "expires=" + date.toUTCString();
     document.cookie = name + "=" + value + ";" + expires;
-  }
-
-  private setMusicType(event: Event): void {
-    console.log((<HTMLSelectElement> event!.target).value);
   }
 
   @action

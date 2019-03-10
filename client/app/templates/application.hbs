@@ -1,52 +1,52 @@
 <div class="background" id="top">
-  {{#bs-navbar as |navbar|}}
+  <BsNavbar as |navbar|>
     <a href="/" class="navbar-brand"><div class="logo"></div></a>
 
-    {{navbar.toggle}} {{!-- sandwich --}}
-    {{#navbar.content}}
-      {{#navbar.nav id="headbar" class="ml-auto" as |nav| }}
+    <navbar.toggle/> {{!-- sandwich --}}
+    <navbar.content>
+      <navbar.nav id="headbar" class="ml-auto" as |nav| >
         {{!-- home --}}
-        {{#nav.item class="button"}}{{#nav.link-to "home"}}Home{{/nav.link-to}}{{/nav.item}}
+        <nav.item class="button">{{#nav.link-to "home"}}Home{{/nav.link-to}}</nav.item>
 
         {{!-- downloads --}}
-        {{#bs-dropdown class="dropdown" as |dd|}}
-          {{#dd.button class="menu-button"}}Downloads{{/dd.button}}
+        <BsDropdown class="dropdown" as |dropdown|>
+          <dropdown.button class="menu-button">Downloads</dropdown.button>
 
-          {{#dd.menu class="menu" as |menu|}}
-            {{#menu.item}}
+          <dropdown.menu class="menu" as |menu|>
+            <menu.item>
               {{#menu.link-to "downloads.graphics" class="download-link"}}Graphics{{/menu.link-to}}
-            {{/menu.item}}
+            </menu.item>
 
-            {{#menu.item}}
+            <menu.item>
               {{#menu.link-to "downloads.programs" class="download-link"}}Programs{{/menu.link-to}}
-            {{/menu.item}}
-          {{/dd.menu}}
-        {{/bs-dropdown}}
+            </menu.item>
+          </dropdown.menu>
+        </BsDropdown>
 
         {{!-- tutorials --}}
-        {{#bs-dropdown class="dropdown" as |dd|}}
-          {{#dd.button class="menu-button"}}Tutorials{{/dd.button}}
-        {{/bs-dropdown}}
+        <BsDropdown class="dropdown" as |dropdown|>
+          <dropdown.button class="menu-button">Tutorials</dropdown.button>
+        </BsDropdown>
 
         {{!-- about --}}
-        {{#bs-dropdown class="dropdown" as |dd|}}
-          {{#dd.button class="menu-button"}}About{{/dd.button}}
+        <BsDropdown class="dropdown" as |dropdown|>
+          <dropdown.button class="menu-button">About</dropdown.button>
 
-          {{#dd.menu class="menu" as |menu|}}
-            {{#menu.item}}
+          <dropdown.menu class="menu" as |menu|>
+            <menu.item>
               {{#menu.link-to "about.authors" class="about-link"}}Authors{{/menu.link-to}}
-            {{/menu.item}}
+            </menu.item>
 
-            {{#menu.item}}
+            <menu.item>
               {{#menu.link-to "about.page" class="about-link"}}Page{{/menu.link-to}}
-            {{/menu.item}}
-          {{/dd.menu}}
-        {{/bs-dropdown}}
+            </menu.item>
+          </dropdown.menu>
+        </BsDropdown>
 
-        {{#nav.item}}<div class="menu-button outsider" onclick={{action "activateSettings"}}><span class="fas fa-cog"></span></div>{{/nav.item}}
-      {{/navbar.nav}}
-    {{/navbar.content}}
-  {{/bs-navbar}}
+        <#nav.item><div class="menu-button outsider" onclick={{action "activateSettings"}}><span class="fas fa-cog"></span></div></nav.item>
+      </navbar.nav>
+    </navbar.content>
+  </BsNavbar>
 
   {{outlet}}
 </div>
