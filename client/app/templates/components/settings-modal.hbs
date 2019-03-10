@@ -1,9 +1,9 @@
 {{#bs-modal size="lg" onHidden=deactivateSettings as |modal|}}
-  {{#modal.header}}
+  <modal.header>
     <h3><span class="fas fa-cog"></span> Settings</h3>
-  {{/modal.header}}
+  </modal.header>
 
-  {{#modal.body}}
+  <modal.body>
     <p class="content">
       Here you can change the page settings. Therefore, cookies are used.
       By changing an option <b>you agree with the usage of cookies</b> on this page.
@@ -17,10 +17,10 @@
 
     {{input class="input-text" type="checkbox" id="particles" checked=isSnowing change=(action "changeSnowState")
             tabindex=-1}}
-  {{/modal.body}}
+  </modal.body>
 
-  {{#modal.footer}}
-    {{bs-button id="reset" class="darker" defaultText="Reset" type="secondary" buttonType="button" onClick=(action "reset")}}
-    {{bs-button id="apply" defaultText="Apply" type="primary" buttonType="button" onClick=(action "reload")}}
-  {{/modal.footer}}
+  <modal.footer>
+    <BsButton id="reset" class="darker" @defaultText="Reset" @type="secondary" @buttonType="button" onClick={{action "reset"}}/>
+    <BsButton id="apply" @defaultText="Apply" @type="primary" @buttonType="button" onClick={{action "reload"}}/>
+  </modal.footer>
 {{/bs-modal}}
