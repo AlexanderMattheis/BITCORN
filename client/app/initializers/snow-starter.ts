@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-import Cookies from "../system/cookies";
+import Cookies from "../system/settings/cookies";
 import Snow from "../view/effects/snow";
 
 export function initialize(): void {

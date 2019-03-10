@@ -1,4 +1,4 @@
-import Cookies from '../system/cookies';
+import Cookies from '../system/settings/cookies';
 import Defaults from "../system/defaults";
 
 export function initialize(): void {

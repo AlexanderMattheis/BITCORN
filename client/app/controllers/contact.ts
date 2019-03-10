@@ -2,7 +2,7 @@ import {action} from '@ember-decorators/object';
 
 import Controller from '@ember/controller';
 import Defaults from "../system/defaults";
-import Regex from "../system/regex";
+import Regex from "../system/formatting/regex";
 
 export default class Contact extends Controller {
   @action

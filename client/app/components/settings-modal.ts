@@ -1,9 +1,7 @@
 import {action} from '@ember-decorators/object';
 
-import { Indexable, Listener } from "bitcorn/system/types";
-
 import Component from '@ember/component';
-import Cookies from "bitcorn/system/cookies";
+import Cookies from "bitcorn/system/settings/cookies";
 import Defaults from "bitcorn/system/defaults";
 
 export default class SettingsModal extends Component {
@@ -13,38 +11,6 @@ export default class SettingsModal extends Component {
   init(): void {
     super.init();
     this.isSnowing = Cookies.isSnowing;
-  }
-
-  didInsertElement(): void {
-    //this.addSelectListener('#particles-select', this.setParticleType);
-  }
-
-  private addSelectListener(id: string, listener: Listener<Event, void>): void {
-    const particlesSelector: HTMLElement = document.querySelector(id) as HTMLElement;
-    particlesSelector.addEventListener('change', listener);
-  }
-
-  private setParticleType(event: Event): void {
-    const particleType: string = (<HTMLSelectElement> event!.target).value;
-
-    switch (particleType) {
-      case 'snow':
-        this.activateCookie(particleType);
-        break;
-      default:
-        this.resetCookies(Defaults.Cookies.Particles);
-    }
-  }
-
-  private activateCookie(particleType: string): void {
-    this.setCookie(particleType, true, Defaults.Cookies.NUM_DAYS_EXPIRING);
-    // activate checkbox
-  }
-
-  private resetCookies(cookieType: Indexable<string, string>): void {
-    for (let key in cookieType) {
-      this.setCookie(cookieType[key], undefined, 0);
-    }
   }
 
   private setCookie(name: string, value: any, numDaysExpiring: number): void {
@@ -69,11 +35,7 @@ export default class SettingsModal extends Component {
 
   @action
   reset(): void {
-    this.resetAllCookies();
-  }
-
-  private resetAllCookies(): void {
-
+    // NOP
   }
 
   @action
