@@ -67,6 +67,14 @@
   padding-top: 4px;
 }
 
+.dropdown-item {
+  padding: 10px 12px 10px 12px;
+}
+
+.dropdown-item:active {
+  background-color: $color-dropdown-active !important;
+}
+
 .dropdown-toggle::after {
   display:none;
 }

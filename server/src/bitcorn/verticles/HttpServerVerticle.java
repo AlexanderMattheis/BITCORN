@@ -1,6 +1,7 @@
 package bitcorn.verticles;
 
 import bitcorn.system.Defaults;
+import bitcorn.system.Messages;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
@@ -24,6 +25,8 @@ public class HttpServerVerticle extends AbstractVerticle {
         HttpServer server = vertx.createHttpServer();
         server.requestHandler(router);  // requests are handled by a router
         server.listen(Defaults.HTTP_SERVER_PORT);  // on which port the server is waiting for requests
+
+        LOGGER.info(Messages.STARTED_BOTH_SERVERS);
     }
 
     private Router createRouter() {
@@ -36,11 +39,30 @@ public class HttpServerVerticle extends AbstractVerticle {
         // links everything in the root "/" to everything
         // in the resources-folder "" (not recursively)
         router.get("/*").handler(StaticHandler.create(""));
-
-        // api
+        router.get("/home").handler(StaticHandler.create(""));
 
         // downloads
+        // downloads/graphics
+        router.get("/downloads/graphics").handler(StaticHandler.create(""));
 
+        // downloads/programs
+        router.get("/downloads/programs").handler(StaticHandler.create(""));
+
+        router.get("/downloads/programs/bioinformatics").handler(StaticHandler.create(""));
+        router.get("/downloads/programs/cross-dating").handler(StaticHandler.create(""));
+        router.get("/downloads/programs/res").handler(StaticHandler.create(""));
+
+        // tutorial
+
+        // about
+        router.get("/about/authors").handler(StaticHandler.create(""));
+        router.get("/about/page").handler(StaticHandler.create(""));
+
+        router.get("/contact/").handler(StaticHandler.create(""));
+        router.get("/imprint/").handler(StaticHandler.create(""));
+        router.get("/privacy/").handler(StaticHandler.create(""));
+
+        // [api]
 
         return router;
     }

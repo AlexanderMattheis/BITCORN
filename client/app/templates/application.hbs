@@ -12,7 +12,7 @@
         <BsDropdown class="dropdown" as |dropdown|>
           <dropdown.button class="menu-button">Downloads</dropdown.button>
 
-          <dropdown.menu class="menu" as |menu|>
+          <dropdown.menu @class="menu" as |menu|>
             <menu.item>
               {{#menu.link-to "downloads.graphics" class="download-link"}}Graphics{{/menu.link-to}}
             </menu.item>
@@ -32,7 +32,7 @@
         <BsDropdown class="dropdown" as |dropdown|>
           <dropdown.button class="menu-button">About</dropdown.button>
 
-          <dropdown.menu class="menu" as |menu|>
+          <dropdown.menu @class="menu" as |menu|>
             <menu.item>
               {{#menu.link-to "about.authors" class="about-link"}}Authors{{/menu.link-to}}
             </menu.item>
