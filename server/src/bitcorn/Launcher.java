@@ -1,12 +1,20 @@
 package bitcorn;
 
+import bitcorn.system.Messages;
 import bitcorn.verticles.DatabaseVerticle;
 import bitcorn.verticles.HttpServerVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 
+import java.util.logging.Logger;
+
 public class Launcher {
-    public static void main(String [] args) {
+
+    private static final Logger LOGGER = Logger.getLogger(Launcher.class.getName());
+
+    public static void main(String[] args) {
+        LOGGER.info(LOGGER.getName());
+
         Vertx vertx = Vertx.vertx();
 
         // A Future represents the result of an action that may, or may not, have occurred yet.
@@ -30,6 +38,7 @@ public class Launcher {
             // the future httpServerVerticleDeployment is notified about a successful deployment
             vertx.deployVerticle(new HttpServerVerticle(), httpServerVerticleDeployment.completer());
 
+            LOGGER.info(Messages.STARTED_BOTH_SERVERS);
             return httpServerVerticleDeployment;
         });
     }

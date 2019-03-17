@@ -1,7 +1,11 @@
+import {ChangesetDef} from 'ember-changeset/types/index';
+
 import {action} from '@ember-decorators/object';
+
 import Controller from '@ember/controller';
 
-import {ChangesetDef} from 'ember-changeset/types/index';
+import ContentTypes from '../system/communication/content-types';
+import Socket from '../system/communication/socket';
 import Validation from '../validations/contact';
 
 export default class Contact extends Controller.extend({Validation}) {
@@ -12,7 +16,7 @@ export default class Contact extends Controller.extend({Validation}) {
       return;
     }
 
-    console.log("valid");
+    Socket.post(ContentTypes.FORM_DATA,'valid', '');
   }
 }
 
