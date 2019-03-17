@@ -64,5 +64,5 @@
 </div>
 
 {{#if settingsActive}}
-  {{settings-modal deactivateSettings=(action "deactivateSettings")}}
+  <SettingsModal @deactivateSettings={{action "deactivateSettings"}}/>
 {{/if}}
