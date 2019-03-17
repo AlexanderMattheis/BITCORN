@@ -16,7 +16,7 @@ export default class Contact extends Controller.extend({Validation}) {
       return;
     }
 
-    Socket.post(ContentTypes.FORM_DATA,'valid', '');
+    Socket.post(ContentTypes.TEXT_PLAIN,'valid', 'api/contact');
   }
 }
 

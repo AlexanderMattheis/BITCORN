@@ -1,10 +1,14 @@
 package bitcorn.verticles;
 
+import bitcorn.system.Codes;
 import bitcorn.system.Defaults;
 import bitcorn.system.Messages;
 import io.vertx.core.AbstractVerticle;
+
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 
@@ -63,7 +67,17 @@ public class HttpServerVerticle extends AbstractVerticle {
         router.get("/privacy/").handler(StaticHandler.create(""));
 
         // [api]
+        router.post("/api/contact").handler(this::contactHandler);
 
         return router;
+    }
+
+    private void contactHandler(RoutingContext context) {
+        JsonObject json = context.getBodyAsJson();
+
+        context.response()
+                .setStatusCode(Codes.CREATED.ordinal())
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end();
     }
 }
