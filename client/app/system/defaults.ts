@@ -13,7 +13,7 @@ export default {
   },
 
   Lengths: {
-    MAIL_ADDRESS: 10,
+    MAIL: 10,
     MESSAGE: 15
   }
 };

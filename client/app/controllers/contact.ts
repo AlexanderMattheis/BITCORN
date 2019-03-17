@@ -1,59 +1,18 @@
 import {action} from '@ember-decorators/object';
-
 import Controller from '@ember/controller';
-import Defaults from "../system/defaults";
-import Regex from "../system/formatting/regex";
 
-export default class Contact extends Controller {
+import {ChangesetDef} from 'ember-changeset/types/index';
+import Validation from '../validations/contact';
+
+export default class Contact extends Controller.extend({Validation}) {
   @action
-  submit(): void {
-    const form: (HTMLElement | null) = document.querySelector(".needs-validation");
-
-    this.coverLegality("email-field", "d-block", 0);
-    this.coverLegality("message-field", "d-block", 1);
-
-    // test correctness
-    const isLegalMail: boolean = this.isLegalMail(form, new RegExp(Regex.AllowedPattern.MAIL));
-    const isLegalMessage: boolean = this.isLegalMessage(form, new RegExp(Regex.AllowedPattern.MESSAGE));
-
-    this.uncoverLegality(isLegalMail, "email-field", "d-block", 0);
-    this.uncoverLegality(isLegalMessage, "message-field", "d-block", 1);
-  }
-
-  private coverLegality(fieldId: string, messageClass: string, messageNumber: number): void {
-    const field: (HTMLInputElement | null) = document.querySelector("#" + fieldId);
-    // @ts-ignore
-    field.classList.remove("is-invalid");
-
-    const messages: NodeListOf<HTMLDivElement> = document.querySelectorAll("." + messageClass);  // ordered list!
-    messages[messageNumber].style.setProperty("display", "none", "important");
-  }
-
-  private isLegalMail(form: (HTMLElement | null), allowedMailPattern: RegExp): boolean {
-    // @ts-ignore
-    const mailField: HTMLInputElement = form[0];
-    mailField.classList.remove("is-invalid");
-    const mail: string = mailField.value;
-    return allowedMailPattern.test(mail) && mail.length >= Defaults.Lengths.MAIL_ADDRESS;
-  }
-
-  private isLegalMessage(form: (HTMLElement | null), allowedMessagePattern: RegExp): boolean {
-    // @ts-ignore
-    const messageField: HTMLInputElement = form[1];
-    messageField.classList.remove("is-invalid");
-    const message: string = messageField.value;
-    return allowedMessagePattern.test(message) && message.length >= Defaults.Lengths.MESSAGE;
-  }
-
-  private uncoverLegality(isLegal: boolean, fieldId: string, messageClass: string, messageNumber: number): void {
-    if (!isLegal) {
-      const field: (HTMLInputElement | null) = document.querySelector("#" + fieldId);
-      // @ts-ignore
-      field.classList.add("is-invalid");
-
-      const messages: NodeListOf<HTMLDivElement> = document.querySelectorAll("." + messageClass);  // ordered list!
-      messages[messageNumber].style.setProperty("display", "block", "important");
+  submit(changeset: ChangesetDef): void {
+    if (changeset.isInvalid || changeset.isPristine) {
+      console.log("invalid");
+      return;
     }
+
+    console.log("valid");
   }
 }
 

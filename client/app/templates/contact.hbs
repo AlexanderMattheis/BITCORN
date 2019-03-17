@@ -7,16 +7,11 @@
     I'll answer you soon and say "Thank you!" to you.
   </p>
 
-  {{#bs-form class="needs-validation" model=model formLayout="horizontal" onSubmit=(action "submit") as |form|}}
-    <form.element @id="email" @controlType="email"
-                  @customError="Each mail should consist at least out of ten symbols!"
-                  @label="E-Mail" @placeholder="Your e-mail address" @property="email"/>
-
-    <form.element @id="message" class="message" @controlType="textarea"
-                  @customError="Each message should be at least 15 characters long,
-                   not containing any special symbols like '+', '*', '$', .. !"
-                  @label="Message" @property="message"/>
-
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit"/>
-  {{/bs-form}}
+  {{#let (changeset model Validation) as |deepCopy|}}
+    <BsForm @model={{deepCopy}} onSubmit={{action "submit" deepCopy}} as |form|>
+      <form.element @label="Email" @controlType="text" @placeholder="Your e-mail address" @property="email"/>
+      <form.element class="message" @label="Message" @controlType="textarea" @property="message"/>
+      <BsButton @defaultText="Submit" @type="primary" @buttonType="submit"/>
+    </BsForm>
+  {{/let}}
 </div>
