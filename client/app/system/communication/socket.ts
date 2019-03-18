@@ -3,6 +3,6 @@ export default class Socket {
     let request: XMLHttpRequest = new XMLHttpRequest();
     request.open('POST', url, true);
     request.setRequestHeader('Content-Type', contentType);
-    request.send(data);
+    request.send(JSON.stringify(data));
   }
 }

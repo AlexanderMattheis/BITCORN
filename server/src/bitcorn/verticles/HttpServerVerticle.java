@@ -73,7 +73,8 @@ public class HttpServerVerticle extends AbstractVerticle {
     }
 
     private void contactHandler(RoutingContext context) {
-        JsonObject json = context.getBodyAsJson();
+        JsonObject data = context.getBodyAsJson();
+        System.out.println(data.getString("message"));
 
         context.response()
                 .setStatusCode(Codes.CREATED.ordinal())
