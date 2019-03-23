@@ -1,4 +1,4 @@
-package bitcorn.system;
+package bitcorn.system.defaults;
 
 public final class Parameters {
     public final class JdbcConfig {

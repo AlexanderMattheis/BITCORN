@@ -1,8 +1,8 @@
 package bitcorn;
 
-import bitcorn.system.Messages;
-import bitcorn.verticles.DatabaseVerticle;
-import bitcorn.verticles.HttpServerVerticle;
+import bitcorn.system.defaults.Messages;
+import bitcorn.pages.verticles.DatabaseVerticle;
+import bitcorn.pages.verticles.HttpServerVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 

@@ -9,4 +9,8 @@ public enum Codes {
     Codes(int code) {
         this.code = code;
     }
+
+    public int getValue() {
+        return code;
+    }
 }
