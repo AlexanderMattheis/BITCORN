@@ -3,31 +3,29 @@ package bitcorn.pages.routes;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 
-public class Pages extends ARoutes {
-
-    private Router router;
+public final class Pages extends ARoutes {
 
     public Pages(Router router) {
         super(router);
     }
 
     public void add() {
-        addBase(router);
-        addDownloads(router);
-        addTutorials(router);
-        addAbout(router);
+        addBase();
+        addDownloads();
+        addTutorials();
+        addAbout();
 
-        addLiabilities(router);
+        addLiabilities();
     }
 
-    private void addBase(Router router) {
+    private void addBase() {
         // links everything in the root "/" to everything
         // in the resources-folder "" (not recursively)
         router.get("/*").handler(StaticHandler.create(""));
         router.get("/home").handler(StaticHandler.create(""));
     }
 
-    private void addDownloads(Router router) {
+    private void addDownloads() {
         // downloads/graphics
         router.get("/downloads/graphics").handler(StaticHandler.create(""));
 
@@ -39,16 +37,16 @@ public class Pages extends ARoutes {
         router.get("/downloads/programs/res").handler(StaticHandler.create(""));
     }
 
-    private void addTutorials(Router router) {
+    private void addTutorials() {
         // NOP
     }
 
-    private void addAbout(Router router) {
+    private void addAbout() {
         router.get("/about/authors").handler(StaticHandler.create(""));
         router.get("/about/page").handler(StaticHandler.create(""));
     }
 
-    private void addLiabilities(Router router) {
+    private void addLiabilities() {
         router.get("/contact/").handler(StaticHandler.create(""));
         router.get("/imprint/").handler(StaticHandler.create(""));
         router.get("/privacy/").handler(StaticHandler.create(""));

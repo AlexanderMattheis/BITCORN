@@ -1,11 +1,11 @@
 package bitcorn.system;
 
-public enum Operations {
+public enum Actions {
     CREATE(1);
 
     private final int operation;
 
-    Operations(int operation) {
+    Actions(int operation) {
         this.operation = operation;
     }
 

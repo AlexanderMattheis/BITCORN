@@ -9,6 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="aether-api-1.1.0" level="project" />
-    <orderEntry type="library" name="jooq-3.11.9" level="project" />
+    <orderEntry type="library" name="jooq-3.11.10" level="project" />
   </component>
 </module>

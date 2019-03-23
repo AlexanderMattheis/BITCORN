@@ -10,7 +10,7 @@ import io.vertx.ext.web.Router;
 
 import java.util.logging.Logger;
 
-public class HttpServerVerticle extends AbstractVerticle {
+public final class HttpServerVerticle extends AbstractVerticle {
 
     private static final Logger logger = Logger.getLogger(HttpServerVerticle.class.getName());
 
