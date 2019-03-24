@@ -7,12 +7,12 @@ import Regex from '../system/formatting/regex';
 export default {
   email: [
     validatePresence(true),
-    validateLength({min: Defaults.Lengths.MAIL}),
-    validateFormat({regex: Regex.AllowedPattern.MAIL})
+    validateLength({min: Defaults.Lengths.Minimum.MAIL}),
+    validateFormat({type: 'email'})
   ],
   message: [
     validatePresence(true),
-    validateLength({min: Defaults.Lengths.MESSAGE}),
+    validateLength({min: Defaults.Lengths.Minimum.MESSAGE}),
     validateFormat({regex: Regex.AllowedPattern.MESSAGE}),
   ]
 };

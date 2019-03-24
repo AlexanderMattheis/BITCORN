@@ -9,8 +9,8 @@
 
   {{#let (changeset model Validation) as |deepCopy|}}
     <BsForm @model={{deepCopy}} @formLayout="horizontal" onSubmit={{action "submit" deepCopy}} as |form|>
-      <form.element @label="Email" @controlType="text" @placeholder="Your e-mail address" @property="email"/>
-      <form.element class="message" @label="Message" @controlType="textarea" @property="message"/>
+      <form.element @label="Email" @controlType="text" @maxlength="254" @placeholder="Your e-mail address" @property="email"/>
+      <form.element class="message" @label="Message" @maxlength="1000" @controlType="textarea" @property="message"/>
       <BsButton @defaultText="Submit" @type="primary" @buttonType="submit"/>
     </BsForm>
   {{/let}}

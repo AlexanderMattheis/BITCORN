@@ -13,7 +13,9 @@ export default {
   },
 
   Lengths: {
-    MAIL: 10,
-    MESSAGE: 15
+    Minimum: {
+      MAIL: 10,
+      MESSAGE: 15
+    }
   }
 };
