@@ -1,6 +1,6 @@
 package bitcorn.pages.verticles;
 
-import bitcorn.logic.databases.Command;
+import bitcorn.logic.database.Command;
 import bitcorn.pages.handler.ContactDatabaseHandler;
 import bitcorn.pages.handler.ICrudBase;
 import bitcorn.system.Actions;

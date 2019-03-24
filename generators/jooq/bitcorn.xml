@@ -38,10 +38,10 @@
 
     <target>
       <!-- The destination package of your generated classes (within the destination directory) -->
-      <packageName>bitcorn.pages.generated</packageName>
+      <packageName>bitcorn.pages.database</packageName>
 
       <!-- The destination directory of your generated classes. Using Maven directory layout here -->
-      <directory>../../server/src/bitcorn/pages</directory>
+      <directory>../../server/src</directory>
     </target>
   </generator>
 </configuration>

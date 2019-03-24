@@ -1,7 +1,7 @@
 package bitcorn.system.database;
 
 
-import bitcorn.logic.databases.Command;
+import bitcorn.logic.database.Command;
 import bitcorn.system.Actions;
 import bitcorn.system.defaults.Regex;
 import bitcorn.system.defaults.Symbols;

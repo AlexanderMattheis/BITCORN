@@ -1,4 +1,4 @@
-package bitcorn.logic.databases;
+package bitcorn.logic.database;
 
 public final class Command {
     private final String context;
