@@ -9,10 +9,10 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
-public final class Contact {
+public final class ContactHandler {
     private final Vertx vertx;
 
-    public Contact(Vertx vertx) {
+    public ContactHandler(Vertx vertx) {
         this.vertx = vertx;
     }
 

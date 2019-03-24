@@ -1,7 +1,7 @@
 package bitcorn.pages.verticles;
 
 import bitcorn.logic.databases.Command;
-import bitcorn.pages.handler.ContactDatabase;
+import bitcorn.pages.handler.ContactDatabaseHandler;
 import bitcorn.pages.handler.ICrudBase;
 import bitcorn.system.Actions;
 import bitcorn.system.database.Commands;
@@ -46,7 +46,7 @@ public final class DatabaseVerticle extends AbstractVerticle {
         final ICrudBase database = getContext(command);
 
         // CRUD
-        if (command.getAction().equals(Actions.CREATE.getValue())) {  // create
+        if (command.getAction().equals(Actions.CREATE.name())) {  // create
             database.create(request);
         }
     }
@@ -54,7 +54,7 @@ public final class DatabaseVerticle extends AbstractVerticle {
     private ICrudBase getContext(Command command) throws NoContextException {
         // the different bitcorn database tables
         if (command.getContext().equals(Contexts.CONTACT.getContext())) {
-            return new ContactDatabase();
+            return new ContactDatabaseHandler();
         }
 
         throw new NoContextException(Messages.Exceptions.NO_CONTEXT);

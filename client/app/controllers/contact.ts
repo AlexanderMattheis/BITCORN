@@ -16,7 +16,7 @@ export default class Contact extends Controller.extend({Validation}) {
     }
 
     Socket.post(ContentTypes.TEXT_PLAIN, {
-      mail: changeset.get('email'),
+      email: changeset.get('email'),
       message: changeset.get('message')
     }, 'api/contact');
   }

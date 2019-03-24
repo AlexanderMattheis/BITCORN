@@ -8,12 +8,12 @@ import io.vertx.core.Vertx;
 
 import java.util.logging.Logger;
 
-public class Launcher {
+public final class Launcher {
 
-    private static final Logger LOGGER = Logger.getLogger(Launcher.class.getName());
+    private static final Logger logger = Logger.getLogger(Launcher.class.getName());
 
     public static void main(String[] args) {
-        LOGGER.info(LOGGER.getName());
+        logger.info(logger.getName());
 
         Vertx vertx = Vertx.vertx();
 
@@ -38,7 +38,7 @@ public class Launcher {
             // the future httpServerVerticleDeployment is notified about a successful deployment
             vertx.deployVerticle(new HttpServerVerticle(), httpServerVerticleDeployment.completer());
 
-            LOGGER.info(Messages.STARTED_BOTH_SERVERS);
+            logger.info(Messages.STARTED_BOTH_SERVERS);
             return httpServerVerticleDeployment;
         });
     }

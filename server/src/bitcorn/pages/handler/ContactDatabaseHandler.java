@@ -4,7 +4,7 @@ import bitcorn.system.Codes;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 
-public final class ContactDatabase implements ICrudBase {
+public final class ContactDatabaseHandler implements ICrudBase {
 
     public void create(Message request) {
         JsonObject data = (JsonObject) request.body();

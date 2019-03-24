@@ -1,6 +1,6 @@
 package bitcorn.pages.routes;
 
-import bitcorn.pages.handler.Contact;
+import bitcorn.pages.handler.ContactHandler;
 import bitcorn.system.Actions;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
@@ -19,7 +19,7 @@ public final class Operations extends ARoutes {
     }
 
     private void addContact() {
-        final Contact contact = new Contact(vertx);
+        final ContactHandler contact = new ContactHandler(vertx);
         router.post("/api/contact").handler(contact.getHandler(Actions.CREATE));
     }
 }
