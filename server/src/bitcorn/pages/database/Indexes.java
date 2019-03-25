@@ -37,6 +37,6 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index CONTACT_PRIMARY = Internal.createIndex("PRIMARY", Contact.CONTACT, new OrderField[] { Contact.CONTACT.RECEIVED }, true);
+        public static Index CONTACT_PRIMARY = Internal.createIndex("PRIMARY", Contact.CONTACT, new OrderField[] { Contact.CONTACT.ID }, true);
     }
 }

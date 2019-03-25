@@ -9,6 +9,7 @@ import bitcorn.pages.database.tables.records.ContactRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
 
@@ -31,6 +32,7 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<ContactRecord, Integer> IDENTITY_CONTACT = Identities0.IDENTITY_CONTACT;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -47,7 +49,11 @@ public class Keys {
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
+    private static class Identities0 {
+        public static Identity<ContactRecord, Integer> IDENTITY_CONTACT = Internal.createIdentity(Contact.CONTACT, Contact.CONTACT.ID);
+    }
+
     private static class UniqueKeys0 {
-        public static final UniqueKey<ContactRecord> KEY_CONTACT_PRIMARY = Internal.createUniqueKey(Contact.CONTACT, "KEY_contact_PRIMARY", Contact.CONTACT.RECEIVED);
+        public static final UniqueKey<ContactRecord> KEY_CONTACT_PRIMARY = Internal.createUniqueKey(Contact.CONTACT, "KEY_contact_PRIMARY", Contact.CONTACT.ID);
     }
 }

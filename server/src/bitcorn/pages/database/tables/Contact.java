@@ -17,6 +17,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -41,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Contact extends TableImpl<ContactRecord> {
 
-    private static final long serialVersionUID = -1472687355;
+    private static final long serialVersionUID = 826475986;
 
     /**
      * The reference instance of <code>bitcorn.contact</code>
@@ -55,6 +56,11 @@ public class Contact extends TableImpl<ContactRecord> {
     public Class<ContactRecord> getRecordType() {
         return ContactRecord.class;
     }
+
+    /**
+     * The column <code>bitcorn.contact.id</code>.
+     */
+    public final TableField<ContactRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>bitcorn.contact.received</code>.
@@ -118,6 +124,14 @@ public class Contact extends TableImpl<ContactRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.CONTACT_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<ContactRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_CONTACT;
     }
 
     /**
