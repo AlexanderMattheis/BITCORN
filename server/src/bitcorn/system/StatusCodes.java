@@ -1,12 +1,12 @@
 package bitcorn.system;
 
-public enum Codes {
+public enum StatusCodes {
     CREATED(201),
     INTERNAL_SERVER_ERROR(500);
 
     private final int code;
 
-    Codes(int code) {
+    StatusCodes(int code) {
         this.code = code;
     }
 

@@ -1,4 +1,4 @@
-import Colors from '../../../system/colors';
+import Colors from '../../../system/defaults/colors';
 
 export default class Snowflake {
   private _x: number;

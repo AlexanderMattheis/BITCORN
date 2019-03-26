@@ -2,7 +2,7 @@
 import {validateFormat, validateLength, validatePresence} from 'ember-changeset-validations/validators/index';
 
 import Defaults from '../system/defaults';
-import Regex from '../system/formatting/regex';
+import Regex from '../system/defaults/regex';
 
 export default {
   email: [

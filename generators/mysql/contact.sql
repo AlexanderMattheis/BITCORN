@@ -11,3 +11,6 @@ DROP TABLE contact;
 
 INSERT INTO contact (received, email, message) 
 VALUES('2019-03-25 07:15:46', 'alexander.mattheis@web.de', 'First message from the developer.');
+
+DELETE FROM contact
+WHERE id > 1;

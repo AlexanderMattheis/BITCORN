@@ -1,6 +1,6 @@
 package bitcorn.pages.handler;
 
-import bitcorn.system.Codes;
+import bitcorn.system.StatusCodes;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.jooq.*;
@@ -31,10 +31,10 @@ public final class ContactDatabaseHandler implements ICrudBase {
                     .values(received, email, message)
                     .execute();
 
-            request.reply(Codes.CREATED.getValue());
+            request.reply(StatusCodes.CREATED.getValue());
             database.close();
         } catch (Exception e) {
-            request.reply(Codes.INTERNAL_SERVER_ERROR.getValue());
+            request.reply(StatusCodes.INTERNAL_SERVER_ERROR.getValue());
             e.printStackTrace();
         }
     }
