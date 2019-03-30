@@ -7,7 +7,7 @@ import Controller from '@ember/controller';
 import ContentTypes from '../system/communication/content-types';
 import Socket from '../system/communication/socket';
 import Validation from '../validations/contact';
-import {StatusCodes} from "bitcorn/system/status-codes";
+import {StatusCodes} from "bitcorn/system/exceptions/status-codes";
 
 export default class Contact extends Controller.extend({Validation}) {
   @action
