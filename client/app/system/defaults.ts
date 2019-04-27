@@ -1,7 +1,7 @@
 export default {
   Cookies: {
     Particles: {
-      SNOW: 'snow',
+      SNOW: "snow",
     },
 
     NUM_DAYS_EXPIRING: 30

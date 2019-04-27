@@ -15,17 +15,17 @@ export default abstract class Effect {
   }
 
   public start(): void {
-    const effectsCanvas = document.querySelector('#effects') as HTMLCanvasElement;
+    const effectsCanvas = document.querySelector("#effects") as HTMLCanvasElement;
     effectsCanvas.width = window.innerWidth;
     effectsCanvas.height = window.innerHeight;
 
-    const canvasContext: CanvasRenderingContext2D = effectsCanvas.getContext('2d') as CanvasRenderingContext2D;
+    const canvasContext: CanvasRenderingContext2D = effectsCanvas.getContext("2d") as CanvasRenderingContext2D;
     const canvasData: object = {context: canvasContext, width: effectsCanvas.width, height: effectsCanvas.height};
 
     this.init(canvasData);
     this.animate(canvasData);
 
-    addEventListener('resize', () => {
+    addEventListener("resize", () => {
       // resize canvas
       effectsCanvas.width = window.innerWidth;
       effectsCanvas.height = window.innerHeight;

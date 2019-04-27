@@ -1,3 +1,3 @@
 export default {
-  invalid: '{description} has wrong format'
+  invalid: "{description} has wrong format"
 }

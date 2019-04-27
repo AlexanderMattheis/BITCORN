@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 import Cookies from "../system/settings/cookies";
 import Snow from "../view/effects/snow";
@@ -11,6 +11,6 @@ export function initialize(): void {
 }
 
 export default {
-  after: 'settings-cookies',
+  after: "settings-cookies",
   initialize
 };

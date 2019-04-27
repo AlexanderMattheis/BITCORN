@@ -1,8 +1,8 @@
 // @ts-ignore
-import Navbar from 'ember-bootstrap/components/bs-navbar';
+import Navbar from "ember-bootstrap/components/bs-navbar";
 
 export default class BsNavbar extends Navbar {
-  didInsertElement(): void {
+  public didInsertElement(): void {
     const itemsContainer: HTMLElement = document.getElementById("headbar") as HTMLElement;
     const menuItems: HTMLCollection = itemsContainer.getElementsByClassName("menu-button");
 

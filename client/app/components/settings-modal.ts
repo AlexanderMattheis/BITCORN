@@ -1,6 +1,6 @@
-import {action} from '@ember-decorators/object';
+import {action} from "@ember-decorators/object";
 
-import Component from '@ember/component';
+import Component from "@ember/component";
 import Cookies from "bitcorn/system/settings/cookies";
 import Defaults from "bitcorn/system/defaults";
 
@@ -8,7 +8,7 @@ export default class SettingsModal extends Component {
   // @ts-ignore
   private isSnowing: boolean;
 
-  init(): void {
+  public init(): void {
     super.init();
     this.isSnowing = Cookies.isSnowing;
   }
@@ -21,12 +21,12 @@ export default class SettingsModal extends Component {
   }
 
   @action
-  changeSnowState(): void {
+  public changeSnowState(): void {
     // @ts-ignore
-    this.set('isSnowing', !this.get('isSnowing'));
+    this.set("isSnowing", !this.get("isSnowing"));
 
     // @ts-ignore
-    if (this.get('isSnowing')) {
+    if (this.get("isSnowing")) {
       this.setCookie(Defaults.Cookies.Particles.SNOW, true, Defaults.Cookies.NUM_DAYS_EXPIRING);
     } else {
       this.setCookie(Defaults.Cookies.Particles.SNOW, false, Defaults.Cookies.NUM_DAYS_EXPIRING);
@@ -34,14 +34,14 @@ export default class SettingsModal extends Component {
   }
 
   @action
-  reset(): void {
+  public reset(): void {
     // NOP
   }
 
   @action
-  reload(): void {
+  public reload(): void {
     // @ts-ignore
-    this.get('deactivateSettings')();
+    this.get("deactivateSettings")();
     location.reload();
   }
 }

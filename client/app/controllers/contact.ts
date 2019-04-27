@@ -1,17 +1,15 @@
-import {ChangesetDef} from 'ember-changeset/types/index';
-
-import {action} from '@ember-decorators/object';
-
-import Controller from '@ember/controller';
-
-import ContentTypes from '../system/communication/content-types';
-import Socket from '../system/communication/socket';
-import Validation from '../validations/contact';
+import {action} from "@ember-decorators/object";
+import {ChangesetDef} from "ember-changeset/types/index";
 import {StatusCodes} from "bitcorn/system/exceptions/status-codes";
+
+import Controller from "@ember/controller";
+import ContentTypes from "../system/communication/content-types";
+import Socket from "../system/communication/socket";
+import Validation from "../validations/contact";
 
 export default class Contact extends Controller.extend({Validation}) {
   @action
-  submit(changeset: ChangesetDef): void {
+  public submit(changeset: ChangesetDef): void {
     if (changeset.isInvalid || changeset.isPristine) {
       return;
     }
@@ -21,9 +19,9 @@ export default class Contact extends Controller.extend({Validation}) {
 
   private post(changeset: ChangesetDef): void {
     Socket.post(ContentTypes.TEXT_PLAIN, {
-      email: changeset.get('email'),
-      message: changeset.get('message')
-    }, 'api/contact', this.statusHandler, [changeset]);
+      email: changeset.get("email"),
+      message: changeset.get("message")
+    }, "api/contact", this.statusHandler, [changeset]);
   }
 
   private statusHandler(): void {
@@ -39,8 +37,8 @@ export default class Contact extends Controller.extend({Validation}) {
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
-declare module '@ember/controller' {
+declare module "@ember/controller" {
   interface Registry {
-    'contact': Contact;
+    "contact": Contact;
   }
 }

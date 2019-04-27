@@ -1,32 +1,32 @@
-import {action} from '@ember-decorators/object';
+import {action} from "@ember-decorators/object";
 
-import Controller from '@ember/controller';
+import Controller from "@ember/controller";
 
 export default class Application extends Controller {
   // @ts-ignore
   private settingsActive: boolean;
 
-  init() {
+  public init() {
     super.init();
     this.settingsActive = false;
   }
 
   @action
-  activateSettings(): void {
+  public activateSettings(): void {
     // @ts-ignore
-    this.set('settingsActive', true);
+    this.set("settingsActive", true);
   }
 
   @action
-  deactivateSettings(): void {
+  public deactivateSettings(): void {
     // @ts-ignore
-    this.set('settingsActive', false);
+    this.set("settingsActive", false);
   }
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your controllers.
-declare module '@ember/controller' {
+declare module "@ember/controller" {
   interface Registry {
-    'index': Application;
+    "index": Application;
   }
 }
