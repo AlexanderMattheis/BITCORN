@@ -37,6 +37,7 @@ public final class Pages extends ARoutes {
         router.get("/downloads/programs/res").handler(StaticHandler.create(""));
     }
 
+    @SuppressWarnings("EmptyMethod")
     private void addTutorials() {
         // NOP
     }

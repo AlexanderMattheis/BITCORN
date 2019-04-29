@@ -12,23 +12,23 @@ import java.util.logging.Logger;
 
 public final class HttpServerVerticle extends AbstractVerticle {
 
-    private static final Logger logger = Logger.getLogger(HttpServerVerticle.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HttpServerVerticle.class.getName());
 
     @Override
-    public void start() throws Exception {
-        logger.info(logger.getName());
+    public void start() {
+        LOGGER.info(LOGGER.getName());
 
         // create router
         Routes routes = new Routes(vertx);
         Router router = routes.create();
 
-        logger.info(Messages.CREATED_ROUTES);
+        LOGGER.info(Messages.CREATED_ROUTES);
 
         // create server
         HttpServer server = vertx.createHttpServer();
         server.requestHandler(router);  // requests are handled by a router
         server.listen(Ports.HTTP_SERVER_PORT);  // on which port the server is waiting for requests
 
-        logger.info(Messages.STARTED_BOTH_SERVERS);
+        LOGGER.info(Messages.STARTED_BOTH_SERVERS);
     }
 }

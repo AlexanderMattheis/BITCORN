@@ -5,12 +5,14 @@ body {
 
 // WebKit and Blink browsers: selection color
 ::selection {
+  //noinspection SassScssUnresolvedVariable
   background: $yellow;
   color: white;
 }
 
 // Gecko browsers: selection color
 ::-moz-selection {
+  //noinspection SassScssUnresolvedVariable
   background: $yellow;
   color: white;
 }

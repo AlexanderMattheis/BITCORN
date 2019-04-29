@@ -1,5 +1,5 @@
 package bitcorn.system.defaults;
 
 public final class Regex {
-    public final static String COMMAND_SEPARATOR = "\\.";
+    public static final String COMMAND_SEPARATOR = "\\.";
 }

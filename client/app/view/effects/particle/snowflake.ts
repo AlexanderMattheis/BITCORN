@@ -1,10 +1,10 @@
 import Colors from "../../../system/defaults/colors";
 
 export default class Snowflake {
-  private _x: number;
+  private readonly _x: number;
   private _y: number;
-  private _dy: number;
-  private _radius: number;
+  private readonly _dy: number;
+  private readonly _radius: number;
 
   public constructor(x: number, y: number, dy: number, radius: number) {
     this._x = x;

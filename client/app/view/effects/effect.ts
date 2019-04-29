@@ -1,7 +1,7 @@
 export default abstract class Effect {
   private _callbackRequestID: number;
 
-  public constructor() {
+  protected constructor() {
     // do not change the request id, it is defined as non-zero value
     this._callbackRequestID = 0;  // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
   }

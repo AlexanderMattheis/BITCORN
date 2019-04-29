@@ -5,6 +5,7 @@ public enum Contexts {
 
     private final String context;
 
+    @SuppressWarnings("SameParameterValue")
     Contexts(String context) {
         this.context = context;
     }

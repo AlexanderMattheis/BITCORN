@@ -8,7 +8,7 @@ import io.vertx.core.Vertx;
 
 import java.util.logging.Logger;
 
-public final class Launcher {
+final class Launcher {
 
     private static final Logger logger = Logger.getLogger(Launcher.class.getName());
 

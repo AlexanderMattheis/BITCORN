@@ -13,15 +13,16 @@ import bitcorn.system.exceptions.NoContextException;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.Message;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class DatabaseVerticle extends AbstractVerticle {
 
-    private static final Logger logger = Logger.getLogger(DatabaseVerticle.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DatabaseVerticle.class.getName());
 
     @Override
-    public void start() throws Exception {
-        logger.info(logger.getName());
+    public void start() {
+        LOGGER.info(LOGGER.getName());
         processEventbusData();
     }
 
@@ -30,7 +31,7 @@ public final class DatabaseVerticle extends AbstractVerticle {
             try {
                 accessDatabase(request);
             } catch (DatabaseException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, Messages.Exceptions.NO_CONNECTION, e);
             }
         });
     }
@@ -61,7 +62,7 @@ public final class DatabaseVerticle extends AbstractVerticle {
     }
 
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         // NOP
     }
 }

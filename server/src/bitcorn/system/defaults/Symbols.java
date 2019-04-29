@@ -1,7 +1,8 @@
 package bitcorn.system.defaults;
 
+@SuppressWarnings("ALL")
 public final class Symbols {
-    public final static String COMMAND_SEPARATOR = ".";
-    public final static String EMPTY = "";
-    public final static String SPACE = " ";
+    public static final String COMMAND_SEPARATOR = ".";
+    public static final String EMPTY = "";
+    public static final String SPACE = " ";
 }

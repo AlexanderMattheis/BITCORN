@@ -23,6 +23,13 @@ public final class ContactHandler {
             default:
                 return this::nop;
         }
+
+//        switch (operation) {
+//            case CREATE:
+//                return this::createMessage;
+//            default:
+//                return this::nop;
+//        }
     }
 
     private void createMessage(RoutingContext context) {
@@ -43,7 +50,7 @@ public final class ContactHandler {
         });
     }
 
+    @SuppressWarnings({"EmptyMethod", "unused"})
     private void nop(RoutingContext context) {
-        // NOP
     }
 }
