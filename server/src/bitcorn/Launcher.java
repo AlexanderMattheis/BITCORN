@@ -12,14 +12,14 @@ final class Launcher {
 
     private static final Logger logger = Logger.getLogger(Launcher.class.getName());
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         logger.info(logger.getName());
 
-        Vertx vertx = Vertx.vertx();
+        final Vertx vertx = Vertx.vertx();
 
         // A Future represents the result of an action that may, or may not, have occurred yet.
         // String-type since an id is assigned to a verticle in case of successful deployment
-        Future<String> dataBaseVerticleDeployment = Future.future();
+        final Future<String> dataBaseVerticleDeployment = Future.future();
 
         // input:
         // - Verticle verticle,
@@ -33,7 +33,7 @@ final class Launcher {
         // to tell an outer-object that deployment was successful
         // input: Function<T,Future<U>> mapper (so output has to be a future, that's why a return value is necessary)
         dataBaseVerticleDeployment.compose(id -> {
-            Future<String> httpServerVerticleDeployment = Future.future();
+            final Future<String> httpServerVerticleDeployment = Future.future();
 
             // the future httpServerVerticleDeployment is notified about a successful deployment
             vertx.deployVerticle(new HttpServerVerticle(), httpServerVerticleDeployment.completer());

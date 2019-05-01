@@ -20,7 +20,7 @@ import static bitcorn.system.database.Parameters.JdbcConfig.*;
 
 public final class ContactDatabaseHandler implements ICrudBase {
 
-    private static final Logger LOGGER = Logger.getLogger(HttpServerVerticle.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ContactDatabaseHandler.class.getName());
 
     public void create(Message request) {
         LOGGER.info(LOGGER.getName());
@@ -31,8 +31,8 @@ public final class ContactDatabaseHandler implements ICrudBase {
         final String message = data.getString("message");
 
         // hint: in a try-catch-statement the connection is closed automatically since Java 7
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD)) {
-            DSLContext database = DSL.using(conn, SQLDialect.MYSQL);
+        try (final Connection conn = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD)) {
+            final DSLContext database = DSL.using(conn, SQLDialect.MYSQL);
             database.insertInto(CONTACT)
                     .columns(CONTACT.RECEIVED, CONTACT.EMAIL, CONTACT.MESSAGE)
                     .values(received, email, message)

@@ -16,7 +16,7 @@ public final class Routes {
 
     public Router create() {
         // create router
-        Router router = Router.router(vertx);
+        final Router router = Router.router(vertx);
 
         // to allow reading the HTTP-body of request globally
         router.route().handler(BodyHandler.create());

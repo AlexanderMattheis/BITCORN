@@ -19,13 +19,13 @@ public final class HttpServerVerticle extends AbstractVerticle {
         LOGGER.info(LOGGER.getName());
 
         // create router
-        Routes routes = new Routes(vertx);
-        Router router = routes.create();
+        final Routes routes = new Routes(vertx);
+        final Router router = routes.create();
 
         LOGGER.info(Messages.CREATED_ROUTES);
 
         // create server
-        HttpServer server = vertx.createHttpServer();
+        final HttpServer server = vertx.createHttpServer();
         server.requestHandler(router);  // requests are handled by a router
         server.listen(Ports.HTTP_SERVER_PORT);  // on which port the server is waiting for requests
 

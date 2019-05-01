@@ -23,13 +23,6 @@ public final class ContactHandler {
             default:
                 return this::nop;
         }
-
-//        switch (operation) {
-//            case CREATE:
-//                return this::createMessage;
-//            default:
-//                return this::nop;
-//        }
     }
 
     private void createMessage(RoutingContext context) {
@@ -38,7 +31,7 @@ public final class ContactHandler {
 
         vertx.eventBus().send(Eventbuses.Verticles.DATABASE, data, options, reply -> {
             if (reply.succeeded()) {
-                int statusCode = (int) reply.result().body();
+                final int statusCode = (int) reply.result().body();
 
                 context.response()
                         .setStatusCode(statusCode)
