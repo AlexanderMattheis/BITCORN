@@ -1,10 +1,12 @@
 <div class="background" id="top">
   <BsNavbar as |navbar|>
-    <a href="/" class="navbar-brand"><div class="logo"></div></a>
+    <a href="/" class="navbar-brand">
+      <div class="logo"></div>
+    </a>
 
     <navbar.toggle/> {{!-- sandwich --}}
     <navbar.content>
-      <navbar.nav id="headbar" class="ml-auto" as |nav| >
+      <navbar.nav id="headbar" class="ml-auto" as |nav|>
         {{!-- home --}}
         <nav.item class="button">{{#nav.link-to "home"}}Home{{/nav.link-to}}</nav.item>
 
@@ -43,7 +45,10 @@
           </dropdown.menu>
         </BsDropdown>
 
-        <nav.item><div class="menu-button outsider" onclick={{action "activateSettings"}}><span class="fas fa-cog"></span></div></nav.item>
+        {{! template-lint-disable no-invalid-interactive}}
+        <nav.item>
+          <div class="menu-button outsider" onclick={{action "activateSettings"}}><span class="fas fa-cog"></span></div>
+        </nav.item>
       </navbar.nav>
     </navbar.content>
   </BsNavbar>
