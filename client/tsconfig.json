@@ -27,7 +27,8 @@
         "app/*"
       ],
       "*": [
-        "types/*"
+        "types/*",
+        "./node_modules/@types/*"
       ]
     },
     "experimentalDecorators": true
