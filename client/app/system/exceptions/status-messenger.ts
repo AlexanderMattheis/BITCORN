@@ -16,6 +16,7 @@ export class StatusMessenger {
     }
   }
 
+  // @ts-ignore
   private static showMessage(message: string, type: string): void {
   }
 }
