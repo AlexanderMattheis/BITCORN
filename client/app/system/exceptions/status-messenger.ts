@@ -5,7 +5,7 @@ export class StatusMessenger {
   public static createMessage(statusCode: number, className: string): void {
 
     // 2xx Success
-    if (statusCode == StatusCodes.CREATED) {
+    if (statusCode === StatusCodes.CREATED) {
       switch (className) {
         case StatusRegistration.CONTACT:
           StatusMessenger.showMessage("", "");

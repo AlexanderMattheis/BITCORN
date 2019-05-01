@@ -28,7 +28,7 @@ export default class Contact extends Controller.extend({Validation}) {
     let params: any[] = this as any;
     let statusCode: number = params[0];
     let changesetData: ChangesetDef = params[1];
-    if (statusCode == StatusCodes.CREATED) {
+    if (statusCode === StatusCodes.CREATED) {
       changesetData.rollback();
     } else {
       // show error message

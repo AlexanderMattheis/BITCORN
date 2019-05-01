@@ -6,7 +6,7 @@ export default class Application extends Controller {
   // @ts-ignore
   private settingsActive: boolean;
 
-  public init() {
+  public init(): void {
     super.init();
     this.settingsActive = false;
   }

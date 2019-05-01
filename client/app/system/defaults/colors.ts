@@ -1,5 +1,5 @@
 export default {
   Particle: {
-    SNOWFLAKE: "#ffffff",
+    SNOWFLAKE: "#ffffff"
   }
-}
+};

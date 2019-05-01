@@ -35,7 +35,7 @@ export default class SettingsModal extends Component {
 
   @action
   public reset(): void {
-    // NOP
+    // nop
   }
 
   @action
