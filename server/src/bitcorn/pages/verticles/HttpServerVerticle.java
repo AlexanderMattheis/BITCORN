@@ -3,6 +3,7 @@ package bitcorn.pages.verticles;
 import bitcorn.pages.Routes;
 import bitcorn.system.defaults.Ports;
 import bitcorn.system.defaults.Messages;
+import bitcorn.system.extension.util.logging.LoggerExtension;
 import io.vertx.core.AbstractVerticle;
 
 import io.vertx.core.http.HttpServer;
@@ -16,7 +17,7 @@ public final class HttpServerVerticle extends AbstractVerticle {
 
     @Override
     public void start() {
-        LOGGER.info(LOGGER.getName());
+        LOGGER.info(LoggerExtension.returnMethodPath(LOGGER, "start"));
 
         // create router
         final Routes routes = new Routes(vertx);

@@ -10,6 +10,7 @@ import bitcorn.system.defaults.Eventbuses;
 import bitcorn.system.defaults.Messages;
 import bitcorn.system.exceptions.DatabaseException;
 import bitcorn.system.exceptions.NoContextException;
+import bitcorn.system.extension.util.logging.LoggerExtension;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.Message;
 
@@ -22,7 +23,7 @@ public final class DatabaseVerticle extends AbstractVerticle {
 
     @Override
     public void start() {
-        LOGGER.info(LOGGER.getName());
+        LOGGER.info(LoggerExtension.returnMethodPath(LOGGER, "start"));
         processEventbusData();
     }
 

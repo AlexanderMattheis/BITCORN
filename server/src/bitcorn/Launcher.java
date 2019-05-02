@@ -1,8 +1,8 @@
 package bitcorn;
 
-import bitcorn.system.defaults.Messages;
 import bitcorn.pages.verticles.DatabaseVerticle;
 import bitcorn.pages.verticles.HttpServerVerticle;
+import bitcorn.system.extension.util.logging.LoggerExtension;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 
@@ -10,10 +10,15 @@ import java.util.logging.Logger;
 
 final class Launcher {
 
-    private static final Logger logger = Logger.getLogger(Launcher.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Launcher.class.getName());
 
     public static void main(final String[] args) {
-        logger.info(logger.getName());
+        configureLogger();
+        startServers();
+    }
+
+    private static void startServers() {
+        LOGGER.info(LoggerExtension.returnMethodPath(LOGGER, "startServers"));
 
         final Vertx vertx = Vertx.vertx();
 
@@ -38,8 +43,12 @@ final class Launcher {
             // the future httpServerVerticleDeployment is notified about a successful deployment
             vertx.deployVerticle(new HttpServerVerticle(), httpServerVerticleDeployment.completer());
 
-            logger.info(Messages.STARTED_BOTH_SERVERS);
             return httpServerVerticleDeployment;
         });
+    }
+
+
+    private static void configureLogger() {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tF | %1$tT | %4$s | %5$s%n");
     }
 }
