@@ -37,6 +37,14 @@ module.exports = {
     "keyword-spacing": "error",
     "lines-around-comment": "error",
     "max-classes-per-file": "error",
+    "max-depth": ["error", 3],
+    "max-len": ["error", {"code": 120}],
+    "max-lines": ["error", 250],
+    "max-lines-per-function": ["error", 40],
+    "max-nested-callbacks": ["error", 3],
+    "max-params": ["error", 7],
+    "max-statements": "error",
+    "max-statements-per-line": "error",
     "multiline-comment-style": "error",  // standardized multiline comments
     "new-cap": "error",  // after new-keyword the class has to start with a capital letter
     "no-trailing-spaces": "error",
