@@ -3,6 +3,7 @@ package bitcorn.pages.handler;
 import bitcorn.pages.verticles.HttpServerVerticle;
 import bitcorn.system.StatusCodes;
 import bitcorn.system.defaults.Messages;
+import bitcorn.system.extension.util.logging.LoggerExtension;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import org.jooq.*;
@@ -23,7 +24,7 @@ public final class ContactDatabaseHandler implements ICrudBase {
     private static final Logger LOGGER = Logger.getLogger(ContactDatabaseHandler.class.getName());
 
     public void create(Message request) {
-        LOGGER.info(LOGGER.getName());
+        LOGGER.info(LoggerExtension.returnMethodPath(LOGGER, "create"));
         final JsonObject data = (JsonObject) request.body();
 
         final Timestamp received = new Timestamp(new Date().getTime());
@@ -42,7 +43,8 @@ public final class ContactDatabaseHandler implements ICrudBase {
             database.close();
         } catch (Exception e) {
             request.reply(StatusCodes.INTERNAL_SERVER_ERROR.getValue());
-            LOGGER.log(Level.SEVERE, Messages.Exceptions.NO_CONNECTION, e);
+            LOGGER.info(Messages.Exceptions.NO_CONNECTION);
+            LOGGER.severe(e.getMessage());
         }
     }
 }

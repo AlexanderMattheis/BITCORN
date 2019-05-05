@@ -45,5 +45,6 @@ public final class ContactHandler {
 
     @SuppressWarnings({"EmptyMethod", "unused"})
     private void nop(RoutingContext context) {
+        // NOP
     }
 }
