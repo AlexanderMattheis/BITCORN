@@ -1,4 +1,6 @@
 SET GLOBAL time_zone = '+1:00';  # UTC
+
+/* CONTACT TABLE */
 SELECT * FROM contact;
 
 CREATE TABLE contact (

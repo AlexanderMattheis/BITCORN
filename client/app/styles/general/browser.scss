@@ -1,25 +1,31 @@
-// Microsoft: removing scrollbar
-body {
-  -ms-overflow-style: none;
-}
-
-// WebKit and Blink browsers: selection color
-::selection {
-  //noinspection SassScssUnresolvedVariable
-  background: $yellow;
-  color: white;
-}
-
-// Gecko browsers: selection color
+/* CHANGING SELECTION COLOR */
+// Firefox
 ::-moz-selection {
   //noinspection SassScssUnresolvedVariable
   background: $yellow;
   color: white;
 }
 
-// WebKit: removing scrollbar
+// Chrome, Edge and Opera
+::selection {
+  //noinspection SassScssUnresolvedVariable
+  background: $yellow;
+  color: white;
+}
+
+/* REMOVING SCROLLBAR */
+// Edge
+body {
+  -ms-overflow-style: none;
+}
+
+// Firefox
+html {
+  scrollbar-width: none;
+}
+
+// Chrome and Opera
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
-
