@@ -8,8 +8,16 @@ const Router = EmberRouter.extend({
 
 Router.map(function () {
   this.route("home");
-  this.mount("downloads");
-  this.mount("tutorials");
+  this.route("downloads", function () {
+    this.route("graphics", function () {
+    });
+    this.route('programs', function() {
+      this.route('bioinformatics');
+      this.route('cross-dating');
+      this.route('res');
+    });
+  });
+  this.route("tutorials");
   this.route("about", function () {
     this.route("authors");
     this.route("page");
@@ -17,6 +25,8 @@ Router.map(function () {
   this.route("contact");
   this.route("imprint");
   this.route("privacy");
+  this.route('downloads');
+  this.route('tutorials');
 });
 
 export default Router;
