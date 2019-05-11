@@ -24,18 +24,44 @@
         "tests/*"
       ],
       "bitcorn/*": [
-        "app/*"
+        "app/*",
+        "lib/downloads/app/*",
+        "lib/tutorials/app/*"
+      ],
+      "downloads": [
+        "lib/downloads/addon"
+      ],
+      "downloads/*": [
+        "lib/downloads/addon/*"
+      ],
+      "downloads/test-support": [
+        "lib/downloads/addon-test-support"
+      ],
+      "downloads/test-support/*": [
+        "lib/downloads/addon-test-support/*"
+      ],
+      "tutorials": [
+        "lib/tutorials/addon"
+      ],
+      "tutorials/*": [
+        "lib/tutorials/addon/*"
+      ],
+      "tutorials/test-support": [
+        "lib/tutorials/addon-test-support"
+      ],
+      "tutorials/test-support/*": [
+        "lib/tutorials/addon-test-support/*"
       ],
       "*": [
-        "types/*",
-        "./node_modules/@types/*"
+        "types/*"
       ]
-    },
-    "experimentalDecorators": true
+    }
   },
   "include": [
     "app/**/*",
     "tests/**/*",
-    "types/**/*"
+    "types/**/*",
+    "lib/downloads/**/*",
+    "lib/tutorials/**/*"
   ]
 }
