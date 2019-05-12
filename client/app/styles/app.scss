@@ -4,12 +4,24 @@
 @import "images";
 @import "system";
 
-/* EXTERN */
+/* [EXTERNAL] */
 //noinspection CssUnknownTarget
 @import "ember-bootstrap/bootstrap";
 
+/* COMPONENTS */
+@import "components/listings/graphic-listing";
+@import "components/listings/graphic-listing-res";
+
 /* GENERAL */
-@import "general";
+@import "general/browser";
+@import "general/classes";
+@import "general/tags";
+@import "general/ids";
+
+@import "general/resolution/extra-small";
+@import "general/resolution/small";
+@import "general/resolution/medium";
+@import "general/resolution/larger";
 
 /* THEME */
 @import "theme/bootstrap";
