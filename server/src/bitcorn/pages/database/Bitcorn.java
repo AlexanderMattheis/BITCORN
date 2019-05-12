@@ -5,6 +5,7 @@ package bitcorn.pages.database;
 
 
 import bitcorn.pages.database.tables.Contact;
+import bitcorn.pages.database.tables.Textures;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Bitcorn extends SchemaImpl {
 
-    private static final long serialVersionUID = -1659997400;
+    private static final long serialVersionUID = -1436668230;
 
     /**
      * The reference instance of <code>bitcorn</code>
@@ -41,6 +42,11 @@ public class Bitcorn extends SchemaImpl {
      * The table <code>bitcorn.contact</code>.
      */
     public final Contact CONTACT = bitcorn.pages.database.tables.Contact.CONTACT;
+
+    /**
+     * The table <code>bitcorn.textures</code>.
+     */
+    public final Textures TEXTURES = bitcorn.pages.database.tables.Textures.TEXTURES;
 
     /**
      * No further instances allowed
@@ -67,6 +73,7 @@ public class Bitcorn extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            Contact.CONTACT);
+            Contact.CONTACT,
+            Textures.TEXTURES);
     }
 }

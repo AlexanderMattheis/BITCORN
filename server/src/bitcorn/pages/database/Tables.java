@@ -5,6 +5,7 @@ package bitcorn.pages.database;
 
 
 import bitcorn.pages.database.tables.Contact;
+import bitcorn.pages.database.tables.Textures;
 
 import javax.annotation.Generated;
 
@@ -26,4 +27,9 @@ public class Tables {
      * The table <code>bitcorn.contact</code>.
      */
     public static final Contact CONTACT = bitcorn.pages.database.tables.Contact.CONTACT;
+
+    /**
+     * The table <code>bitcorn.textures</code>.
+     */
+    public static final Textures TEXTURES = bitcorn.pages.database.tables.Textures.TEXTURES;
 }

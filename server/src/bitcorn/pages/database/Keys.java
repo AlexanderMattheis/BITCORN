@@ -5,7 +5,9 @@ package bitcorn.pages.database;
 
 
 import bitcorn.pages.database.tables.Contact;
+import bitcorn.pages.database.tables.Textures;
 import bitcorn.pages.database.tables.records.ContactRecord;
+import bitcorn.pages.database.tables.records.TexturesRecord;
 
 import javax.annotation.Generated;
 
@@ -33,12 +35,14 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<ContactRecord, Integer> IDENTITY_CONTACT = Identities0.IDENTITY_CONTACT;
+    public static final Identity<TexturesRecord, Integer> IDENTITY_TEXTURES = Identities0.IDENTITY_TEXTURES;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<ContactRecord> KEY_CONTACT_PRIMARY = UniqueKeys0.KEY_CONTACT_PRIMARY;
+    public static final UniqueKey<TexturesRecord> KEY_TEXTURES_PRIMARY = UniqueKeys0.KEY_TEXTURES_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -51,9 +55,11 @@ public class Keys {
 
     private static class Identities0 {
         public static Identity<ContactRecord, Integer> IDENTITY_CONTACT = Internal.createIdentity(Contact.CONTACT, Contact.CONTACT.ID);
+        public static Identity<TexturesRecord, Integer> IDENTITY_TEXTURES = Internal.createIdentity(Textures.TEXTURES, Textures.TEXTURES.ID);
     }
 
     private static class UniqueKeys0 {
         public static final UniqueKey<ContactRecord> KEY_CONTACT_PRIMARY = Internal.createUniqueKey(Contact.CONTACT, "KEY_contact_PRIMARY", Contact.CONTACT.ID);
+        public static final UniqueKey<TexturesRecord> KEY_TEXTURES_PRIMARY = Internal.createUniqueKey(Textures.TEXTURES, "KEY_textures_PRIMARY", Textures.TEXTURES.ID);
     }
 }

@@ -5,6 +5,7 @@ package bitcorn.pages.database;
 
 
 import bitcorn.pages.database.tables.Contact;
+import bitcorn.pages.database.tables.Textures;
 
 import javax.annotation.Generated;
 
@@ -31,6 +32,7 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     public static final Index CONTACT_PRIMARY = Indexes0.CONTACT_PRIMARY;
+    public static final Index TEXTURES_PRIMARY = Indexes0.TEXTURES_PRIMARY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -38,5 +40,6 @@ public class Indexes {
 
     private static class Indexes0 {
         public static Index CONTACT_PRIMARY = Internal.createIndex("PRIMARY", Contact.CONTACT, new OrderField[] { Contact.CONTACT.ID }, true);
+        public static Index TEXTURES_PRIMARY = Internal.createIndex("PRIMARY", Textures.TEXTURES, new OrderField[] { Textures.TEXTURES.ID }, true);
     }
 }
