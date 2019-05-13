@@ -6,6 +6,7 @@ package bitcorn.pages.database;
 
 import bitcorn.pages.database.tables.Contact;
 import bitcorn.pages.database.tables.Textures;
+import bitcorn.pages.database.tables.VectorGraphics;
 
 import javax.annotation.Generated;
 
@@ -32,4 +33,9 @@ public class Tables {
      * The table <code>bitcorn.textures</code>.
      */
     public static final Textures TEXTURES = bitcorn.pages.database.tables.Textures.TEXTURES;
+
+    /**
+     * The table <code>bitcorn.vector_graphics</code>.
+     */
+    public static final VectorGraphics VECTOR_GRAPHICS = bitcorn.pages.database.tables.VectorGraphics.VECTOR_GRAPHICS;
 }
