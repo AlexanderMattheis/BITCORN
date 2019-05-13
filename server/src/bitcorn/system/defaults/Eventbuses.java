@@ -1,8 +1,8 @@
 package bitcorn.system.defaults;
 
-public final class Eventbuses {
-    public final class Verticles {
+public interface Eventbuses {
+    interface Verticles {
         // the queue to which the database-verticle listens to
-        public static final String DATABASE = "database_queue";  // arbitrary string/name
+        String DATABASE = "database_queue";  // arbitrary string/name
     }
 }
