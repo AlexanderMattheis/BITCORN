@@ -1,6 +1,5 @@
 package bitcorn.pages.handler;
 
-import bitcorn.pages.verticles.HttpServerVerticle;
 import bitcorn.system.StatusCodes;
 import bitcorn.system.defaults.Messages;
 import bitcorn.system.extension.util.logging.LoggerExtension;
@@ -13,7 +12,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static bitcorn.pages.database.Tables.CONTACT;

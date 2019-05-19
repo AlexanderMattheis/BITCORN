@@ -3,13 +3,20 @@ package bitcorn.pages.handler;
 import bitcorn.system.Actions;
 import bitcorn.system.database.Commands;
 import bitcorn.system.defaults.Eventbuses;
+import bitcorn.system.defaults.Messages;
+import bitcorn.system.extension.util.logging.LoggerExtension;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
+import java.util.logging.Logger;
+
 public final class ContactHandler {
+
+    private static final Logger LOGGER = Logger.getLogger(ContactDatabaseHandler.class.getName());
+
     private final Vertx vertx;
 
     public ContactHandler(Vertx vertx) {
@@ -17,11 +24,13 @@ public final class ContactHandler {
     }
 
     public Handler<RoutingContext> getHandler(Actions operation) {
+        LOGGER.info(LoggerExtension.returnMethodPath(LOGGER, "getHandler"));
+
         switch (operation) {
             case CREATE:
                 return this::createMessage;
             default:
-                return this::nop;
+                return this::nop;  // hint: throwing a hard error made everything more complex such that it was avoided
         }
     }
 
@@ -43,8 +52,7 @@ public final class ContactHandler {
         });
     }
 
-    @SuppressWarnings({"EmptyMethod", "unused"})
-    private void nop(RoutingContext context) {
-        // NOP
+    private void nop(@SuppressWarnings("unused") RoutingContext context) {
+        LOGGER.info(Messages.Exceptions.ACTION_NOT_AVAILABLE);
     }
 }

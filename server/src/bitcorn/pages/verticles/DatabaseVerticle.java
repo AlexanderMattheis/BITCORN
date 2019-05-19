@@ -8,7 +8,6 @@ import bitcorn.system.database.Commands;
 import bitcorn.system.database.Contexts;
 import bitcorn.system.defaults.Eventbuses;
 import bitcorn.system.defaults.Messages;
-import bitcorn.system.exceptions.DatabaseException;
 import bitcorn.system.exceptions.NoContextException;
 import bitcorn.system.extension.util.logging.LoggerExtension;
 import io.vertx.core.AbstractVerticle;
@@ -28,28 +27,26 @@ public final class DatabaseVerticle extends AbstractVerticle {
     }
 
     private void processEventbusData() {
-        vertx.eventBus().consumer(Eventbuses.Verticles.DATABASE, request -> {
-            try {
-                accessDatabase(request);
-            } catch (DatabaseException e) {
-                LOGGER.log(Level.SEVERE, Messages.Exceptions.NO_CONNECTION, e);
-            }
-        });
+        vertx.eventBus().consumer(Eventbuses.Verticles.DATABASE, this::accessDatabase);
     }
 
-    private void accessDatabase(Message request) throws DatabaseException {
+    private void accessDatabase(Message request) {
         final String action = request.headers().get(Commands.ACTION);
         final Command command = Commands.getParts(action);
 
         executeOperation(command, request);
     }
 
-    private void executeOperation(Command command, Message request) throws DatabaseException {
-        final ICrudBase database = getContext(command);
+    private void executeOperation(Command command, Message request) {
+        try {
+            final ICrudBase database = getContext(command);
 
-        // CRUD
-        if (command.getAction().equals(Actions.CREATE.name())) {  // create
-            database.create(request);
+            // CRUD
+            if (command.getAction().equals(Actions.CREATE.name())) {  // create
+                database.create(request);
+            }
+        } catch (NoContextException e) {
+            LOGGER.log(Level.SEVERE, Messages.Exceptions.NO_CONTEXT, e);
         }
     }
 

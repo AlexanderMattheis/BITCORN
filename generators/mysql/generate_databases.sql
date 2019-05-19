@@ -1,5 +1,3 @@
-SET GLOBAL time_zone = '+1:00';  # UTC
-
 /* CONTACT */
 SELECT * FROM contact;
 
