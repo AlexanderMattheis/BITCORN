@@ -1,7 +1,8 @@
 package bitcorn.system;
 
 public enum Actions {
-    CREATE(1);
+    CREATE(1),
+    READ(2);
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final int operation;

@@ -11,9 +11,9 @@ import io.vertx.ext.web.Router;
 
 import java.util.logging.Logger;
 
-public final class HttpServerVerticle extends AbstractVerticle {
+public final class HttpVerticle extends AbstractVerticle {
 
-    private static final Logger LOGGER = Logger.getLogger(HttpServerVerticle.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HttpVerticle.class.getName());
 
     @Override
     public void start() {

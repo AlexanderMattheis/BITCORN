@@ -1,6 +1,7 @@
 package bitcorn.pages.handler;
 
-import bitcorn.system.StatusCodes;
+import bitcorn.system.EventbusMessaging;
+import bitcorn.system.Statuscode;
 import bitcorn.system.defaults.Messages;
 import bitcorn.system.extension.util.logging.LoggerExtension;
 import io.vertx.core.eventbus.Message;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 import static bitcorn.pages.database.Tables.CONTACT;
 import static bitcorn.system.database.Parameters.JdbcConfig.*;
 
-public final class ContactDatabaseHandler implements ICrudBase {
+public final class ContactDatabaseHandler implements IDatabaseHandler {
 
     private static final Logger LOGGER = Logger.getLogger(ContactDatabaseHandler.class.getName());
 
@@ -29,6 +30,8 @@ public final class ContactDatabaseHandler implements ICrudBase {
         final String email = data.getString("email");
         final String message = data.getString("message");
 
+        // TODO: Validate before adding into the database
+
         // hint: in a try-catch-statement the connection is closed automatically since Java 7
         try (final Connection conn = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD)) {
             final DSLContext database = DSL.using(conn, SQLDialect.MYSQL);
@@ -36,13 +39,19 @@ public final class ContactDatabaseHandler implements ICrudBase {
                     .columns(CONTACT.RECEIVED, CONTACT.EMAIL, CONTACT.MESSAGE)
                     .values(received, email, message)
                     .execute();
-
-            request.reply(StatusCodes.CREATED.getValue());
             database.close();
+
+            EventbusMessaging.reply(request, null, Statuscode.CREATED);  // reply on eventbus
         } catch (Exception e) {
-            request.reply(StatusCodes.INTERNAL_SERVER_ERROR.getValue());
             LOGGER.info(Messages.Exceptions.NO_CONNECTION);
             LOGGER.severe(e.getMessage());
+
+            EventbusMessaging.reply(request, null, Statuscode.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Override
+    public void read(Message request) {
+        throw new UnsupportedOperationException();
     }
 }

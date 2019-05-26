@@ -1,6 +1,9 @@
-package bitcorn.logic.database;
+package bitcorn.system.database;
 
 public final class Command {
+
+    public final String ACTION = "action";
+
     private final String context;
     private final String action;
 

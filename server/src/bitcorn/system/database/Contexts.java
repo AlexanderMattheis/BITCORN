@@ -1,7 +1,9 @@
 package bitcorn.system.database;
 
 public enum Contexts {
-    CONTACT("CONTACT");
+    CONTACT("CONTACT"),
+    TEXTURES("TEXTURES"),
+    VECTOR_GRAPHICS("VECTOR_GRAPHICS");
 
     private final String context;
 

@@ -4,54 +4,66 @@ import bitcorn.system.Actions;
 import bitcorn.system.database.Commands;
 import bitcorn.system.defaults.Eventbuses;
 import bitcorn.system.defaults.Keywords;
+import bitcorn.system.defaults.Symbols;
 import bitcorn.system.types.CommandType;
+import bitcorn.system.types.GraphicType;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
-public final class ContactHandler implements IHandler {
+public class GraphicsHandler implements IHandler {
 
     private final Vertx vertx;
 
-    public ContactHandler(Vertx vertx) {
+    private final GraphicType graphicType;
+
+    public GraphicsHandler(Vertx vertx, GraphicType graphicType) {
         this.vertx = vertx;
+        this.graphicType = graphicType;
     }
 
+    @Override
     public Handler<RoutingContext> getHandler(Actions operation) {
         switch (operation) {
-            case CREATE:
-                return this::createMessage;
+            case READ:
+                return this::readGraphicsInformation;
             default:
                 throw new UnsupportedOperationException();
         }
     }
 
+    private void readGraphicsInformation(RoutingContext context) {
+        final String key = CommandType.ACTION.getName();
+        String value = Symbols.EMPTY;
+
+        if (graphicType.equals(GraphicType.TEXTURE)) {
+            value = Commands.Graphics.TextureGraphics.READ;
+        } else if (graphicType.equals(GraphicType.VECTOR_GRAPHIC)) {
+            value = Commands.Graphics.VectorGraphics.READ;
+        }
+
+        final DeliveryOptions options = new DeliveryOptions().addHeader(key, value);
+        this.sendToVerticle(vertx, Eventbuses.Verticles.DATABASE, context, options);
+    }
+
     @Override
     public void sendToVerticle(Vertx vertx, String verticle, RoutingContext context, DeliveryOptions options) {
-        final JsonObject data = context.getBodyAsJson();
+        final String data = context.getBodyAsString();
 
         vertx.eventBus().send(verticle, data, options, reply -> {
             if (reply.succeeded()) {
                 final String httpStatuscode = reply.result().headers().get(Keywords.HTTP_STATUS_CODE);
                 final int statusCode = Integer.valueOf(httpStatuscode);
+                final String graphicListings = (String) reply.result().body();
 
                 context.response()
                         .setStatusCode(statusCode)
                         .putHeader("content-type", "application/json; charset=utf-8")
-                        .end();
+                        .end(graphicListings);
             } else {
                 context.fail(reply.cause());  // HTTP-Error 500: Internal Server Error
             }
         });
-    }
-
-    private void createMessage(RoutingContext context) {
-        final String key = CommandType.ACTION.getName();
-        final String value = Commands.Contact.CREATE;
-        final DeliveryOptions options = new DeliveryOptions().addHeader(key, value);
-
-        this.sendToVerticle(vertx, Eventbuses.Verticles.DATABASE, context, options);
     }
 }
