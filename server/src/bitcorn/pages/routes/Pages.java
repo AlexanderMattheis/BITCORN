@@ -29,6 +29,9 @@ public final class Pages extends ARoutes {
         // downloads/graphics
         router.get("/downloads/graphics").handler(StaticHandler.create(""));
 
+        router.get("/downloads/graphics/textures").handler(StaticHandler.create(""));
+        router.get("/downloads/graphics/vector-graphics").handler(StaticHandler.create(""));
+
         // downloads/programs
         router.get("/downloads/programs").handler(StaticHandler.create(""));
 

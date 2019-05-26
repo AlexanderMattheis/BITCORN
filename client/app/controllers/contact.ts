@@ -31,7 +31,7 @@ export default class Contact extends Controller.extend({Validation}) {
     if (statusCode === StatusCodes.CREATED) {
       changesetData.rollback();
     } else {
-      // show error message
+      // TODO: show error message
     }
   }
 }

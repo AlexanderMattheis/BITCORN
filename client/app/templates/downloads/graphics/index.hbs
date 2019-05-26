@@ -10,14 +10,16 @@
 
 <FilesLister>
   <div class="container">
-    <Listings::GraphicListing
-      @author = "Alexander Mattheis"
-      @date = "2018-11-10"
-      @description = "Age of ...? Ah, the Age of Communities!"
-      @image = "/assets/images/vector_graphics/community.png"
-      @licence = "<a href='https://creativecommons.org/publicdomain/zero/1.0/deed' target='_blank' rel='noopener'>CC0 1.0 Universal</a>"
-      @path = "/assets/downloads/vector_graphics/community.svg"
-      @tags = "community, group"
-      @title = "Community"/>
+    {{#each model as |entry|}}
+      <Listings::GraphicListing
+        @author = {{entry.author}}
+        @date = {{format-date entry.date}}
+        @description = {{entry.description}}
+        @image = {{concat entry.imagePath entry.imageName}}
+        @licence = "<a href='{{entry.licenceLink}}' target='_blank' rel='noopener'>{{entry.licenceName}}</a>"
+        @path = {{concat entry.path entry.elementName}}
+        @tags = {{format-tags entry.tags}}
+        @title = {{entry.title}}/>
+    {{/each}}
   </div>
 </FilesLister>

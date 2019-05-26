@@ -34,6 +34,6 @@ public final class Operations extends ARoutes {
 
     private void getVectorGraphicListings() {
         final GraphicsHandler graphics = new GraphicsHandler(vertx, GraphicType.VECTOR_GRAPHIC);
-        router.get("/api/graphics/vector_graphics").handler(graphics.getHandler(Actions.READ));
+        router.get("/api/graphics/vector-graphics").handler(graphics.getHandler(Actions.READ));
     }
 }
