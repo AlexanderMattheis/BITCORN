@@ -1,7 +1,7 @@
 export default class Socket {
   public static post(contentType: string, data: any, url: string, handler: Function, params: any[]) {
     let request: XMLHttpRequest = new XMLHttpRequest();
-    request.open("POST", url, true);
+    request.open("POST", url);
     request.setRequestHeader("Content-Type", contentType);
 
     request.onload = (): void => {
@@ -11,9 +11,6 @@ export default class Socket {
     request.send(JSON.stringify(data));
   }
 
-  /**
-   * Hint: the handler gets only executed if async is true
-   */
   public static get(url: string, handler: Function, params: any[]): void {
     let request: XMLHttpRequest = new XMLHttpRequest();
     request.open("GET", url);
