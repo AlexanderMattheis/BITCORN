@@ -1,5 +1,13 @@
-/* CONTACT */
-SELECT * FROM contact;
+CREATE SCHEMA `bitcorn`;
+
+/*------------------------------- CONTACT */
+# SELECT * FROM contact;
+# DROP TABLE contact;
+
+/*
+DELETE FROM contact
+WHERE id > 1;
+*/
 
 CREATE TABLE contact (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -8,16 +16,12 @@ CREATE TABLE contact (
     message VARCHAR(1000) CHARACTER SET UTF8MB4 NOT NULL
 );
 
-DROP TABLE contact;
-
 INSERT INTO contact (received, email, message) 
 VALUES('2019-03-25 07:15:46', 'alexander.mattheis@web.de', 'First message from the developer.');
 
-DELETE FROM contact
-WHERE id > 1;
-
-/* TEXTURES */
-SELECT * FROM textures;
+/*------------------------------- TEXTURES */
+# SELECT * FROM textures;
+# DROP TABLE textures;
 
 CREATE TABLE textures (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -35,15 +39,19 @@ CREATE TABLE textures (
     writing VARCHAR(1000) CHARACTER SET UTF8MB4 NOT NULL
 );
 
-DROP TABLE textures;
-
 INSERT INTO textures VALUES
 (1,'Alexander Mattheis','2018-11-13','Coppers? No, dude! Planets are the new currency!','/assets/images/textures/','planets.png','https://creativecommons.org/publicdomain/zero/1.0/deed','CC0 1.0 Universal','/assets/downloads/textures/','planets.zip','planets,space,universe','Planets','Some planets I''ve created with <a href="https://www.gimp.org/" target="_blank" rel="noopener">GIMP</a> eight years ago for a friend''s Trackmania fan page. Maybe you want them? Because the website has never officially been launched and I have no use for that files.'),
 (2,'Alexander Mattheis','2018-11-13','38 textures created/taken for Blender.','/assets/images/textures/','surfaces.png','https://creativecommons.org/publicdomain/zero/1.0/deed','CC0 1.0 Universal','/assets/downloads/textures/','surfaces.zip','grounds,surfaces,walls','Surfaces','Once I have also worked a lot with <a href="https://www.blender.org/" target="_blank" rel="noopener">Blender</a>, before the GUI has been changed to that dark theme, so before version 2.5 has been released. And in that time after my high school graduation (Abitur), I made that pictures, you see here and about 24 tutorials (which I have removed again due to the fact they were not professional enough). Hopefully, somebody finds some use in them.'),
 (3,'Alexander Mattheis','2018-11-13','Abstract textures like color-splashes.','/assets/images/textures/','synthetics.png','https://creativecommons.org/publicdomain/zero/1.0/deed','CC0 1.0 Universal','/assets/downloads/textures/','synthetics.zip','artificial,synthetics,splash','Synthetics','Some synthetics I''ve created by playing around with <a href="https://www.gimp.org/" target="_blank" rel="noopener">GIMP</a>. Colorize them and you will see how great that textures will look like, especially the blurred one. Maybe I will use that texture in one of my tutorials, then I can better convince you.');
 
-/* VECTOR GRAPHICS */
-SELECT * FROM vector_graphics;
+/*------------------------------- VECTOR GRAPHICS */
+# SELECT * FROM vector_graphics;
+# DROP TABLE vector_graphics;
+
+/*
+DELETE FROM vector_graphics
+WHERE id > 0;
+*/
 
 CREATE TABLE vector_graphics (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,8 +67,6 @@ CREATE TABLE vector_graphics (
     tags VARCHAR(200) CHARACTER SET UTF8MB4 NOT NULL,
     title VARCHAR(50) CHARACTER SET UTF8MB4 NOT NULL
 );
-
-DROP TABLE vector_graphics;
 
 INSERT INTO vector_graphics VALUES
 (1,'Alexander Mattheis','2018-11-10','Age of ...? Ah, the Age of Communities!','/assets/images/vector_graphics/','community.png','https://creativecommons.org/publicdomain/zero/1.0/deed','CC0 1.0 Universal','/assets/downloads/vector_graphics/','community.svg','community,group','Community'),
@@ -96,6 +102,3 @@ INSERT INTO vector_graphics VALUES
 (31,'Alexander Mattheis','2018-10-24','You want be a superstar and celebrate like Mario?','/assets/images/vector_graphics/','superstar.png','https://creativecommons.org/publicdomain/zero/1.0/deed','CC0 1.0 Universal','/assets/downloads/vector_graphics/','superstar.svg','celebration,superstar','Superstar'),
 (32,'Alexander Mattheis','2018-11-20','What happens if you toggle the switch?','/assets/images/vector_graphics/','switch_block.png','https://creativecommons.org/publicdomain/zero/1.0/deed','CC0 1.0 Universal','/assets/downloads/vector_graphics/','switch_block.svg','exclamation mark,switch','Switch Block'),
 (33,'Alexander Mattheis','2018-11-20','I warn you to leave this page!','/assets/images/vector_graphics/','warning.png','https://creativecommons.org/publicdomain/zero/1.0/deed','CC0 1.0 Universal','/assets/downloads/vector_graphics/','warning.svg','exclamation mark,warning','Warning!');
-
-DELETE FROM vector_graphics
-WHERE id > 0;
