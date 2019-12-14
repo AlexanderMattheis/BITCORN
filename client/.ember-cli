@@ -1,4 +1,4 @@
 {
   "disableAnalytics": true,
-  "output-path": "../server/resources"
+  "output-path": "../server/src/main/resources"
 }
