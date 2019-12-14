@@ -1,0 +1,58 @@
+<div class="content">
+  <h2>Impressum</h2>
+  Informationen bezüglich &sect; 5 TMG
+  und verantwortlich für den Inhalt in Bezug zu &sect; 55 Abs. 2 RStV ist
+
+  <p>
+    [Vorname] [Nachname]<br>
+    [Stra&szlig;e] [Nummer]<br>
+    [PLZ] [Ort]
+  </p>
+
+  <br>
+
+  <p>
+    Telefon: [Telefonnummer]<br>
+    E-Mail: <a href="mailto:">[E-Mail]</a><br>
+  </p>
+
+  <br>
+
+  <h2>Copyright</h2>
+  <h4>Verwendete Schriftarten</h4>
+  <p>
+	Zusätzlich zu den Systemschriftarten wurden folgende Schriftarten innerhalb der Webseite verwendet:
+  </p>
+  <p>
+    <b>Open Sans</b><br>
+    <b>Quelle:</b> <a href="https://fonts.google.com/specimen/Open+Sans?selection.family=Open+Sans">https://fonts.google.com/specimen/Open+Sans?selection.family=Open+Sans</a><br>
+    <b>Entwerfer:</b> Steve Matteson<br>
+    <b>Lizenz:</b> Apache Licence Version 2.0 (<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>)
+  </p>
+
+  <br>
+
+  <h2>Haftungsausschluss</h2>
+  <h4>&sect; 1 Warnung bezüglich der Inhalte</h4>
+  <p>
+	Der Autor dieser Webseite garantiert nicht die Korrektheit, Aktualität und Vollständigkeit
+	der angebotenen Informationen. Sofern keine grobe Fahrlässigkeit oder Absicht besteht,
+	ist der Autor nicht haftbar für mögliche Schäden, die durch die Nutzung der angebotenen Informationen entstehen.
+
+	Das Recht, Teile der ganzen Webseite ohne vorige Ankündigung zu verändern, erweitern oder zu entfernen,
+	behält sich der Autor ausdrücklich vor. Somit kann diese Webseite jederzeit auch wieder 
+	aus dem Internet genommen werden.
+  </p>
+
+  <br>
+
+  <h4>&sect; 2 Externe Links</h4>
+  <p>
+	Diese Webseite enthält auch Links zu anderen Webseiten (sogenannte Externe Links).
+	Der Autor hat bei Erstellung der Externen Links dieser Webseite die Webseiten Dritter 
+	auf mögliche Rechtsverletzungen hin überprüft. Zu diesem Zeitpunkt waren für den Autor
+	keine Rechtsbrüche feststellbar. Aber der Autor hat keinen Einfluss auf derzeitige 
+	und zukünftige Inhalte der Externen Links. Das ist der Grund, weshalb sich der Autor
+	hiermit ausdrücklich von Inhalten aller Externen Links distanziert.
+  </p>
+</div>

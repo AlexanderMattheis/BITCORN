@@ -1,0 +1,205 @@
+<div class="content">
+  <h2>Datenschutzerklärung</h2>
+  <p>
+    Personenbezogene Daten (im Folgenden „Daten“)
+    werden vom Autor einzig und allein im Rahmen der Erforderlichkeit verarbeitet
+    um einen Internetauftritt zu gewährleisten.
+  </p>
+
+  <br>
+
+  <p>
+    Gemäß dem Kapitel 1 - Allgemeine Bestimmungen,
+    Artikel 4 Ziffer 2. der Verordnung (EU) 2016/679, also Datenschutz-Grundverordnung
+    (im Folgenden „DSGVO“), ist eine „Verarbeitung“ jeder mit oder ohne Hilfe automatisierter Verfahren
+    ausgeführter Vorgang/Vorgangsreihe im Zusammenhang mit personenbezogenen Daten. Dazu gehören unteranderem das Erheben,
+    das Erfassen, die Organisation, das Ordnen, die Speicherung, die Anpassung oder Veränderung, das Auslesen,
+    das Abfragen, die Verwendung, die Offenlegung durch Übermittlung, Verbreitung oder eine andere Form der Bereitstellung,
+    den Abgleich oder die Verknüpfung, die Einschränkung, das Löschen oder die Vernichtung von Daten.
+  </p>
+
+  <br>
+
+  <p>
+    Mit der folgenden Datenschutzerklärung informiere ich Sie über die Art der Verarbeitung,
+    Umfang, Zweck, Rechtsgrundlage und Dauer. Zudem werden Sie über eingesetzte Fremdkomponenten informiert
+    durch die Dritte ebenfalls Ihre Daten verarbeiten können.
+  </p>
+
+  <br>
+
+  <p>
+    Die Datenschutzerklärung ist wie folgt gegliedert:
+  </p>
+  <p>
+    <i>I. Identität und Kontaktdaten des Verantwortlichen</i><br>
+    <i>II. Datenverarbeitung</i><br>
+    <i>III. Rechte der Nutzer</i>
+  </p>
+
+  <br>
+
+  <h4>I. Identität und Kontaktdaten des Verantwortlichen</h4>
+  <p>
+    Verantwortlich für diesen Internetauftritts im Sinne des Datenschutzes ist:
+  </p>
+  <p>
+    [Vorname] [Name]<br>
+    [Straße] [Nummer]<br>
+    D-[PLZ] [Ort]
+  </p>
+
+  <p>
+    Telefon: [Telefonnummer]<br>
+    E-Mail: <a href="mailto:">[E-Mail]</a>
+  </p>
+
+  <br>
+  <h4>II. Datenverarbeitung</h4>
+  <p>
+    Die bei der Nutzung dieses Internetauftritts verarbeiteten Daten existieren innerhalb dieser Webseite nur temporärer
+    und werden gelöscht sofern kein Grund einer permanenten Speicherung besteht. Ein Grund für eine Speicherung von
+    Daten wäre beispielsweise ein hinterlassenes Kommentar von einem Nutzer zu einem bestimmten hier verfassten Artikel.
+    Bei der Nutzung von Fremdkomponenten/Diensten wie z.B. YouTube gelten die vom Anbieter
+    der Fremdkomponente geltenden Bestimmungen auf die ich wiederum keinerlei Einfluss habe. Das heißt,
+    dass die Daten auch länger aufbewahrt und weiterverarbeitet werden könnten.
+  </p>
+
+  <br>
+
+  <h5>Beiträge</h5>
+  <p>
+    Auf dieser Webseite haben Sie die Möglichkeit Beiträge zu kommentieren.
+    Sofern Sie diese Funktion in Anspruch nehmen, wird Ihr Beitrag mit Datum und Uhrzeit,
+    sowie dem von Ihnen genutzte Pseudonym oder Namen auf meiner Webseite veröffentlicht und dauerhaft abgespeichert.
+  </p>
+
+  <br>
+
+  <p>
+    Eine Rechtsgrundlage hierbei bildet Artikel 6 Abs. 1 lit. a) der DSGVO.
+    Die von Ihnen erteilte Einwilligung zur Speicherung
+    kann jedoch nach Artikel 7 Absatz 3 auch wieder widerrufen werden.
+    Hierbei werden Sie über die von Ihnen im Kommentar angegebene E-Mail bezüglich der Löschung benachrichtigt.
+  </p>
+
+  <br>
+
+  <p>
+    Ihre IP- und E-Mail-Adresse wird von mir verarbeitet,
+    da ein berechtigtes Interesse daran besteht, Sie eventuell rechtlich zu verteidigen
+    oder im Falle rechtswidriger Beiträge juristische Schritte gegen Sie einzuleiten.
+    Eine Rechtsgrundlage bildet hierfür Artikel 6 Absatz 1 lit. f) der DSGVO.
+  </p>
+
+  <br>
+
+  <h5>Cookies</h5>
+  <p>
+    Für einen benutzerfreundlichen und sicheren Internetauftritt werden sogenannte Cookies verwendet, welche die
+    durch den von Ihnen verwendeten Internet-Browser auf Ihrem Endgerät (PC, Smartphone etc.) gespeichert werden.
+    Die Rechtsgrundlage dieser Verarbeitung ist Artikel 6 Ziffer 1 lit. f der DSGVO.
+  </p>
+
+  <br>
+
+  <p>
+    Cookies können bei gängigen Internet-Browsern (wie Google Chrome, Microsoft Edge oder Mozilla Firefox, ...)
+    blockiert oder auch gelöscht werden. Zur Blockierung/Einschränkung sogenannter Flash-Cookies
+    müssen Sie jedoch Einstellungen innerhalb Ihres Flash-Players durchführen.
+    Bei Fragen zum Flash-Player oder zu Ihrem Browser wenden Sie sich bitte an den jeweiligen Hersteller/Entwickler
+    oder suchen Hilfe in die jeweiligen Dokumentation.
+    Sollten Sie Cookies einschränken oder gar vollstädig blockieren,
+    kann dies dazu führen, dass nicht alle Funktionen dieses Internetauftritts nutzbar sind!
+  </p>
+
+  <br>
+
+  <h5>Kontaktanfragen</h5>
+  <p>
+    Wenn Sie mich per E-Mail oder mit Hilfe des Kontaktformulars anschreiben,
+    werden Ihre eingegebenen Daten zur Bearbeitung der Anfrage genutzt.
+    Im Falle eines Anschreibens per Kontaktformular werden ihre Daten verschlüsselt
+    unter Verwendung eines TLS/SSL-Protokols an den Betreiber-Server weitergeleitet
+    und können innerhalb eines geschützten Bereiches von mir aufgerufen werden.
+    Eine Rechtsgrundlage für eine Verarbeitung bildet der Artikel 6 Abs. 1 der DSGVO.
+    Ihre Daten werden gelöscht, sobald Ihre Anfrage abschließend beantwortet wurde.
+  </p>
+
+  <br>
+
+  <h5>Serverdaten</h5>
+  <p>
+    Aus technischen Gründen werden einige Daten an meinen Webspace-Provider übermittelt.
+    Mit diesen sogenannten Server-Logfiles werden unter anderem die von Ihnen besuchte Webseite,
+    die Uhrzeit, die Menge an gesendeten Daten, die zuvor besuchte Webseite, der verwendete Browser, das Betriebssystem,
+    und ihre IP-Adresse gespeichert. Die übermittelten Daten dienen zur Fehlerprotokollierung, statistischen Auswertung,
+    Stabilität und Sicherheit des Internetauftritts. Eine Rechtsgrundlage hierfür bildet Artikel 6 Absatz 1 lit. f)
+    der DSGVO auf Grund berechtigter Interessen. Die IP-Addressen in diesen Daten werden innerhalb
+    von sieben Tage anonymisiert, jedoch behält sich der Serverbetreiber vor im Falle rechtswidriger Nutzung
+    die Daten länger aufzubewahren, sofern es zu Beweiszwecken erforderlich ist.
+    Spätestens nach 8 Wochen werden auch die anonymisierten Daten vollständig gelöscht.
+  </p>
+
+  <br>
+
+  <h5>YouTube</h5>
+  <p>
+    Für diesen Internetauftritt wird das Videoportal <a href="https://www.youtube.com/">YouTube</a> verwendet.
+    YouTube-Videos werden auf dieser Webseite mit dem „Erweiterter Datenschutzmodus“ eingebunden.
+    Das heißt Daten wie Ihre IP-Addresse und die betreffende Seite von der Sie das Video abrufen,
+    sollten an den YouTube-Server erst bei Video-Start übermittelt werden.
+    Solch eine Verbindung ist notwendig zur Darstellung eines Videos auf dieser Webseite.
+  </p>
+
+  <br>
+
+  <h4>III. Rechte der Nutzer</h4>
+  <p>
+    Die Nutzer dieses Internetauftritts haben folgende Rechte (vgl. Sie mit Artikeln 15-21 und 77 der DSGVO)
+  </p>
+
+  <br>
+
+  Sie können
+
+  <ul>
+    <li>
+      auf Anfrage eine Auskunft über Ihre verarbeiteten Daten erhalten
+      (Verarbeitungszwecke, Kategorien personenbezogener Daten, etc.)
+    </li>
+
+    <li>
+      eine Berichtigung Ihrer Daten durchführen lassen (hierzu bitte eine Benachrichtigung per Mail)
+    </li>
+
+    <li>
+      eine Beschwerde bei einer Aufsichtsbehörde stellen
+    </li>
+
+    <li>
+      eine Einschränkung der Verarbeitung Ihrer Daten fordern
+    </li>
+
+    <li>
+      eine Kopie Ihrer Daten anfordern
+      (für jede weitere Kopie darf ein Entgelt in Höhe der Verwaltungskosten verlangt werden)
+    </li>
+
+    <li>
+      eine Löschung Ihrer Daten veranlassen
+    </li>
+
+    <li>
+      einen Widerspruch gegen die weitere Verarbeitung Ihrer Daten stellen
+    </li>
+  </ul>
+
+  <br>
+
+  <p>
+    Zusätzlich ist der Anbieter dieser Internetpräsenz dazu verpflichtet, sofern die Daten seiner Nutzer
+    öffentlich geworden sind (beispielsweise durch einen Hackerangriff)
+    zu unterrichten, sofern das technich mit einem nicht unverhältnismäßig hohen Aufwand überhaupt möglich ist.
+  </p>
+</div>

@@ -3,5 +3,6 @@
 # Don't track content of these folders
 /out/
 /.idea/
+/.vs/
 /.vertx/
 
