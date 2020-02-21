@@ -3,7 +3,7 @@
 
 1. Install `mysql-installer-community-8.0.18.0` or newer
 
-2. Create database `bitcorn`  (be sure the Service `MySQL80` is running)![mysql_8_service](D:\Documents\IdeaProjects\bitcorn\pics\mysql_8_service.png)
+2. Create database `bitcorn`  (be sure the Service `MySQL80` is running) ![mysql_8_service](D:\Documents\IdeaProjects\bitcorn\pics\mysql_8_service.png)
 
 3. Create tables by using `generators\mysql\generate_databases.sql`
 
